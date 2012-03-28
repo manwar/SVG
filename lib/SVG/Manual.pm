@@ -223,8 +223,6 @@ Martin Owens - SVG::DOM improvements in version 3.34
 
 =head1 EXAMPLES
 
-http://wiki.roitsystems.com/
-
 See also the examples directory in this distribution which contain several fully documented examples.
 
 =pod
@@ -492,8 +490,8 @@ B<Example:>
         %$points,
         id=>'pline_1',
         style=>{
-            'fill-opacity'=>0,
-            'stroke-color'=>'rgb(250,123,23)'
+            'fill-opacity' => 0,
+            'stroke' => 'rgb(250,123,23)'
         }
     );
 
@@ -643,8 +641,8 @@ B<Example:>
         id    => 'pline_1',
         style => {
             'fill-opacity' => 0,
-            'fill-color'   => 'green',
-            'stroke-color' => 'rgb(250,123,23)'
+            'fill'   => 'green',
+            'stroke' => 'rgb(250,123,23)'
         }
     );
 

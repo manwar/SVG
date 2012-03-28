@@ -42,7 +42,11 @@ Refer to L<SVG::Manual> for the complete manual.
 
 =head1 AUTHOR
 
-Ronan Oger, RO IT Systemms GmbH, cpan@roitsystems.com.com
+Ronan Oger, RO IT Systemms GmbH, cpan@roitsystems.com
+
+=head1 CO-MAINTAINER
+
+Gabor Szabo
 
 =head1 CREDITS
 
