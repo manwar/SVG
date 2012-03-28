@@ -153,11 +153,11 @@ a hyphen) may be set on a per object basis:
 
 B<Example:>
 
-    my $svg1=new SVG;
+    my $svg1 = SVG->new;
 
-    my $svg2=new SVG(id => 'document_element');
+    my $svg2 = SVG->new(id => 'document_element');
 
-    my $svg3=new SVG(
+    my $svg3 = SVG->new(
         -printerror => 1,
         -raiseerror => 0,
         -indent     => '  ',

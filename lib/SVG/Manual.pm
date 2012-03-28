@@ -188,7 +188,7 @@ B<Example:>
 
 The Default SVG tag will generate the following XML:
 
-  $svg = new SVG;
+  $svg = SVG->new;
   print $svg->xmlify;
 
 Resulting XML snippet:
@@ -255,11 +255,11 @@ a hyphen) may be set on a per object basis:
 
 B<Example:>
 
-    my $svg1=new SVG;
+    my $svg1 = SVG->new;
 
-    my $svg2=new SVG(id => 'document_element');
+    my $svg2 = SVG->new(id => 'document_element');
 
-    my $svg3=new SVG(s
+    my $svg3 = SVG->new(s
         -printerror => 1,
         -raiseerror => 0,
         -indent     => '  ',
