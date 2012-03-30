@@ -4,6 +4,7 @@
 ,v$
 \B\.svn\b
 \B\.git\b
+\B\.gitignore
 \B\.cvsignore$
 
 # Avoid Makemaker generated and utility files.
@@ -15,6 +16,8 @@
 ^MANIFEST\.SKIP$
 MYMETA\.(?:yml|json)$
 
+
+\.swp$
 
 # Avoid Module::Build generated and utility files.
 \bBuild$
