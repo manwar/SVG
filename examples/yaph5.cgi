@@ -1,21 +1,9 @@
-#!/usr/bin/perl -w
-
-BEGIN {
-  push @INC , '../';  
-  push @INC , '../SVG';
-}
+#!/usr/bin/perl
 
 use strict;
-use CGI;
+use warnings;
+
 use SVG;
-
-my $VERSION = 3;
-
-$| = 1;
-my $p = new CGI ':header';
-# open the header and start sending
-print $p->header(-type=>'image/svg-xml');
-
 
 my $points;
 my $path;
@@ -28,17 +16,17 @@ my $gradient;
 my $svg = SVG->new(width=>800,height=>600);
 
 my $lg = $svg->gradient(-type=>'linear',
-		'id'=>"transparent-sky_1", 
-		'x1'=>"0%", 
-		'y1'=>"0%", 
-		'x2'=>"100%", 
+		'id'=>"transparent-sky_1",
+		'x1'=>"0%",
+		'y1'=>"0%",
+		'x2'=>"100%",
 		'y2'=>"0%",
-		'spreadMethod'=>"pad", 
+		'spreadMethod'=>"pad",
 		'gradientUnits'=>"userSpaceOnUse");
 
-	$lg->stop(offset=>"0%", 
+	$lg->stop(offset=>"0%",
             style=>{'stop-color'=>'rgb(1,71,1)','stop-opacity'=>1});
-	$lg->stop(offset=>"37%", 
+	$lg->stop(offset=>"37%",
             style=>{'stop-color'=>'rgb(0,128,0)','stop-opacity'=>1});
 	$lg->stop(offset=>"38%",
             style=>{'stop-color'=>'rgb(255,255,255)','stop-opacity'=>1});
@@ -79,7 +67,7 @@ my $lg2 = $svg->gradient(-type=>'linear',
 				spreadMethod=>"pad",
 				gradientUnits=>"userSpaceOnUse");
 
-	$lg2->stop(offset=>"0%", 
+	$lg2->stop(offset=>"0%",
             style=>{'stop-color'=>'rgb(0,0,0)','stop-opacity'=>"0.8"});
 	$lg2->stop(offset=>"100%",
             style=>{'stop-color'=>'rgb(255,255,255)','stop-opacity'=>"1"});
@@ -92,37 +80,37 @@ my $Argyle_1 = $svg->pattern(id=>"Argyle_1",
 				patternContentUnits=>"userSpaceOnUse");
 
 
-my $Argyle_1_lg = $Argyle_1->gradient(id=>"red-yellow-red", 
-				x1=>"0%", 
-				y1=>"0%", 
-				x2=>"100%", 
+my $Argyle_1_lg = $Argyle_1->gradient(id=>"red-yellow-red",
+				x1=>"0%",
+				y1=>"0%",
+				x2=>"100%",
 				y2=>"0%",
-				spreadMethod=>"pad", 
+				spreadMethod=>"pad",
 				gradientUnits=>"objectBoundingBox"	);
 
-	$Argyle_1_lg->stop(offset=>"10%", 
+	$Argyle_1_lg->stop(offset=>"10%",
 					            style=>{'stop-color'=>'rgb(255,0,0)','stop-opacity'=>1});
 
-	$Argyle_1_lg->stop(offset=>"50%", 
+	$Argyle_1_lg->stop(offset=>"50%",
         					  style=>{'stop-color'=>'rgb(253,215,0)','stop-opacity'=>1});
-	$Argyle_1_lg->stop(offset=>"90%", 
+	$Argyle_1_lg->stop(offset=>"90%",
   			        		style=>{'stop-color'=>'rgb(255,0,0)','stop-opacity'=>1});
 
   my $argyle_1_1 = $Argyle_1->gradient(-type=>'linear',
-    				id=>"black-white", 
-		    		x1=>"0%", 
-            y1=>"0%", 
-            x2=>"100%", 
+    				id=>"black-white",
+		    		x1=>"0%",
+            y1=>"0%",
+            x2=>"100%",
             y2=>"0%",
-            spreadMethod=>"pad", 
+            spreadMethod=>"pad",
             gradientUnits=>"objectBoundingBox");
 
 	$argyle_1_1->stop(offset=>"0%",
           				style=>{'stop-color'=>'rgb(255,0,0)','stop-opacity'=>'1'});
 
-	$argyle_1_1->stop(offset=>"100%", 
+	$argyle_1_1->stop(offset=>"100%",
           				style=>{'stop-color'=>'rgb(255,255,0)','stop-opacity'=>'1'});
-  
+
   my $Bumpy = $svg->filter(id=>'Bumpy',filterUnits=>"objectBoundingBox",
               x=>"-10%",y=>"-10%",
               width=>"150%", height=>"150%",
@@ -143,20 +131,20 @@ my $Argyle_1_lg = $Argyle_1->gradient(id=>"red-yellow-red",
             in2=>"SourceGraphic",operator=>"arithmetic",
             k2=>"0.5",k3=>"0.5",result=>"image4");
 
-  $Bumpy->fe(-type=>"composite",in=>"image4", 
-            in2=>"SourceGraphic", operator=>"in",	
+  $Bumpy->fe(-type=>"composite",in=>"image4",
+            in2=>"SourceGraphic", operator=>"in",
             result=>"image5");
 
-my $pointillist = $svg->filter(id=>"pointillist", filterUnits=>"objectBoundingBox", 
+my $pointillist = $svg->filter(id=>"pointillist", filterUnits=>"objectBoundingBox",
             x=>"-10%", y=>"-10%", width=>"150%", height=>"150%");
-	$pointillist->fe(-type=>'turbulence', baseFrequency=>"0.1", 
+	$pointillist->fe(-type=>'turbulence', baseFrequency=>"0.1",
                   numOctaves=>"2",  result=>'I1');
-	$pointillist->fe(-type=>'morphology', in=>"I1", radius=>"5", 
+	$pointillist->fe(-type=>'morphology', in=>"I1", radius=>"5",
               operator=>"dilate", result=>"I2");
-	$pointillist->fe(-type=>'colormatrix', in=>"I2", type=>"matrix", 
-                values=>"1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0 255", 
+	$pointillist->fe(-type=>'colormatrix', in=>"I2", type=>"matrix",
+                values=>"1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0 255",
                 result=>"I3");
-	$pointillist->fe(-type=>'composite', in=>"I3", 
+	$pointillist->fe(-type=>'composite', in=>"I3",
                    in2=>"SourceGraphic", operator=>"in");
 
 
@@ -262,11 +250,11 @@ $svg->text(x=>"318", y=>"333",
                 ->cdata('A');
 
 $svg->polygon(points=>'33.6776,266.425 34.408,266.795 33.6684,267.165 33.8903,266.795',
-              'stroke-miterlimit'=>4, 'stroke-linejoin'=>'miter', 
+              'stroke-miterlimit'=>4, 'stroke-linejoin'=>'miter',
               fill=>'rgb(0,0,0)');
 
 $svg->polygon(points=>'75.8931,140.313 -18,268.028 77.0816,395.744 48.5571,268.028',
-		          'stroke-linejoin'=>'miter', 
+		          'stroke-linejoin'=>'miter',
               fill=>'url(#red-yellow-red)',
               filter=>'url(#Bumpy)');
 
@@ -396,10 +384,10 @@ $style={'stroke-miterlimit'=>4,
         'stroke'=>'url(#transparent-sky_1)',
         'fill-opacity'=>1,
         'fill'=>'rgb(0,0,0)',
-        'opacity'=>0.5};	
+        'opacity'=>0.5};
 
 $svg->path(d=>$path,style=>$style);
-	
+
 $string = '( Well..., almost )';
 
 $style = {'font-family'=>'Arial monospaced for SAP',
@@ -415,3 +403,4 @@ $style = {'font-family'=>'Arial monospaced for SAP',
 $svg->text(x=>273,y=>437,style=>$style)->cdata($string);
 
 print $svg->xmlify;
+
