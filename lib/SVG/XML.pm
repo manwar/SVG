@@ -21,13 +21,11 @@ package SVG::XML;
 use strict;
 use warnings;
 
-use vars qw($VERSION @ISA @EXPORT );
+use Exporter qw(import);
 
-$VERSION = "2.50";
+our $VERSION = "2.50";
 
-require Exporter;
-@ISA = qw(Exporter);
-@EXPORT = qw(
+our @EXPORT = qw(
     xmlesc
     xmlescape
     xmlescp

@@ -1,4 +1,4 @@
-=pod 
+=pod
 
 =head1 NAME
 
@@ -9,21 +9,20 @@ SVG - Perl extension for generating Scalable Vector Graphics (SVG) documents
 package SVG;
 
 use strict;
-use vars qw($VERSION @ISA $AUTOLOAD);
-use Exporter;
+use warnings;
+
 use SVG::XML;
 use SVG::Element;
 use SVG::Extension;
 use Scalar::Util qw/weaken/;
-use warnings;
 
-@ISA = qw(SVG::Element SVG::Extension);
+our @ISA = qw(SVG::Element SVG::Extension);
 
-$VERSION = "2.50";
+our $VERSION = "2.50";
 
 #-------------------------------------------------------------------------------
 
-=pod 
+=pod
 
 =head2 VERSION
 
