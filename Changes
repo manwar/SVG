@@ -1,5 +1,10 @@
 Revision history for Perl extension SVG.
 
+	- Maintenance by Gabor Szabo
+	- Some documentation fixes.
+	- Modernizing test suite.
+	- Link to new public repository.
+
 2.50  05 April, 2010
 	-Fixed inline SVG generation method (bug # 43814 and 50075)
 	-Fixed XML-escaped characters (bug # 53918 and 44454)
