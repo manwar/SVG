@@ -23,7 +23,7 @@ use warnings;
 
 use Exporter qw(import);
 
-our $VERSION = "2.50";
+our $VERSION = "2.51";
 
 our @EXPORT = qw(
     xmlesc

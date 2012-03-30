@@ -2,7 +2,7 @@ package SVG::Extension;
 use strict;
 use warnings;
 use vars qw(@ISA $VERSION @TYPES %TYPES);
-$VERSION = "2.50";
+$VERSION = "2.51";
 
 # although DTD declarations are not elements, we use the same API so we can
 # manipulate the internal DTD subset using the same methods available for

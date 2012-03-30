@@ -20,7 +20,7 @@ L<http://www.w3c.org/Graphics/SVG/> SVG at the W3C
 
 package SVG::Element;
 
-$VERSION = "2.50";
+$VERSION = "2.51";
 
 use strict;
 use SVG::XML;

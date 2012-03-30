@@ -18,7 +18,7 @@ use Scalar::Util qw/weaken/;
 
 our @ISA = qw(SVG::Element SVG::Extension);
 
-our $VERSION = "2.50";
+our $VERSION = "2.51";
 
 #-------------------------------------------------------------------------------
 
@@ -26,7 +26,7 @@ our $VERSION = "2.50";
 
 =head2 VERSION
 
-Version 2.44, 08  April, 2008
+Version 2.51, 30  March, 2012
 
 Refer to L<SVG::Manual> for the complete manual
 
