@@ -1,5 +1,7 @@
-use Test::More tests => 10;
 use strict;
+use warnings;
+
+use Test::More tests => 10;
 use SVG qw(-inline 1);
 
 # test: -inline

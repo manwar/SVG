@@ -1,27 +1,34 @@
-use Test::More tests=>9;
 use strict;
+use warnings;
+
+use Test::More tests => 9;
 use SVG;
 
-my $svg=new SVG(width=>100,height=>100);
-my $xml;
+my $svg = SVG->new(width=>100,height=>100);
 
-ok(my $pi = $svg->pi("Hello world","I am a PI"),"PI: add 2 arbitrary processing instructions");
+my $pi = $svg->pi("Hello world","I am a PI");
+ok($pi,"PI: add 2 arbitrary processing instructions");
+
 ok($svg->rect(x=>0,y=>0,width=>10,height=>10,fill=>'red',stroke=>'brick'),"add a drawing element");
-$svg->rect(x=>0,y=>0,width=>10,height=>10,fill=>'red',stroke=>'brick');
-$svg->rect(x=>0,y=>0,width=>10,height=>10,fill=>'red',stroke=>'brick');
-$svg->rect(x=>0,y=>0,width=>10,height=>10,fill=>'red',stroke=>'brick');
-$svg->rect(x=>0,y=>0,width=>10,height=>10,fill=>'red',stroke=>'brick');
-$svg->rect(x=>0,y=>0,width=>10,height=>10,fill=>'red',stroke=>'brick');
-$svg->rect(x=>0,y=>0,width=>10,height=>10,fill=>'red',stroke=>'brick');
-ok($xml = $svg->xmlify(),"serialize the svg");
-ok($xml=~/<\?Hello\sworld\?>/gs, "serialize arbitrary processing instruction 1");
-ok($xml=~/<\?I\sam\sa\sPI\?>/gs, "serialize arbitrary processing instruction 2");
+
+$svg->rect(x=>0, y=>0, width=>10, height=>10, fill=>'red', stroke=>'brick');
+$svg->rect(x=>0, y=>0, width=>10, height=>10, fill=>'red', stroke=>'brick');
+$svg->rect(x=>0, y=>0, width=>10, height=>10, fill=>'red', stroke=>'brick');
+$svg->rect(x=>0, y=>0, width=>10, height=>10, fill=>'red', stroke=>'brick');
+$svg->rect(x=>0, y=>0, width=>10, height=>10, fill=>'red', stroke=>'brick');
+$svg->rect(x=>0, y=>0, width=>10, height=>10, fill=>'red', stroke=>'brick');
+
+my $xml = $svg->xmlify();
+ok($xml, "serialize the svg");
+like($xml, qr/<\?Hello\sworld\?>/, "serialize arbitrary processing instruction 1");
+like($xml, qr/<\?I\sam\sa\sPI\?>/, "serialize arbitrary processing instruction 2");
 
 
-ok($xml=~/rect/gsi,"PI 2: add non-PI elements");
-ok(scalar @{$svg->pi} ==  2,"PI 3 - fetch PI array");
+like($xml, qr/rect/, "PI 2: add non-PI elements");
+is(scalar @{$svg->pi}, 2,"PI 3 - fetch PI array");
 
 $svg->pi("Third PI entry");
 $xml = $svg->xmlify();
-ok($xml=~/<\?Third\sPI\sentry\?>/gsi,"pi 2");
-ok(scalar @{$svg->pi} ==  3,"PI 3");
+like($xml, qr/<\?Third\sPI\sentry\?>/, "pi 2");
+is(scalar @{$svg->pi}, 3, "PI 3");
+
