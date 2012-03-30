@@ -1,8 +1,8 @@
 package SVG::Extension;
 use strict;
 use warnings;
-use vars qw(@ISA $VERSION @TYPES %TYPES);
-$VERSION = "2.51";
+
+our $VERSION = "2.51";
 
 # although DTD declarations are not elements, we use the same API so we can
 # manipulate the internal DTD subset using the same methods available for
@@ -11,7 +11,7 @@ $VERSION = "2.51";
 # e.g. isElementDecl() to determine types; this API will be retained
 # irrespective.
 
-@ISA=qw(SVG::Element);
+our @ISA = qw(SVG::Element);
 
 # DTD declarations handled in this module
 use constant ELEMENT => "ELEMENT";
@@ -19,8 +19,8 @@ use constant ATTLIST => "ATTLIST";
 use constant NOTATION => "NOTATION";
 use constant ENTITY => "ENTITY";
 
-@TYPES=(ELEMENT,ATTLIST,NOTATION,ENTITY);
-%TYPES=map { $_ => 1 } @TYPES;
+our @TYPES = (ELEMENT,ATTLIST,NOTATION,ENTITY);
+our %TYPES = map { $_ => 1 } @TYPES;
 
 #-----------------
 

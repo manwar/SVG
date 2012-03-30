@@ -20,15 +20,18 @@ L<http://www.w3c.org/Graphics/SVG/> SVG at the W3C
 
 package SVG::Element;
 
-$VERSION = "2.51";
 
 use strict;
+use warnings;
+
 use SVG::XML;
 use SVG::DOM;
 use SVG::Extension;
 use Scalar::Util qw/weaken/;
-use warnings;
-use vars qw($AUTOLOAD %autosubs);
+
+our $AUTOLOAD;
+
+our $VERSION = "2.51";
 
 my @autosubs = qw(
   animateMotion animateColor animateTransform circle ellipse rect polyline
@@ -42,7 +45,7 @@ my @autosubs = qw(
   image a g
 );
 
-%autosubs = map { $_ => 1 } @autosubs;
+our %autosubs = map { $_ => 1 } @autosubs;
 
 #-------------------------------------------------------------------------------
 

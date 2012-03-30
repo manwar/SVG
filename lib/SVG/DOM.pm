@@ -1,9 +1,10 @@
 package SVG::DOM;
 use strict;
 use warnings;
+
 use Scalar::Util qw/weaken/;
-use vars qw($VERSION);
-$VERSION = "2.51";
+
+our $VERSION = "2.51";
 
 # this module extends SVG::Element
 package SVG::Element;
