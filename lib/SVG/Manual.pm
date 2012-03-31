@@ -20,8 +20,6 @@ Covers SVG-2.51 distribution, 30 March 2012
 
     # create an SVG object
     my $svg= SVG->new(width=>200,height=>200);
-    #or
-    my $svg= SVG->new(width=>200,height=>200);
 
     # use explicit element constructor to generate a group element
     my $y=$svg->group(

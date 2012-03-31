@@ -53,10 +53,6 @@ I would like to thank the following people for contributing to this module with
 patches, testing, suggestions, and other nice tidbits:
 Peter Wainwright, Ian Hickson, Adam Schneider, Steve Lihn, Allen Day 
 
-=head1 EXAMPLES
-
-http://www.roitsystems.com/index.shtml?svg.pod
-
 =head1 SEE ALSO
 
 perl(1),L<SVG>,L<SVG::DOM>,L<SVG::XML>,L<SVG::Element>,L<SVG::Parser>, L<SVG::Manual> L<SVG::Extension>
