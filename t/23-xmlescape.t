@@ -1,12 +1,15 @@
-use Test::More tests=>14;
 use strict;
+use warnings;
+
+use Test::More tests => 14;
+
 use SVG ( -printerror => 0, -raiseerror => 0 );
 
 # test: special characters
 
 my $bad_chars = '><!&';
 my $esc_chars = '&gt;&lt;!&amp';
-my $svg  = new SVG;
+my $svg  = SVG->new;
 
 ok(my $out1 = $svg->text()->cdata_noxmlesc($svg->xmlescp($bad_chars)),"Testing toxic characters to xmlescp");
 
