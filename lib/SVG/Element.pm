@@ -56,7 +56,7 @@ sub new ($$;@) {
     foreach my $key ( keys %attrs ) {
 
         #handle escapes for special elements such as anchor
-        if ( $key =~ /^\-/ ) {
+        if ( $key =~ /^-/ ) {
             if ( $key eq '-href' ) {
                 $self->{'xlink:href'}    = $attrs{$key};
                 $self->{'xlink:type'}    = $attrs{-type} if $attrs{-type};
@@ -80,7 +80,7 @@ sub release ($) {
     my $self = shift;
 
     foreach my $key ( keys( %{$self} ) ) {
-        next if $key =~ /^\-/;
+        next if $key =~ /^-/;
         if ( ref( $self->{$key} ) =~ /^SVG/ ) {
             eval { $self->{$key}->release; };
         }
@@ -98,7 +98,7 @@ sub xmlify ($) {
     #prep the attributes
     my %attrs;
     foreach my $k ( keys( %{$self} ) ) {
-        if ( $k =~ /^\-/ ) { next; }
+        if ( $k =~ /^-/ ) { next; }
         if ( ref( $self->{$k} ) eq 'ARRAY' ) {
             $attrs{$k} = join( ', ', @{ $self->{$k} } );
         } elsif ( ref( $self->{$k} ) eq 'HASH' ) {
@@ -180,7 +180,7 @@ sub perlify {
     #prep the attributes
     my %attrs;
     foreach my $k ( keys( %{$self} ) ) {
-        if ( $k =~ /^\-/ ) { next; }
+        next if $k =~ /^-/;
         if ( ref( $self->{$k} ) eq 'ARRAY' ) {
             $attrs{$k} = join( ', ', @{ $self->{$k} } );
         } elsif ( ref( $self->{$k} ) eq 'HASH' ) {

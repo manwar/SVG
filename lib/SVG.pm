@@ -288,12 +288,12 @@ sub xmlify ($;@) {
     }
 
     foreach my $key (keys %attrs) {
-        next unless ($key =~ /^\-/);
+        next if $key !~ /^-/;
         $self->{$key} = $attrs{$key};
     }
 
     foreach my $key (keys %$self) {
-        next unless ($key =~ /^\-/);
+        next if $key !~ /^-/;
         $attrs{$key} ||= $self->{$key};
     }
 
