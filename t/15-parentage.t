@@ -1,25 +1,28 @@
-use Test::More tests=>18;
 use strict;
+use warnings;
+
+use Test::More tests => 18;
 use SVG;
 
 # test: getFirstChild, getLastChild, getParent, getChildren
 
-my $svg    = new SVG;
+my $svg    = SVG->new;
 my $parent = $svg->group();
 my $child1 = $parent->text->cdata("I am the first child");
 my $child2 = $parent->text->cdata("I am the second child");
 my $child3 = $parent->text->cdata("I am the third child");
 
-ok($parent->getFirstChild() == $child1,"getFirstChild");
-ok($child1->getParent() == $parent,"getParent 1");
-ok($parent->getLastChild() == $child3,"getLastChild");
-ok($child2->getParent() == $parent,"getParent 2");
-ok($parent->hasChildren(),"hasChildren");
+is($parent->getFirstChild(), $child1, "getFirstChild");
+is($child1->getParent(),     $parent, "getParent 1");
+is($parent->getLastChild(),  $child3, "getLastChild");
+is($child2->getParent(),     $parent, "getParent 2");
+ok($parent->hasChildren(),   "hasChildren");
+
 my @children = $parent->getChildren();
-ok(scalar(@children) == 3,"correct number of children");
-ok($children[0] == $child1,"getChildren 1");
-ok($children[1] == $child2,"getChildren 2");
-ok($children[2] == $child3,"getChildren 3");
+is(scalar(@children), 3,"correct number of children");
+is($children[0], $child1, "getChildren 1");
+is($children[1], $child2, "getChildren 2");
+is($children[2], $child3, "getChildren 3");
 
 
 is($parent->removeChild($child1), $child1, 'removeChild1');
@@ -32,3 +35,4 @@ is($parent->insertAtIndex($child1,0), 1);
 is($parent->findChildIndex($child1), 0, 'child1 is back');
 is($parent->removeAtIndex(0), $child1);
 is($parent->findChildIndex($child1), -1, 'child1 is gone again');
+
