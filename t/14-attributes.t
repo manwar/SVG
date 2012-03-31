@@ -1,14 +1,16 @@
-use Test::More tests => 2;
 use strict;
+use warnings;
+
+use Test::More tests => 2;
 use SVG;
 
-my $svg=new SVG();
-my $g=$svg->group(fill=>"white", stroke=>"black");
+my $svg = SVG->new();
+my $g = $svg->group(fill=>"white", stroke=>"black");
 
-my $fill=$g->attribute("fill");
-ok($fill eq "white","attribute (get)");
+my $fill = $g->attribute("fill");
+is($fill, "white", "attribute (get)");
 
 $g->attribute(stroke => "red");
-my $stroke=$g->attribute("stroke");
-ok($stroke eq "red","attribute (set)");
+my $stroke = $g->attribute("stroke");
+is($stroke, "red", "attribute (set)");
 

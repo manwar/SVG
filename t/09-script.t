@@ -1,8 +1,10 @@
-use Test::More tests=>7;
 use strict;
+use warnings;
+
+use Test::More tests => 8;
 use SVG;
 
-my $svg = new SVG;
+my $svg = SVG->new;
 
 my $tag = $svg->script( type => "text/ecmascript" );
 
@@ -10,8 +12,6 @@ my $tag = $svg->script( type => "text/ecmascript" );
 # be careful to manage the javascript line ends.
 # qq│text│ or qq§text§ where text is the script
 # works well for this.
-
-my $out;
 
 $tag->CDATA(
     qq|
@@ -24,13 +24,13 @@ document.write('<br>');//write a horizontal rule
 }|
 );
 
-ok($tag,"create script element");
-$out = $svg->xmlify;
+ok($tag, "create script element");
+my $out = $svg->xmlify;
 
-ok($out =~ /\"text\/ecmascript\"/,"specify script type");
-ok($out =~ /function/,"generate script content");;
-ok($out =~ /'<br>'/,"handle single quotes");
-ok($out =~ /"<hr>/,"handle double quotes");
+like($out, qr{"text/ecmascript"}, "specify script type");
+like($out, qr/function/, "generate script content");;
+like($out, qr/'<br>'/, "handle single quotes");
+like($out, qr/"<hr>/, "handle double quotes");
 
 #test for adding scripting commands in an element
 
@@ -48,7 +48,8 @@ my $rect = $svg->rect(
 
 $out = $rect->xmlify;
 
-ok( $out =~ /'hello'/gs && $out =~ /'world'/gsi,"mouse event script call" );
+like($out, qr/'hello'/, 'mouse event');
+like($out, qr/'world'/, "mouse event script call" );
 
 
 $svg = new SVG;
@@ -56,6 +57,6 @@ $svg->script()->CDATA("TESTTESTTEST");
 $out = $svg->xmlify;
 chomp $out;
 
-ok( $out =~ /<script\s*><!\[CDATA\[TESTTESTTEST\]\]>\s*<\/script>/,"script without type");
+like( $out, qr/<script\s*><!\[CDATA\[TESTTESTTEST\]\]>\s*<\/script>/, "script without type");
 
 
