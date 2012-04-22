@@ -5,6 +5,7 @@ WriteMakefile(
     NAME              => 'SVG',
     VERSION_FROM      => 'lib/SVG.pm', # finds $VERSION
     PREREQ_PM         => {
+        'parent'       => 0,
         'Scalar::Util' => 0,
      },
     ($] >= 5.005 ?     ## Add these new keywords supported since 5.005

@@ -773,10 +773,10 @@ B<Example:>
     
     my $tag = $SVG->style(type=>"text/css");
 
-    # populate the style tag with cdata
-    # be careful to manage the line ends.
-    # qq|text| or qq§text§ where text is the script
-    # works well for this.
+    # Populate the style tag with cdata.
+    # Be careful to manage the line ends.
+    # qq|text| or qq§text§, where text is the script
+    # work well for this.
 
     $tag1->CDATA(qq|
 	rect     fill:red;stroke:green;
@@ -785,7 +785,7 @@ B<Example:>
 	text     fill:black;stroke:none;
    	|);
     
-    # create a external css stylesheet reference
+    # Create a external CSS stylesheet reference
     my $tag2 = $SVG->style(type=>"text/css", -href="/resources/example.css");
 
 =pod

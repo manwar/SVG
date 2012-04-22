@@ -11,7 +11,7 @@ our $VERSION = "2.51";
 # e.g. isElementDecl() to determine types; this API will be retained
 # irrespective.
 
-our @ISA = qw(SVG::Element);
+use parent qw/SVG::Element/;
 
 # DTD declarations handled in this module
 use constant ELEMENT => "ELEMENT";
