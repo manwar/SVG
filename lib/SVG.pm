@@ -210,7 +210,7 @@ may also be set in xmlify, overriding any corresponding values set in the SVG->n
 # the next tag object there.
 # refer to the SVG::tag method 
 
-sub new ($;@) {
+sub new {
     my ($proto,%attrs) = @_;
     my $class = ref $proto || $proto;
     my $self;
