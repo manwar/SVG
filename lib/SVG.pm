@@ -12,11 +12,8 @@ use strict;
 use warnings;
 
 use SVG::XML;
-use SVG::Element;
-use SVG::Extension;
+use parent qw(SVG::Element SVG::Extension);
 use Scalar::Util qw/weaken/;
-
-our @ISA = qw(SVG::Element SVG::Extension);
 
 our $VERSION = "2.51";
 
