@@ -1,4 +1,5 @@
 #!/usr/bin/perl
+
 use strict;
 use warnings;
 
@@ -19,4 +20,4 @@ $svg->circle(
 
 
 # now render the SVG object, implicitly use svg namespace
-print $svg->xmlify;
+print $svg->xmlify, "\n";
