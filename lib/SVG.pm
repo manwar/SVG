@@ -272,7 +272,7 @@ B<XML Declaration>
 
 =cut
 
-sub xmlify ($;@) {
+sub xmlify {
 
     my ($self,%attrs) = @_;
     my ($decl,$ns);
