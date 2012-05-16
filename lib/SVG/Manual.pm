@@ -774,6 +774,7 @@ $svg->mouseaction(%attributes)
 
 Sets/Adds mouse action definitions for tag
 
+=head2 attrib
 
 $svg->attrib($name, $value)
 
