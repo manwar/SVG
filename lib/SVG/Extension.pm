@@ -4,6 +4,13 @@ use warnings;
 
 our $VERSION = "2.51";
 
+=head1 NAME
+
+SVG::Extension - additional methods
+
+=cut
+
+
 # although DTD declarations are not elements, we use the same API so we can
 # manipulate the internal DTD subset using the same methods available for
 # elements. At this state, all extensions are the same object class, but
@@ -103,7 +110,7 @@ sub attlist_decl {
 
 =head2 notation_decl(%attrs)
 
-return an extention object of type NOTATION
+return an extension object of type NOTATION
 
 =cut
 

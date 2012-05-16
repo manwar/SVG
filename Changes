@@ -2,6 +2,7 @@ Revision history for Perl extension SVG.
 
 	- Some example cleanup - Shlomi Fish
 	- removing prototype - Shlomi Fish
+	- POD fixes - David Paleino
 
 2.51 30 March, 2012
 	- Maintenance by Gabor Szabo
