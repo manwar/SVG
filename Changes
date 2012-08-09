@@ -1,5 +1,8 @@
 Revision history for Perl extension SVG.
 
+2.53 2012.08.09
+    - missing test file removed from MANIFEST (RT #78856)
+
 2.52 2012.05.29
 	- move POD testing to xt/
 	- Some example cleanup - Shlomi Fish

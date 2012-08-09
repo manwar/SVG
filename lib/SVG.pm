@@ -15,7 +15,7 @@ use SVG::XML;
 use parent qw(SVG::Element SVG::Extension);
 use Scalar::Util qw/weaken/;
 
-our $VERSION = '2.52';
+our $VERSION = '2.53';
 
 #-------------------------------------------------------------------------------
 
