@@ -25,7 +25,14 @@ our $VERSION = '2.53';
 
 Version 2.51, 30  March, 2012
 
-Refer to L<SVG::Manual> for the complete manual
+Refer to L<SVG::Manual> for the complete manual.
+
+See the other modules in this distribution:
+L<SVG::DOM>,
+L<SVG::XML>,
+L<SVG::Element>,
+L<SVG::Parser>,
+L<SVG::Extension>
 
 =head1 DESCRIPTION
 
@@ -52,10 +59,16 @@ Peter Wainwright, Ian Hickson, Adam Schneider, Steve Lihn, Allen Day
 
 =head1 SEE ALSO
 
-perl(1),L<SVG>,L<SVG::DOM>,L<SVG::XML>,L<SVG::Element>,L<SVG::Parser>, L<SVG::Manual> L<SVG::Extension>
 L<http://www.roitsystems.com/> ROASP.com: Serverside SVG server
 L<http://www.roitsystems.com/> ROIT Systems: Commercial SVG perl solutions
 L<http://www.w3c.org/Graphics/SVG/> SVG at the W3C
+
+=head1 COPYRIGHT & LICENSE
+
+Copyright Ronan Oger
+
+The modules in the SVG distribution are distributed under the same license
+as Perl itself. It is provided free of warranty and may be re-used freely.
 
 =cut
 
@@ -321,17 +334,5 @@ Alias for method perlify()
 =cut
 
 *toperl=\&perlify;
-
-#-------------------------------------------------------------------------------
-
-#LICENSE
-#
-#
-#
-#The modules in the SVG distribution are distributed under the same license
-# as Perl itself. It is provided free of warranty and may be re-used freely.
-#
-#
-#
 
 1;
