@@ -1,0 +1,7 @@
+#[Perl::Critic::Policy::NamingConventions::Capitalization]
+#severity = 1
+
+
+[-Perl::Critic::Policy::OTRS::RequireCamelCase]
+[-Perl::Critic::Policy::OTRS::ProhibitSomeCoreFunctions]
+
