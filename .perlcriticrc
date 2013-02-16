@@ -2,6 +2,7 @@
 #severity = 1
 
 
-[-Perl::Critic::Policy::OTRS::RequireCamelCase]
-[-Perl::Critic::Policy::OTRS::ProhibitSomeCoreFunctions]
+[-OTRS::RequireCamelCase]
+[-OTRS::ProhibitSomeCoreFunctions]
+[-OTRS::ProhibitLowPrecendeceOps]
 
