@@ -9,7 +9,7 @@ WriteMakefile(
         'Scalar::Util' => 0,
      },
     ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
-      (ABSTRACT_FROM  => 'lib/SVG/Manual.pm', # retrieve abstract from module
+      (ABSTRACT_FROM  => 'lib/SVG.pm',
        LICENSE        => 'perl',
        AUTHOR         => 'Ronan Oger <ronan@cpan.com>') : ()),
     META_MERGE        => {
