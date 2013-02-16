@@ -1632,6 +1632,7 @@ sub autoload {
 	#per rt.perl.org comment by slaven.
 
 	if (!$package->can($sub)) {
+        ## no critic (TestingAndDebugging::ProhibitNoStrict)
 		no strict 'refs';
 		*{$package.'::'.$sub} = sub { return shift->tag($tag, @_) };
 	}

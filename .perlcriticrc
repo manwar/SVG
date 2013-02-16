@@ -1,8 +1,11 @@
-#[Perl::Critic::Policy::NamingConventions::Capitalization]
-#severity = 1
-
 
 [-OTRS::RequireCamelCase]
 [-OTRS::ProhibitSomeCoreFunctions]
 [-OTRS::ProhibitLowPrecendeceOps]
+[-OTRS::RequireParensWithMethods]
+
+# TODO
+[-Subroutines::ProhibitExplicitReturnUndef]
+[-ValuesAndExpressions::ProhibitAccessOfPrivateData]
+
 
