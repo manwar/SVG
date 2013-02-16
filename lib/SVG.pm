@@ -323,7 +323,7 @@ return the perl code which generates the SVG document as it currently exists.
 
 =cut
 
-sub perlify ($;@) {
+sub perlify {
     return shift->SUPER::perlify();
 }
 

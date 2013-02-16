@@ -12,7 +12,7 @@ package SVG::Element;
 #-----------------
 # sub getFirstChild
 
-sub getFirstChild ($) {
+sub getFirstChild {
     my $self=shift;
 
     if (my @children=$self->getChildren) {
@@ -26,7 +26,7 @@ sub getFirstChild ($) {
 # return the array index of this element in the parent
 # or the passed list (if there is one).
 
-sub getChildIndex ($;@) {
+sub getChildIndex {
     my ($self,@children)=@_;
 
     unless (@children) {
@@ -47,7 +47,7 @@ sub getChildIndex ($;@) {
 # return the element at the specified index
 # (the index can be negative)
 
-sub getChildAtIndex ($$;@) {
+sub getChildAtIndex {
     my ($self,$index,@children)=@_;
 
     unless (@children) {
@@ -62,7 +62,7 @@ sub getChildAtIndex ($$;@) {
 #-----------------
 # sub getNextSibling
 
-sub getNextSibling ($) {
+sub getNextSibling {
     my $self=shift;
 
     if (my $parent=$self->getParent) {
@@ -80,7 +80,7 @@ sub getNextSibling ($) {
 #-----------------
 # sub getPreviousSibling
 
-sub getPreviousSibling ($) {
+sub getPreviousSibling {
     my $self=shift;
 
     if (my $parent=$self->getParent) {
@@ -97,7 +97,7 @@ sub getPreviousSibling ($) {
 #-----------------
 # sub getLastChild
 
-sub getLastChild ($) {
+sub getLastChild {
     my $self=shift;
 
     if (my @children=$self->getChildren) {
@@ -110,7 +110,7 @@ sub getLastChild ($) {
 #-----------------
 # sub getChildren
 
-sub getChildren ($) {
+sub getChildren {
     my $self=shift;
 
     if ($self->{-childs}) {
@@ -127,7 +127,7 @@ sub getChildren ($) {
 
 #-----------------
 
-sub hasChildren ($) {
+sub hasChildren {
     my $self=shift;
 
     if (exists $self->{-childs}) {
@@ -145,7 +145,7 @@ sub hasChildren ($) {
 # sub getParent / getParentElement
 # return the ref of the parent of the current node
 
-sub getParent ($) {
+sub getParent {
     my $self=shift;
 
     if ($self->{-parent}) {
@@ -179,9 +179,9 @@ sub getParents {
 *getAncestors=\&getParents;
 
 #-----------------
-# sub isAncestor 
+# sub isAncestor
 
-sub isAncestor ($$) {
+sub isAncestor {
     my ($self,$descendant)=@_;
 
     my @parents=$descendant->getParents();
@@ -195,7 +195,7 @@ sub isAncestor ($$) {
 #-----------------
 # sub isDescendant
 
-sub isDescendant ($$) {
+sub isDescendant {
     my ($self,$ancestor)=@_;
 
     my @parents=$self->getParents();
@@ -209,7 +209,7 @@ sub isDescendant ($$) {
 #-----------------
 # sub getSiblings
 
-sub getSiblings ($) {
+sub getSiblings {
     my $self=shift;
 
     if (my $parent=$self->getParent) {
@@ -222,7 +222,7 @@ sub getSiblings ($) {
 #-----------------
 # sub hasSiblings
 
-sub hasSiblings ($) {
+sub hasSiblings {
     my $self=shift;
 
     if (my $parent=$self->getParent) {
@@ -236,7 +236,7 @@ sub hasSiblings ($) {
 #-----------------
 # sub getElementName / getType
 
-sub getElementName ($) {
+sub getElementName {
     my $self=shift;
 
     if (exists $self->{-name}) {
@@ -257,7 +257,7 @@ sub getElementName ($) {
 # get all elements of the specified type
 # if none is specified, get all elements in document.
 
-sub getElements ($;$) {
+sub getElements {
     my ($self,$element)=@_;
 
     return undef unless exists $self->{-docref};
@@ -279,13 +279,13 @@ sub getElements ($;$) {
 }
 
 # forces the use of the second argument for element name
-sub getElementsByName ($$) {
+sub getElementsByName {
     return shift->getElements(shift);
 }
 *getElementsByType=\&getElementsByName;
 
 #-----------------
-sub getElementNames ($) {
+sub getElementNames {
     my $self=shift;
 
     my @types=keys %{$self->{-docref}->{-elist}};
@@ -297,7 +297,7 @@ sub getElementNames ($) {
 #-----------------
 # sub getElementID
 
-sub getElementID ($) {
+sub getElementID {
     my $self=shift;
 
     if (exists $self->{id}) {
@@ -310,7 +310,7 @@ sub getElementID ($) {
 #-----------------
 # sub getElementByID / getElementbyID
 
-sub getElementByID ($$) {
+sub getElementByID {
     my ($self,$id)=@_;
 
     return undef unless defined($id);
@@ -327,7 +327,7 @@ sub getElementByID ($$) {
 # sub getAttribute
 # see also SVG::attrib()
 
-sub getAttribute ($$) {
+sub getAttribute {
     my ($self,$attr)=@_;
 
     if (exists $self->{$attr}) {
@@ -340,7 +340,7 @@ sub getAttribute ($$) {
 #-----------------
 # sub getAttributes
 
-sub getAttributes ($) {
+sub getAttributes {
     my $self=shift;
 
     my $out = {};
@@ -355,7 +355,7 @@ sub getAttributes ($) {
 #-----------------
 # sub setAttribute
 
-sub setAttributes ($$) {
+sub setAttributes {
     my ($self,$attr) = @_;
     foreach my $i (keys %$attr) {
         $self->attrib($i,$attr->{$i});
@@ -365,14 +365,14 @@ sub setAttributes ($$) {
 #-----------------
 # sub setAttribute
 
-sub setAttribute ($$;$) {
+sub setAttribute {
     my ($self,$att,$val) = @_;
     $self->attrib($att,$val);
 }
 #-----------------
 # sub getCDATA / getCdata / getData
 
-sub getCDATA ($) {
+sub getCDATA {
     my $self=shift;
 
     if (exists $self->{-cdata}) {

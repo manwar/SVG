@@ -50,7 +50,7 @@ sub internal_subset {
 
 return the element object
 
-=cut 
+=cut
 
 sub extension {
     my $self=shift;
@@ -122,7 +122,7 @@ sub notation_decl {
 }
 
 
-=head2 entity_decl(%attrs) 
+=head2 entity_decl(%attrs)
 
 return an extension object of type 'ENTITY'
 
@@ -361,7 +361,7 @@ sub isAttributeDecl {
 
 # the Decl 'name' is an attribute, the name is e.g. 'ELEMENT'
 # use getElementName if you want the actual decl type
-sub getElementDeclName ($) {
+sub getElementDeclName {
     my $self=shift;
 
     if (exists $self->{name}) {
@@ -373,7 +373,7 @@ sub getElementDeclName ($) {
 
 # identical to the above; will be smarter as and when we subclass
 # as above, the name is ATTLIST, the 'name' is a property of the decl
-sub getAttributeDeclName ($) {
+sub getAttributeDeclName {
     my $self=shift;
 
     if (exists $self->{name}) {
@@ -412,33 +412,33 @@ sub hasAttributeDecl {
 # directly map to Child/Siblings: we presume this is being called from an
 # element decl. You can use 'getChildIndex', 'getChildAtIndex' etc. as well
 
-sub getElementAttributeAtIndex ($$;@) {
+sub getElementAttributeAtIndex {
     my ($self,$index,@children)=@_;
 
     return $self->SUPER::getChildAtIndex($index,@children);
 }
 
-sub getElementAttributeIndex ($;@) {
+sub getElementAttributeIndex {
     return shift->SUPER::getChildIndex(@_);
 }
 
-sub getFirstAttributeDecl ($) {
+sub getFirstAttributeDecl {
     return shift->SUPER::getFirstChild();
 }
 
-sub getNextAttributeDecl ($) {
+sub getNextAttributeDecl {
     return shift->SUPER::getNextSibling();
 }
 
-sub getLastAttributeDecl ($) {
+sub getLastAttributeDecl {
     return shift->SUPER::getLastChild();
 }
 
-sub getPreviousAttributeDecl ($) {
+sub getPreviousAttributeDecl {
     return shift->SUPER::getPreviousSibling();
 }
 
-sub getElementAttributeDecls ($) {
+sub getElementAttributeDecls {
     return shift->SUPER::getChildren();
 }
 

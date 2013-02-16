@@ -454,7 +454,7 @@ B<Example:>
 
 =cut
 
-sub rectangle ($;@) {
+sub rectangle {
     my ( $self, %attrs ) = @_;
     return $self->tag( 'rect', %attrs );
 }
@@ -483,7 +483,7 @@ B<Output:>
 
 =cut
 
-#sub image ($;@) {
+#sub image {
 #    my ($self,%attrs)=@_;
 #    my $im=$self->tag('image',%attrs);
 #    #$im->{'xlink:href'}=$attrs{-href} if(defined $attrs{-href});
@@ -517,7 +517,7 @@ single element within an external SVG file.
 
 =cut
 
-sub use ($;@) {
+sub use {
     my ( $self, %attrs ) = @_;
     my $u = $self->tag( 'use', %attrs );
     $u->{'xlink:href'} = $attrs{-href} if ( defined $attrs{-href} );
@@ -640,7 +640,7 @@ SEE ALSO:
 
 =cut
 
-sub text ($;@) {
+sub text {
     my ( $self, %attrs ) = @_;
     my $pre = '';
     $pre = $attrs{-type} || 'std';
@@ -695,7 +695,7 @@ B<Example:>
 
 =cut
 
-sub comment ($;@) {
+sub comment {
     my ( $self, @text ) = @_;
     my $tag = $self->tag('comment');
     $tag->{ -comment } = [@text];
@@ -722,7 +722,7 @@ B<Example:>
 
 #add
 
-sub pi ($;@) {
+sub pi {
     my ( $self, @text ) = @_;
     return $self->{-document}->{ -pi } unless scalar @text;
     my @pi;
@@ -871,7 +871,7 @@ B<Aliases:> get_path set_path
 
 =cut
 
-sub get_path ($;@) {
+sub get_path {
     my ( $self, %attrs ) = @_;
 
     my $type = $attrs{-type} || 'path';
@@ -916,12 +916,12 @@ sub get_path ($;@) {
     return \%out;
 }
 
-sub make_path ($;@) {
+sub make_path {
     my ( $self, %attrs ) = @_;
     return get_path(%attrs);
 }
 
-sub set_path ($;@) {
+sub set_path {
     my ( $self, %attrs ) = @_;
     return get_path(%attrs);
 }
@@ -971,7 +971,7 @@ B<Inputs:> -method = Transform | Motion | Color
 
 =cut
 
-sub animate ($;@) {
+sub animate {
     my ( $self, %attrs ) = @_;
     my %rtr    = %attrs;
     my $method = $rtr{'-method'};    # Set | Transform | Motion | Color
@@ -1046,7 +1046,7 @@ B<Example:>
 
 =cut
 
-sub group ($;@) {
+sub group {
     my ( $self, %attrs ) = @_;
     return $self->tag( 'g', %attrs );
 }
@@ -1073,7 +1073,7 @@ which the value of the property is not redefined by the child.
 
 =cut
 
-sub STYLE ($;@) {
+sub STYLE {
     my ( $self, %attrs ) = @_;
 
     $self->{style} = $self->{style} || {};
@@ -1094,7 +1094,7 @@ Sets/Adds mouse action definitions for tag
 
 =cut
 
-sub mouseaction ($;@) {
+sub mouseaction {
     my ( $self, %attrs ) = @_;
 
     $self->{mouseaction} = $self->{mouseaction} || {};
@@ -1135,7 +1135,7 @@ B<Aliases:> attr attribute
 
 =cut
 
-sub attrib ($$;$) {
+sub attrib {
     my ( $self, $name, $val ) = @_;
 
     #verify that the current id is unique. compain on exception
@@ -1200,7 +1200,7 @@ SEE ALSO:
 
 =cut
 
-sub cdata ($@) {
+sub cdata {
     my ( $self, @txt ) = @_;
     $self->{ -cdata } = join( ' ', @txt );
     return ($self);
@@ -1273,13 +1273,13 @@ SEE ALSO:
 
 =cut
 
-sub CDATA ($@) {
+sub CDATA {
     my ( $self, @txt ) = @_;
     $self->{ -CDATA } = join( '\n', @txt );
     return ($self);
 }
 
-sub cdata_noxmlesc ($@) {
+sub cdata_noxmlesc {
     my ( $self, @txt ) = @_;
     $self->{ -cdata_noxmlesc } = join( '\n', @txt );
     return ($self);
@@ -1312,7 +1312,7 @@ L<"fe">.
 
 =cut
 
-sub filter ($;@) {
+sub filter {
     my ( $self, %attrs ) = @_;
     return $self->tag( 'filter', %attrs );
 }
@@ -1396,7 +1396,7 @@ L<"filter">.
 
 =cut
 
-sub fe ($;@) {
+sub fe {
     my ( $self, %attrs ) = @_;
 
     return 0 unless ( $attrs{'-type'} );
@@ -1455,7 +1455,7 @@ B<Example:>
 
 =cut
 
-sub pattern ($;@) {
+sub pattern {
     my ( $self, %attrs ) = @_;
     return $self->tag( 'pattern', %attrs );
 }
@@ -1481,7 +1481,7 @@ B<Example:>
 
 =cut
 
-sub set ($;@) {
+sub set {
     my ( $self, %attrs ) = @_;
     return $self->tag( 'set', %attrs );
 }
@@ -1506,7 +1506,7 @@ B<Example:>
 
 =cut
 
-sub stop ($;@) {
+sub stop {
     my ( $self, %attrs ) = @_;
     return $self->tag( 'stop', %attrs );
 }
@@ -1526,7 +1526,7 @@ B<Example:>
 
 =cut
 
-sub gradient ($;@) {
+sub gradient {
     my ( $self, %attrs ) = @_;
 
     my $type = $attrs{'-type'} || 'linear';
@@ -1601,7 +1601,7 @@ See e.g. L<"pattern"> for an example of the use of these methods.
 #-------------------------------------------------------------------------------
 # Internal methods
 
-sub error ($$$) {
+sub error {
     my ( $self, $command, $error ) = @_;
 
     if ( $self->{-docref}->{-raiseerror} ) {
@@ -1642,7 +1642,7 @@ sub autoload {
 #-------------------------------------------------------------------------------
 # GD Routines
 
-sub colorAllocate ($$$$) {
+sub colorAllocate {
     my ( $self, $red, $green, $blue ) = @_;
     return 'rgb(' . int($red) . ',' . int($green) . ',' . int($blue) . ')';
 }

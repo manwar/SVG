@@ -44,7 +44,7 @@ our @EXPORT = qw(
     dtddecl
 );
 
-sub xmlescp ($$) {
+sub xmlescp {
     my ($self,$s) = @_;
 
     $s = '0' unless defined $s;
@@ -88,37 +88,37 @@ sub xmlattrib {
    return(join(' ',map { qq($_=").$attrs{$_}.q(") } sort keys(%attrs)));
 }
 
-sub xmltag ($$;@) {
+sub xmltag {
     my ($name,$ns,%attrs)=@_;
     $ns=$ns?"$ns:":'';
     my $at=' '.xmlattrib(%attrs)||'';
     return qq(<$ns$name$at />);
 }
 
-sub xmltag_ln ($$;@) {
+sub xmltag_ln {
     my ($name,$ns,%attrs)=@_;
     return xmltag($name,$ns,%attrs);
 }
 
-sub xmltagopen ($$;@) {
+sub xmltagopen {
     my ($name,$ns,%attrs)=@_;
     $ns=$ns?"$ns:":'';
     my $at=' '.xmlattrib(%attrs)||'';
     return qq(<$ns$name$at>);
 }
 
-sub xmltagopen_ln ($$;@) {
+sub xmltagopen_ln {
     my ($name,$ns,%attrs)=@_;
     return xmltagopen($name,$ns,%attrs);
 }
 
-sub xmlcomment ($$) {
+sub xmlcomment {
     my ($self,$r_comment) = @_;
     my $ind = $self->{-docref}->{-elsep}.$self->{-docref}->{-indent} x $self->{-docref}->{-level};
     return($ind.join($ind,map { qq(<!-- $_ -->)} @$r_comment));
 }
 
-sub xmlpi ($$) {
+sub xmlpi {
     my ($self,$r_pi) = @_;
     my $ind = $self->{-docref}->{-elsep}.$self->{-docref}->{-indent} x $self->{-docref}->{-level};
     return(join($ind,map { qq(<?$_?>)} @$r_pi));
@@ -126,18 +126,18 @@ sub xmlpi ($$) {
 
 *processinginstruction=\&xmlpi;
 
-sub xmltagclose ($$) {
+sub xmltagclose {
     my ($name,$ns)=@_;
     $ns=$ns?"$ns:":'';
     return qq(</$ns$name>);
 }
 
-sub xmltagclose_ln ($$) {
+sub xmltagclose_ln {
     my ($name,$ns)=@_;
     return xmltagclose($name,$ns);
 }
 
-sub dtddecl ($) {
+sub dtddecl {
     my $self = shift;
     my $docroot = $self->{-docroot} || 'svg';
     my $id;
@@ -168,7 +168,7 @@ sub dtddecl ($) {
     return qq[$self->{-docref}{-elsep}<!DOCTYPE $at$extension>];
 }
 
-sub xmldecl ($) {
+sub xmldecl {
     my $self = shift;
 
     my $version= $self->{-version} || '1.0';

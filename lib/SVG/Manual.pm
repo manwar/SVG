@@ -323,7 +323,7 @@ as a child.
 
 B<Example:>
 
-    # generate an anchor	
+    # generate an anchor
     $tag = $svg->anchor(
         -href=>'http://here.com/some/simpler/svg.svg'
     );
