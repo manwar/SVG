@@ -1,5 +1,6 @@
 Revision history for Perl extension SVG.
 
+    - Update the dates in the Changes file.
     - Remove the function prototypes that don't work on methods anyway.
 
 2.53 2012.08.09
@@ -11,13 +12,13 @@ Revision history for Perl extension SVG.
 	- removing prototype - Shlomi Fish
 	- POD fixes - David Paleino
 
-2.51 30 March, 2012
+2.51 2012.03.30
 	- Maintenance by Gabor Szabo
 	- Some documentation fixes.
 	- Modernizing test suite.
 	- Link to new public repository.
 
-2.50  05 April, 2010
+2.50 2010.04.05
 	-Fixed inline SVG generation method (bug # 43814 and 50075)
 	-Fixed XML-escaped characters (bug # 53918 and 44454)
   -Fixed undef bug in findChildIndex (bug # 48932)
@@ -25,71 +26,71 @@ Revision history for Perl extension SVG.
   -Fixed cloning method (bug # 36194)
   -DOM::insertAtIndex() and removeAtIndex() now update the ID and element list
 
-2.49  23 January, 2009
+2.49 2009.01.23
 	-Fixed bugtracker URL in YAML
 
-2.48  08 January, 2009
+2.48 2009.01.08
 	-Improved YAML and MANIFEST for cpan testers game
 
-2.47  15 December, 2008
+2.47 2008.12.15
 	-Fixed MANIFEST - replaced Changes entry
 
-2.46  15 December, 2008
+2.46 2008.12.15
 	-Improved META.yml
 	-Fixed MANIFEST
 	-Removed all pointless files
 
-2.45  15 December, 2008
+2.45 2008.12.15
 	-Improved META.yml
 
-2.44  21 April, 2008
+2.44 2008.04.21
 	-Improved META.yml
 
-2.43  21 April, 2008
+2.43 2008.04.21
 	-Improved META.yml
 
-2.42  16 April, 2008
+2.42 2008.04.16
 	-Removed Makefile from MANIFEST
 
-2.41  16 April, 2008
+2.41 2008.04.16
 	-Fixed MANIFEST and added license data to the SVG.pm file
 
-2.40  14 April, 2008
+2.40 2008.04.14
 	-Changed tests to current recommendation. Moved to t/ directory.
 	-Added POD and POD Coverage tests
 
-2.39  08 April, 2008
+2.39 2008.04.08
 	-Added warnings
 
-2.38  03 April, 2008
+2.38 2008.04.03
 
 	-Modified SVG::Element to answer a bug report in rt.perl.org by slaven
 	 regarding the redefined methods warnings when SVG is used twice.
 	-Fixed the POD to reflect annotation comments.
 
-2.37  02 March, 2008
+2.37 2008.03.02
 	-Added NS definitions for svg and xlink to enable xlink:href and svg: namespace usage in Firefox.
 
-2.36  16 September, 2007
+2.36 2007.09.16
 	-Fixed SVG::DOM POD
 
-2.35  14 September, 2007
+2.35 2007.09.14
 	-Fixed SVG::DOM POD
 
-2.34  17 May 2005
+2.34 2005.05.17
 	-SVG::Element - Removed elsep entry for CDATA, cdata, cdata_noxmlesc fields to get rid of
 	artificial blank spaces that confuse some browsers
 	-SVG::DOM - added getRootNode method
 	-Added user-contributed DOM2 methods to SVG::DOM
 
-2.33  14 May, 2005
-	-fixed the xlink reference behaviour which was wrong and 
+2.33 2005.05.14
+	-fixed the xlink reference behaviour which was wrong and
 	 broke Mozilla native SVG. Fix submitted by Ian Hickson
 
-2.32  10 October, 2004
+2.32 2004.10.10
 	-bufgix to repair broken test which causes failure of make test
 	-added sorting to attribute list so output is consistent
-	-added generic support for -href for any method that adds 
+	-added generic support for -href for any method that adds
 	 it as an attribute
 	-added xlink support to any tag with an -href attribute
 	-added 'a' and 'g' autosubs
@@ -97,19 +98,20 @@ Revision history for Perl extension SVG.
 	-bugfix for pi() method
 	-repaired script and style examples
 
-2.31  8 October, 2004
+2.31 2004.10.08
 	-bugfix to stop xml escaping of attribute data.
 	-additional support of making fe element types case insensitive
 
-2.30  30 Sept, 2004
+2.30 2004.09.30
 	-POD changes
 
-2.29  26 September, 2004
+2.29 2004.09.26
 	-exposed SVG::Extension
 	-exposed perlify
 	-added Mozilla native SVG support as default behaviour
 
-2.28  Monday 3 November, 2003 (RO, PW)
+2.28 2003.11.03
+    - date was: Monday 3 November, 2003 (RO, PW)
 	-Added SVG::GD to allow GD users to output SVG for simple GD drawings (RO)
 	-Added perlify support: Generate Perl code from an SVG document (PW)
 	-Added SVG::Extention for DTD validation support during serialisation (PW)
@@ -118,45 +120,50 @@ Revision history for Perl extension SVG.
 	 SVG::Element SMIL animation per Mike Churchill bug report 2003.12.03
 	-bug fix to the inlinesvg.pl example Also per Mike Churchill bug report
 
-2.27  Wednesday 29 January 2002 (RO)
+2.27 2002.01.29
+    - date was: Wednesday 29 January 2002 (RO)
 	-Added setAttribute and setAttributes to SVG::DOM
 
-2.26  Sunday 4 August 2002 (PW)
-	- Moved all -specialarguments to %default_attrs so they 
+2.26 2002.08.04
+    - date was: Sunday 4 August 2002 (PW)
+	- Moved all -specialarguments to %default_attrs so they
 	  can be set at import time
-	- Added strict checking for duplicate IDs in tag() and attribute() 
+	- Added strict checking for duplicate IDs in tag() and attribute()
 	- Created test suite of 17 initial regession test scripts
-	- Improved xmlesc method in 
+	- Improved xmlesc method in
 
-2.25  Sunday 13 July 2002 (PW)
+2.25 2002.07.13
+    - date: Sunday 13 July 2002 (PW)
 	- Extended DOM module to cover many more DOM functions
 	- Rewrote attrib() to also set and delete attributes
-        - Added 'attribute' and 'attr' aliases for attrib()
+    - Added 'attribute' and 'attr' aliases for attrib()
 
-2.22  Monday 24 June 2002
-	- Minor bug fix - method script was changed to uppercase accidentally. 
+2.22 2002.06.24
+	- Minor bug fix - method script was changed to uppercase accidentally.
 	  Repaired this error.
 
-2.21  Thursday 20 June 2002
-	- Added the internal hash $svg->{-docref} which contains 
-	  the -elist and -idlist hashes for tracking the elements 
+2.21 2002.06.20
+	- Added the internal hash $svg->{-docref} which contains
+	  the -elist and -idlist hashes for tracking the elements
 	  and ids in the document in the DOM
 	- Added functionality to SVG::DOM including getElements, getElementByID
 	- Added an example of the use of SVG DOM in the examples directory
 	- Added element-level namespace support to override the document namespace
 
 
-2.2  (Not released) Friday 15 June 2002
+2.2  2002.06.15
+    - date was: (Not released) Friday 15 June 2002
 	- Bug fix for SVG::DOM
 	- Enabled SVG::DOM and added additional functionality
 
-2.1  27 May 2002
+2.1 2002.05.27
 	- Separated out the SVG module documentation and moved it to SVG::Manual.pm
 	- Added experimental SVG::DOM
 	- Improved script support and commenting.
 	- Added an end-of-output credit
 
-2.0  Mon Dec 24 14:00
+2.0 2001.12.24
+    - date:  Mon Dec 24 14:00
     - Improved POD, and moved it to SVG::manual
 	- Tested significantly
 	- Added aliases for xmlify
@@ -167,7 +174,8 @@ Revision history for Perl extension SVG.
 	- Repaired inline SVG generation
 	- Added configurability and NON-SVG support
 
-1.12  Thu Oct 18 00:25
+1.12 2001.10.18
+    - date: Thu Oct 18 00:25
 	- Repaired Animate command
 	- Added import functionality
 	- Improved AUTOLOAD functionality
@@ -176,49 +184,60 @@ Revision history for Perl extension SVG.
 	- Modified constructor to accept XML-definition parameters
 	  in preparation for supporting SVG::Parser
 
-0.60-1.0  Internal releases 
+
+    - 0.60-1.0  Internal releases
 	- Not released to public.
 
-0.50  Sat Oct 13 12:00
+0.50 2001.10.13
+    - date: Sat Oct 13 12:00
 	- Maintenance release.
 	- Repaired and added consistency to pod
 	- Repaired small bug in inline.
 	- Added svg.pm to examples. Tested sample of the synopsis script.
 
-0.31  Thu Oct 10 12:00:00
+0.31 2001.10.10
+    - date: Thu Oct 10 12:00:00
     - Bug fix for careless error. Left a debugging comment in the code.
-	- Next time, run the code through an interpreted rather than just 
+	- Next time, run the code through an interpreted rather than just
 	  looking at the raw XML.
 
-0.30  Wed Oct 10 17:05:00
+0.30 2001.10.10
+    - date: Wed Oct 10 17:05:00
 	- Now support -T and inline and namespace.
 
-0.29  Tue Oct 9 14:36:00 
-	- Repaired bug in method $self->use(). The method was 
+0.29 2001.10.09
+    - Tue Oct 9 14:36:00
+	- Repaired bug in method $self->use(). The method was
 	  generating an <image > tag.
 
-0.28  Mon Oct 8 18:05:40
+0.28 2001.10.08
+    - date: Mon Oct 8 18:05:40
 	- Got the program to pass -w
 	- Fixed user-reported bug in animate function $rtr{-method}
 	  was missing the minus.
 	- ran significant tests for complex files. Most work but some crash.
 
-0.26  Sun Oct 7 00:40:00
+0.26 2001.10.07
+    - date: Sun Oct 7 00:40:00
 	- Repaired the pod file
 	- Added title and desc support
 
-0.25  Sat Oct  6 23:00:02
+0.25 2001.10.06
+    - date: Sat Oct  6 23:00:02
 	- added image support; improved POD;
 	- Provided DTD & XML version support:
 		XML version         '1.0'
 		XML encoding        'UTF-8'
 		standalone      'yes'
-		namespace       'svg' 
+		namespace       'svg'
 		DTD identifier      '-//W3C//DTD SVG 1.0//EN';
-		DTD url 'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'  
+		DTD url 'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'
 
-0.2  Sat Oct  6 02:47:02
+0.2 2001.10.06
+    - date: Sat Oct  6 02:47:02
 	- added filter support; improved POD.
 
-0.1  Thu Oct  4 09:46:28 2001
+0.1 2001.10.04
+    - date was: Thu Oct  4 09:46:28 2001
 	- original version; created by h2xs 1.19
+
