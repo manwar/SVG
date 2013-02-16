@@ -1,9 +1,3 @@
-package SVG::Manual;
-use strict;
-use warnings;
-
-our $VERSION = '2.54';
-
 =head1 NAME
 
 SVG - Perl extension for generating Scalable Vector Graphics (SVG) documents
