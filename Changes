@@ -1,5 +1,7 @@
 Revision history for Perl extension SVG.
 
+    - Rename SVG::Manual from .pm to .pod.
+
 2.54 2013.02.16
     - Update the dates in the Changes file.
     - Remove the function prototypes that don't work on methods anyway.
