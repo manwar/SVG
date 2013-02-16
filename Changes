@@ -1,5 +1,7 @@
 Revision history for Perl extension SVG.
 
+    - Remove the function prototypes that don't work on methods anyway.
+
 2.53 2012.08.09
     - missing test file removed from MANIFEST (RT #78856)
 

@@ -55,7 +55,7 @@ Gabor Szabo
 
 I would like to thank the following people for contributing to this module with
 patches, testing, suggestions, and other nice tidbits:
-Peter Wainwright, Ian Hickson, Adam Schneider, Steve Lihn, Allen Day 
+Peter Wainwright, Ian Hickson, Adam Schneider, Steve Lihn, Allen Day
 
 =head1 SEE ALSO
 
@@ -140,7 +140,7 @@ sub import {
 
 SVG provides both explicit and generic element constructor methods. Explicit
 generators are generally (with a few exceptions) named for the element they
-generate. If a tag method is required for a tag containing hyphens, the method 
+generate. If a tag method is required for a tag containing hyphens, the method
 name replaces the hyphen with an underscore. ie: to generate tag <column-heading id="new">
 you would use method $svg->column_heading(id=>'new').
 
@@ -173,7 +173,7 @@ B<Example:>
         -elsep      => "\n",  # element line (vertical) separator
         -docroot    => 'svg', # default document root element (SVG specification assumes svg). Defaults to 'svg' if undefined
         -xml_xlink  => 'http://www.w3.org/1999/xlink', # required by Mozilla's embedded SVG engine
-        -sysid      => 'abc', # optional system identifier 
+        -sysid      => 'abc', # optional system identifier
         -pubid      => "-//W3C//DTD SVG 1.0//EN", # public identifier default value is "-//W3C//DTD SVG 1.0//EN" if undefined
         -namespace  => 'mysvg',
         -inline     => 1
@@ -183,7 +183,7 @@ B<Example:>
     );
 
 Default SVG options may also be set in the import list. See L<"EXPORTS"> above
-for more on the available options. 
+for more on the available options.
 
 Furthermore, the following options:
 
@@ -209,7 +209,7 @@ may also be set in xmlify, overriding any corresponding values set in the SVG->n
 # or
 #     a child entry svg created.
 #
-# Because the new method returns the $self reference and not the 
+# Because the new method returns the $self reference and not the
 # latest child to be created, a hash key -document with the reference to the hash
 # entry of its already-created child. hence the document object has a -document reference
 # to parent or svg if inline is 1 or 0, and parent will have a -document entry
@@ -218,7 +218,7 @@ may also be set in xmlify, overriding any corresponding values set in the SVG->n
 # This way, the next tag constructor will descend the
 # tree until it finds no more tags with -document, and will add
 # the next tag object there.
-# refer to the SVG::tag method 
+# refer to the SVG::tag method
 
 sub new {
     my ($proto,%attrs) = @_;
@@ -272,10 +272,10 @@ Returns xml representation of svg document.
 B<XML Declaration>
 
     Name               Default Value
-    -version           '1.0'               
+    -version           '1.0'
     -encoding          'UTF-8'
     -standalone        'yes'
-    -namespace         'svg' - namespace prefix for elements. 
+    -namespace         'svg' - namespace prefix for elements.
                                Can also be used in any element method to over-ride
                                the current namespace prefix. Make sure to have
                                declared the prefix before using it.

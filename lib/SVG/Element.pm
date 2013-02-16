@@ -1,5 +1,5 @@
 
-=pod 
+=pod
 
 =head1 NAME
 
@@ -49,7 +49,7 @@ our %autosubs = map { $_ => 1 } @autosubs;
 
 #-------------------------------------------------------------------------------
 
-sub new ($$;@) {
+sub new {
     my ( $proto, $name, %attrs ) = @_;
     my $class = ref($proto) || $proto;
     my $self = { -name => $name };
@@ -76,7 +76,7 @@ sub new ($$;@) {
 
 #-------------------------------------------------------------------------------
 
-sub release ($) {
+sub release {
     my $self = shift;
 
     foreach my $key ( keys( %{$self} ) ) {
@@ -90,7 +90,7 @@ sub release ($) {
     return $self;
 }
 
-sub xmlify ($) {
+sub xmlify {
     my $self = shift;
     my $ns   = $self->{-namespace} || $self->{-docref}->{-namespace} || undef;
     my $xml  = '';
@@ -245,7 +245,7 @@ sub perlify {
 }
 *toperl = \&perlify;
 
-sub addchilds ($@) {
+sub addchilds {
     my $self = shift;
     push @{ $self->{-childs} }, @_;
     return $self;
@@ -254,7 +254,7 @@ sub addchilds ($@) {
 =pod
 
 =head2 tag (alias: element)
- 
+
 $tag = $SVG->tag($name, %attributes)
 
 Generic element generator. Creates the element named $name with the attributes
@@ -267,7 +267,7 @@ B<Example:>
 
 =cut
 
-sub tag ($$;@) {
+sub tag {
     my ( $self, $name, %attrs ) = @_;
 
     unless ( $self->{-parent} ) {
@@ -356,7 +356,7 @@ L<http://www.w3.org/TR/xlink/>
 
 B<Example:>
 
-    # generate an anchor    
+    # generate an anchor
     $tag = $SVG->anchor(
          -href=>'http://here.com/some/simpler/SVG.SVG'
          -title => 'new window 2 example title',
