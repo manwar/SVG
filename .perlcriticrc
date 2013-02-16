@@ -10,6 +10,7 @@ severity  = 4
 [-ValuesAndExpressions::ProhibitAccessOfPrivateData]
 
 # Severity 4:
+[-Bangs::ProhibitRefProtoOrProto]
 [-ErrorHandling::RequireUseOfExceptions]
 [-Modules::ProhibitMultiplePackages]
 [-Modules::ProhibitAutomaticExportation]
