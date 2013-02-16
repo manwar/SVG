@@ -18,7 +18,7 @@ sub getFirstChild {
     if (my @children=$self->getChildren) {
         return $children[0];
     }
-    return undef;
+    return;
 }
 
 #-----------------
@@ -32,14 +32,14 @@ sub getChildIndex {
     unless (@children) {
         my $parent=$self->getParent();
         @children=$parent->getChildren();
-        return undef unless @children;
+        return unless @children;
     }
 
     for my $index (0..$#children) {
         return $index if $children[$index]==$self;
     }
 
-    return undef;
+    return;
 }
 
 #-----------------
@@ -53,7 +53,7 @@ sub getChildAtIndex {
     unless (@children) {
         my $parent=$self->getParent();
         @children=$parent->getChildren();
-        return undef unless @children;
+        return unless @children;
     }
 
     return $children[$index];
@@ -73,7 +73,7 @@ sub getNextSibling {
         }
     }
 
-    return undef;
+    return;
 }
 
 
@@ -91,7 +91,7 @@ sub getPreviousSibling {
         }
     }
 
-    return undef;
+    return;
 }
 
 #-----------------
@@ -104,7 +104,7 @@ sub getLastChild {
         return $children[-1];
     }
 
-    return undef;
+    return;
 }
 
 #-----------------
@@ -120,7 +120,7 @@ sub getChildren {
         return $self->{-childs};
     }
 
-    return wantarray?():undef;
+    return;
 }
 *getChildElements=\&getChildren;
 *getChildNodes=\&getChildren;
@@ -152,7 +152,7 @@ sub getParent {
         return $self->{-parent};
     }
 
-    return undef;
+    return;
 }
 *getParentElement=\&getParent;
 *getParentNode=\&getParent;
@@ -164,7 +164,7 @@ sub getParents {
     my $self=shift;
 
     my $parent=$self->{-parent};
-    return undef unless $parent;
+    return unless $parent;
 
     my @parents;
     while ($parent) {
@@ -216,7 +216,7 @@ sub getSiblings {
         return $parent->getChildren();
     }
 
-    return wantarray?():undef;
+    return;
 }
 
 #-----------------
@@ -230,7 +230,7 @@ sub hasSiblings {
         return 1 if $siblings>=2;
     }
 
-    return undef;
+    return;
 }
 
 #-----------------
@@ -243,7 +243,7 @@ sub getElementName {
         return $self->{-name};
     }
 
-    return undef;
+    return;
 }
 *getType=\&getElementName;
 *getElementType=\&getElementName;
@@ -260,15 +260,15 @@ sub getElementName {
 sub getElements {
     my ($self,$element)=@_;
 
-    return undef unless exists $self->{-docref};
-    return undef unless exists $self->{-docref}->{-elist};
+    return unless exists $self->{-docref};
+    return unless exists $self->{-docref}->{-elist};
 
     my $elist=$self->{-docref}->{-elist};
     if (defined $element) {
         if (exists $elist->{$element}) {
             return wantarray?@{$elist->{$element}}:$elist->{$element};
         }
-        return wantarray?():undef;
+        return;
     } else {
        my @elements;
        foreach my $element_type (keys %$elist) {
@@ -304,7 +304,7 @@ sub getElementID {
         return $self->{id};
     }
 
-    return undef;
+    return;
 }
 
 #-----------------
@@ -313,13 +313,13 @@ sub getElementID {
 sub getElementByID {
     my ($self,$id)=@_;
 
-    return undef unless defined($id);
+    return unless defined($id);
     my $idlist=$self->{-docref}->{-idlist};
     if (exists $idlist->{$id}) {
         return $idlist->{$id};
     }
 
-    return undef;
+    return;
 }
 *getElementbyID=\&getElementByID;
 
@@ -334,7 +334,7 @@ sub getAttribute {
         return $self->{$attr};
     }
 
-    return undef;
+    return;
 }
 
 #-----------------
@@ -379,7 +379,7 @@ sub getCDATA {
         return $self->{-cdata};
     }
 
-    return undef;
+    return;
 }
 *getCdata=\&getCDATA;
 *getData=\&getCDATA;

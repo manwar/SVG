@@ -292,7 +292,7 @@ sub tag {
     if ( $tag->{id} ) {
         if ( $self->getElementByID( $tag->{id} ) ) {
             $self->error( $tag->{id} => "ID already exists in document" );
-            return undef;
+            return;
         }
     }
 
@@ -1142,7 +1142,7 @@ sub attrib {
     if ( $name eq "id" ) {
         if ( $self->getElementByID($val) ) {
             $self->error( $val => "ID already exists in document" );
-            return undef;
+            return;
         }
     }
 

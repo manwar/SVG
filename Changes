@@ -1,10 +1,13 @@
 Revision history for Perl extension SVG.
 
     - Rename SVG::Manual from .pm to .pod.
+    - Stop violating the Subroutines::ProhibitExplicitReturnUndef policy,
+      eliminate 'return undef' and return wantarray?():undef; from the code.
 
 2.54 2013.02.16
     - Update the dates in the Changes file.
     - Remove the function prototypes that don't work on methods anyway.
+      Stop violating the Subroutines::ProhibitSubroutinePrototypes policy.
 
 2.53 2012.08.09
     - missing test file removed from MANIFEST (RT #78856)

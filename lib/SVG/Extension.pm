@@ -85,7 +85,7 @@ sub attribute_decl {
 
     unless ($element_decl->getElementType eq 'ELEMENT') {
         $element_decl->error($element_decl => 'is not an ELEMENT declaration');
-        return undef;
+        return;
     }
 
     return $element_decl->extension('ATTLIST',%attrs);
@@ -102,7 +102,7 @@ sub attlist_decl {
     my $element_decl=$subset->getElementDeclByName($attrs{name});
     unless ($element_decl) {
         $subset->error("ATTLIST declaration '$attrs{attr}'" => "ELEMENT declaration '$attrs{name}' does not exist");
-        return undef;
+        return;
     }
 
     return $element_decl->attribute_decl(%attrs);
@@ -297,7 +297,7 @@ sub getElementDeclByName {
         return $element_decl if $element_decl->{name} eq $name;
     }
 
-    return undef;
+    return;
 }
 
 # ...but we can have multiple attributes. Note that this searches the master list
@@ -314,7 +314,7 @@ sub getAttributeDeclsByName {
         return $element_decl if $element_decl->{name} eq $name;
     }
 
-    return undef;
+    return;
 }
 
 #-----------------
@@ -368,7 +368,7 @@ sub getElementDeclName {
         return $self->{name};
     }
 
-    return undef;
+    return;
 }
 
 # identical to the above; will be smarter as and when we subclass
@@ -380,7 +380,7 @@ sub getAttributeDeclName {
         return $self->{name};
     }
 
-    return undef;
+    return;
 }
 
 # unlike other 'By' methods, attribute searches work from their parent element
@@ -395,7 +395,7 @@ sub getAttributeDeclByName {
         return $attribute_decl if $attribute_decl->{name} eq $name;
     }
 
-    return undef;
+    return;
 }
 # as this is element specific, we allow a 'ElementAttribute' name too,
 # for those that like consistency at the price of brevity. Not that
