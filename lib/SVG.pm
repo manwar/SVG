@@ -15,7 +15,7 @@ use SVG::XML;
 use parent qw(SVG::Element SVG::Extension);
 use Scalar::Util qw/weaken/;
 
-our $VERSION = '2.53';
+our $VERSION = '2.54';
 
 #-------------------------------------------------------------------------------
 
@@ -23,7 +23,7 @@ our $VERSION = '2.53';
 
 =head2 VERSION
 
-Version 2.51, 30  March, 2012
+Version 2.54
 
 Refer to L<SVG::Manual> for the complete manual.
 
