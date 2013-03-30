@@ -105,7 +105,7 @@ That you can either embed directly into HTML or can include it using:
 
    <object data="file.svg" type="image/svg+xml"></object>
 
-=for HTML <p><a<img src="http://szabgab.com/img/SVG/svg.png" alt="SVG example circle" /></p>
+=for HTML <p><img src="http://szabgab.com/img/SVG/circle.png" alt="SVG example circle" /></p>
 
 (The image was converted to png using L<Image::LibRSVG>. See the svg2png.pl script in the examples directory.)
 
