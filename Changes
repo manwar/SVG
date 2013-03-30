@@ -1,10 +1,7 @@
 Revision history for Perl extension SVG.
 
-2.58 2013.03.30
-	- Another experiment to show images on MetaCPAN
-
-2.57 2013.03.30
-	- Another experiment to show images on MetaCPAN
+2.59 2013.03.31
+	- Experiment to show images on MetaCPAN
 
 2.56 2013.03.30
 	- Move all the content of SVG::Manual to SVG
