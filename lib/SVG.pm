@@ -7,7 +7,7 @@ use SVG::XML;
 use parent qw(SVG::Element SVG::Extension);
 use Scalar::Util qw/weaken/;
 
-our $VERSION = '2.55';
+our $VERSION = '2.56';
 
 =pod
 
@@ -85,7 +85,7 @@ L<SVG::Extension>
 
 =head1 VERSION
 
-Version 2.55
+Version 2.56
 
 =head1 EXAMPLES
 
@@ -1480,6 +1480,10 @@ Copyright 2001- Ronan Oger
 
 The modules in the SVG distribution are distributed under the same license
 as Perl itself. It is provided free of warranty and may be re-used freely.
+
+=head1 ARTICLES
+
+L<SVG using Perl|http://szabgab.com/svg-using-perl.html>
 
 =head1 SEE ALSO
 
