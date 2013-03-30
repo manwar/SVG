@@ -89,50 +89,25 @@ Version 2.57
 
 =head1 EXAMPLES
 
-examples/svg.pl generates the following image:
+examples/circle.pl generates the following image:
 
-Full:
+  <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+  <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+  <svg height="200" width="200" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <title >I am a title</title>
+  <g id="group_y" style="fill: green; stroke: red">
+  <circle cx="100" cy="100" id="circle_in_group_y" r="50" />
+  <!-- This is a comment -->
+  </g>
+  </svg>
 
-=begin HTML
+That you can either embed directly into HTML or can include it using:
 
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
-<svg height="200" width="200" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<title >I am a title</title>
-<g id="group_y" style="fill: green; stroke: red">
-<circle cx="100" cy="100" id="circle_in_group_y" r="50" />
-<!-- This is a comment -->
-</g>
-</svg>
+   <object data="file.svg" type="image/svg+xml"></object>
 
-=end HTML
+=for HTML <p><a<img src="http://szabgab.com/img/SVG/svg.png" alt="SVG example circle" /></p>
 
-Header removed:
-
-=begin HTML
-
-
-<svg height="200" width="200" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<title >I am a title</title>
-<g id="group_y" style="fill: green; stroke: red">
-<circle cx="100" cy="100" id="circle_in_group_y" r="50" />
-<!-- This is a comment -->
-</g>
-</svg>
-
-=end HTML
-
-Object:
-
-=begin HTML
-
-<object data="http://szabgab.com/img/SVG/svg.svg" type="image/svg+xml"></object>
-
-=end HTML
-
-for:
-
-=for HTML <p><object data="http://szabgab.com/img/SVG/svg.svg" type="image/svg+xml"></object></p>
+(The image was converted to png using L<Image::LibRSVG>. See the svg2png.pl script in the examples directory.)
 
 See also the B<examples> directory in this distribution which contain several fully documented examples.
 
