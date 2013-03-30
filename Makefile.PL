@@ -16,5 +16,13 @@ WriteMakefile(
        resources => {
            repository  =>  'https://github.com/szabgab/SVG',
        },
+        x_contributors => [
+            'Peter Wainwright',
+            'Ian Hickson',
+            'Adam Schneider',
+            'Steve Lihn',
+            'Allen Day',
+            'Gabor Szabo',
+        ],
     },
 );
