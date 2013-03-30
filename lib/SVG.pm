@@ -91,7 +91,9 @@ Version 2.56
 
 examples/svg.pl generates the following image:
 
-=begin html
+Full:
+
+=begin HTML
 
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
@@ -103,7 +105,34 @@ examples/svg.pl generates the following image:
 </g>
 </svg>
 
-=end html
+=end HTML
+
+Header removed:
+
+=begin HTML
+
+
+<svg height="200" width="200" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title >I am a title</title>
+<g id="group_y" style="fill: green; stroke: red">
+<circle cx="100" cy="100" id="circle_in_group_y" r="50" />
+<!-- This is a comment -->
+</g>
+</svg>
+
+=end HTML
+
+Object:
+
+=begin HTML
+
+<object data="http://szabgab.com/img/SVG/svg.svg" type="image/svg+xml"></object>
+
+=end HTML
+
+for:
+
+=for HTML <p><object data="http://szabgab.com/img/SVG/svg.svg" type="image/svg+xml"></object></p>
 
 See also the B<examples> directory in this distribution which contain several fully documented examples.
 
