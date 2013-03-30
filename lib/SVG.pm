@@ -7,7 +7,7 @@ use SVG::XML;
 use parent qw(SVG::Element SVG::Extension);
 use Scalar::Util qw/weaken/;
 
-our $VERSION = '2.57';
+our $VERSION = '2.58';
 
 =pod
 
@@ -85,7 +85,7 @@ L<SVG::Extension>
 
 =head1 VERSION
 
-Version 2.57
+Version 2.58
 
 =head1 EXAMPLES
 
