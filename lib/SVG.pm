@@ -1504,18 +1504,5 @@ L<ROASP.com: Serverside SVG server|http://www.roitsystems.com/>,
 L<ROIT Systems: Commercial SVG perl solutions|http://www.roitsystems.com/>,
 L<SVG at the W3C|http://www.w3c.org/Graphics/SVG/>
 
-=head1 EXPERIMENTAL POD
-
-=for HTML <p><img src="http://gphat.github.com/chart-clicker/static/images/examples/bubble.png" width="500" height="250" alt="Bubble Chart" /></p>
-
-=for html <p><img src="http://szabgab.com/img/SVG/circle.png" alt="SVG example circle" /></p>
-
-=begin HTML
-
-<p><img src="http://szabgab.com/img/SVG/circle.png" alt="SVG example circle" /></p>
-
-=end HTML
-
-
 =cut
 
