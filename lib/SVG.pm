@@ -1497,8 +1497,6 @@ L<SVG::Element>,
 L<SVG::Parser>,
 L<SVG::Extension>
 
-Serverside SVG Portal - Perl focused SVG site with discussion board and examples:
-L<http://www.perlsvg.com/>
 For Commercial Perl/SVG development, refer to the following sites:
 L<ROASP.com: Serverside SVG server|http://www.roitsystems.com/>,
 L<ROIT Systems: Commercial SVG perl solutions|http://www.roitsystems.com/>,
