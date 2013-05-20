@@ -1,6 +1,6 @@
 README for SVG.pm
 
-SVG.pm is a perl extention to generate standalone or inline SVG 
+SVG.pm is a perl extension to generate standalone or inline SVG 
 (short for "Scalable Vector Graphics") images using the W3C's
 SVG XML recommendation.
 
@@ -9,8 +9,8 @@ script, or to the following mirror:
 
     https://metacpan.org/module/SVG
 
-The complete POD documentation for SVG resides in SVG::Manual -
-type "perldoc SVG::Manual" on the command line.
+The complete POD documentation for SVG resides in the SVG module itself -
+type "perldoc SVG" on the command line.
 
 (c) 2001-2008  Ronan Oger, RO IT Systems, GmbH  
 homepage: http://www.roitsystems.com
@@ -35,17 +35,11 @@ SVG.pm makes it possible to generate fully-functional SVG images in perl.
 100% of the SVG tags are supported, and any new arbitrary element tag can be
 added by users by declaring it.
 
-VERSION
--------
-
-2.33 Sunday, 2005.05.15
-
 DOCUMENTATION
 -------------
 
 The following documentation is available:
 
-* POD in HTML format.
 * POD in perldoc format (type "perldoc SVG" on the command line.)
 
 RESOURCES
@@ -53,54 +47,44 @@ RESOURCES
 
 The following URLs offer additional resources for users of SVG.pm:
 
-* Serverside Perl Forum: http://www.roitsystems.com/serverside/
-* SVG.pm on-line manual http://www.roitsystems.com/man/SVG.html
 * Perl SVG tutorials http://www.roitsystems.com/tutorial/
 * Perl SVG Zone homepage http://www.roitsystems.com/
 * gallery of the use of SVG.pm on the web http://roitsystems.com/gallery/svg/index.html
-* SVG Foundation http://www.svgfoundation.org/
-* SVG Developers mailing list http://www.yahoogroups.com/svg-developers/
-* W3 Consortium http://www.w3.org/
+* W3 Consortium http://www.w3.org/Graphics/SVG/
 * Sams Publishing, "SVG Unleashed", September 2002. There is a Perl chapter
 * SVG Open Conference proceedings http://www.svgopen.org/
-* SVG foundation http://www.svgfoundation.org/
-* SVG dot org http://www.svg.org/
 
 INSTALLATION INSTRUCTIONS
 -------------------------
 
-***THERE ARE FIVE WAYS TO INSTALL THE SVG MODULE IN PERL***
+***THERE ARE FOUR WAYS TO INSTALL THE SVG MODULE IN PERL***
 
-	1/ Systems with CPAN support (all Unix/Linux/BSD/Mac):
+	1/ Systems with CPAN support (all Windows/Unix/Linux/BSD/Mac):
 	-----------------------------------------------------
 
 	Install the new distribution via the Perl CPAN module:
 	In a shell:
-	/home/somewhere% perl -MCPAN -e"install SVG"
+	/home/somewhere% cpan install SVG"
 
     You can alternatively use CPANPLUS or cpanm.
 
-	2/ (WIN) install Perl from Active State or equivalent:
+	2/ (Windows) install Perl from ActiveState:
 	-----------------------------------------------------
 
 	Make sure you already have perl or get it here: http://www.activestate.com
 	On the command line:
-	 C:\> ppm
-	 PPM> set repository tmp http://roitsystems.com/PPM/SVG/
-	 PPM> install SVG
-	 PPM> quit
-	 C:\>
+	 C:\> ppm install SVG
 
-	3/ Use Source RPMs.
-    -------------------
+	3/ Use RPMs:
+    ------------
 
 	Download the source RPM of your choice.
 	In a shell:
 	/hom/somewhere/% rpm -ihv SVG-source-rpm-name
 	You may be prompted for the root password
 
-	4/ The hard way (requires make or nmake, tar, gunzip, and gcc):
-	---------------------------------------------------------------
+	4/ The hard way (requires make, dmake or nmake, tar, gunzip, and gcc):
+	----------------------------------------------------------------------
 
 	This method was tested in DOS, Windows, AS400, Linux, Unix, BSD, Mac.
 	Hard-headed users can directly get the distribution from a CPAN mirror.
@@ -112,26 +96,6 @@ INSTALLATION INSTRUCTIONS
 	make
 	make test
 	make install
-
-
-	5/ If all the above fail, there is still a (cumbersome) way:
-	-----------------------------------------------------------
-
-	You have to install to a local dirctory and explicitly call the module 
-	by using one of the following line in your calling program:
-
-	#using use lib
-	use lib 'path/where/the/release/is/located';
-
-	-or-
-
-	#using BEGIN block at the beginning of the file
-	BEGIN {
-		push @INC 'path/to/svg.pm-file'; #where the SVG.pm file lives
-		push @INC 'path/to/svg.pm-file/SVG'; # where the Utils.pm file lives
-	}
-	#Refer to the Perl manual for more details.
-
 
 KNOWN BUGS & ISSUES
 -------------------
