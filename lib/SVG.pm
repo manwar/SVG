@@ -128,9 +128,9 @@ Generating SVG is a simple three step process:
 Examples of element constructors are L<"circle"> and L<"path">.
 
 =head2 3 The third and last step is to render the SVG object into XML using the
-L<"xmlify"> method.
+L<xmlify> method.
 
-The L<"xmlify"> method takes a number of optional arguments that control how SVG
+The L<xmlify> method takes a number of optional arguments that control how SVG
 renders the object into XML, and in particular determine whether a standalone
 SVG document or an inline SVG document fragment is generated:
 
