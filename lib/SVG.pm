@@ -1188,63 +1188,66 @@ The following L<SVG::DOM> elements are accessible through SVG:
 
 =cut
 
-
-
 #-------------------------------------------------------------------------------
 
 my %default_attrs = (
+
     # processing options
-    -auto       => 0,       # permit arbitrary autoloads (only at import)
-    -printerror => 1,       # print error messages to STDERR
-    -raiseerror => 1,       # die on errors (implies -printerror)
+    -auto       => 0,    # permit arbitrary autoloads (only at import)
+    -printerror => 1,    # print error messages to STDERR
+    -raiseerror => 1,    # die on errors (implies -printerror)
 
     # rendering options
-    -indent     => "\t",    # what to indent with
-    -elsep      => "\n",    # element line (vertical) separator
-    -nocredits  => 0,       # enable/disable credit note comment
-    -namespace  => '',      # The root element's (and it's children's) namespace prefix
+    -indent    => "\t",    # what to indent with
+    -elsep     => "\n",    # element line (vertical) separator
+    -nocredits => 0,       # enable/disable credit note comment
+    -namespace =>
+        '',    # The root element's (and it's children's) namespace prefix
 
     # XML and Doctype declarations
-    -inline     => 0,       # inline or stand alone
-    -docroot    => 'svg',   # The document's root element
-    -version    => '1.0',
-    -extension  => '',
-    -encoding   => 'UTF-8',
-    -xml_svg    => 'http://www.w3.org/2000/svg',
-    -xml_xlink  => 'http://www.w3.org/1999/xlink',
+    -inline    => 0,                             # inline or stand alone
+    -docroot   => 'svg',                         # The document's root element
+    -version   => '1.0',
+    -extension => '',
+    -encoding  => 'UTF-8',
+    -xml_svg   => 'http://www.w3.org/2000/svg',
+    -xml_xlink => 'http://www.w3.org/1999/xlink',
     -standalone => 'yes',
-    -pubid      => "-//W3C//DTD SVG 1.0//EN", # formerly -identifier
-    -sysid      => 'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd',
+    -pubid      => "-//W3C//DTD SVG 1.0//EN",    # formerly -identifier
+    -sysid => 'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd',
 );
 
 sub import {
-    my $package=shift;
+    my $package = shift;
 
-    my $attr=undef;
+    my $attr = undef;
     foreach (@_) {
         if ($attr) {
-            $default_attrs{$attr}=$_;
+            $default_attrs{$attr} = $_;
             undef $attr;
-        } elsif (exists $default_attrs{$_}) {
-            $attr=$_;
-        } else {
+        }
+        elsif ( exists $default_attrs{$_} ) {
+            $attr = $_;
+        }
+        else {
             /^-/ and die "Unknown attribute '$_' in import list\n";
-            $SVG::Element::autosubs{$_}=1; # add to list of autoloadable tags
+            $SVG::Element::autosubs{$_}
+                = 1;    # add to list of autoloadable tags
         }
     }
 
     # switch on AUTOLOADer, if asked.
-    if ($default_attrs{'-auto'}) {
-        *SVG::Element::AUTOLOAD=\&SVG::Element::autoload;
+    if ( $default_attrs{'-auto'} ) {
+        *SVG::Element::AUTOLOAD = \&SVG::Element::autoload;
     }
 
     # predeclare any additional elements asked for by the user
-    foreach my $sub (keys %SVG::Element::autosubs) {
-        $SVG::Element::AUTOLOAD=("SVG::Element::$sub");
+    foreach my $sub ( keys %SVG::Element::autosubs ) {
+        $SVG::Element::AUTOLOAD = ("SVG::Element::$sub");
         SVG::Element::autoload();
     }
 
-    delete $default_attrs{-auto}; # -auto is only allowed here, not in new
+    delete $default_attrs{-auto};    # -auto is only allowed here, not in new
 
     return ();
 }
@@ -1338,32 +1341,38 @@ may also be set in xmlify, overriding any corresponding values set in the SVG->n
 # refer to the SVG::tag method
 
 sub new {
-    my ($proto,%attrs) = @_;
+    my ( $proto, %attrs ) = @_;
+
     my $class = ref $proto || $proto;
     my $self;
 
     # establish defaults for unspecified attributes
-    foreach my $attr (keys %default_attrs) {
-        $attrs{$attr}=$default_attrs{$attr} unless exists $attrs{$attr}
+    foreach my $attr ( keys %default_attrs ) {
+        $attrs{$attr} = $default_attrs{$attr} unless exists $attrs{$attr};
     }
     $self = $class->SUPER::new('document');
-    if (not $self->{-docref}) {
-      $self->{-docref} = $self;
-      weaken( $self->{-docref} );
+    if ( not $self->{-docref} ) {
+        $self->{-docref} = $self;
+        weaken( $self->{-docref} );
     }
-    unless ($attrs{-namespace}) {
+    unless ( $attrs{-namespace} ) {
         $attrs{'xmlns'} = $attrs{'xmlns'} || $attrs{'-xml_svg'};
     }
-    $attrs{'xmlns:xlink'} = $attrs{'xmlns:xlink'} || $attrs{'-xml_xlink'} || 'http://www.w3.org/1999/xlink';
-    $attrs{'xmlns:svg'} = $attrs{'xmlns:svg'} || $attrs{'-xml_svg'} || 'http://www.w3.org/2000/svg';
-
+    $attrs{'xmlns:xlink'}
+        = $attrs{'xmlns:xlink'}
+        || $attrs{'-xml_xlink'}
+        || 'http://www.w3.org/1999/xlink';
+    $attrs{'xmlns:svg'}
+        = $attrs{'xmlns:svg'}
+        || $attrs{'-xml_svg'}
+        || 'http://www.w3.org/2000/svg';
 
     $self->{-level} = 0;
     $self->{$_} = $attrs{$_} foreach keys %default_attrs;
 
     # create SVG object according to nostub attribute
     my $svg;
-    unless ($attrs{-nostub}) {
+    unless ( $attrs{-nostub} ) {
         $svg = $self->svg(%attrs);
         $self->{-document} = $svg;
         weaken( $self->{-document} );
@@ -1403,36 +1412,36 @@ B<XML Declaration>
 =cut
 
 sub xmlify {
+    my ( $self, %attrs ) = @_;
 
-    my ($self,%attrs) = @_;
-    my ($decl,$ns);
+    my ( $decl, $ns );
 
     my $credits = '';
 
     # Give the module and myself credit unless explicitly turned off
-    unless ($self->{-docref}->{-nocredits}) {
-        $self->comment("\n\tGenerated using the Perl SVG Module V$VERSION\n\tby Ronan Oger\n\tInfo: http://www.roitsystems.com/\n" );
+    unless ( $self->{-docref}->{-nocredits} ) {
+        $self->comment(
+            "\n\tGenerated using the Perl SVG Module V$VERSION\n\tby Ronan Oger\n\tInfo: http://www.roitsystems.com/\n"
+        );
     }
 
-    foreach my $key (keys %attrs) {
+    foreach my $key ( keys %attrs ) {
         next if $key !~ /^-/;
         $self->{$key} = $attrs{$key};
     }
 
-    foreach my $key (keys %$self) {
+    foreach my $key ( keys %$self ) {
         next if $key !~ /^-/;
         $attrs{$key} ||= $self->{$key};
     }
 
-    return $self->SUPER::xmlify($self->{-namespace});
+    return $self->SUPER::xmlify( $self->{-namespace} );
 }
 
-
-*render=\&xmlify;
-*to_xml=\&xmlify;
-*serialise=\&xmlify;
-*serialize=\&xmlify;
-
+*render    = \&xmlify;
+*to_xml    = \&xmlify;
+*serialise = \&xmlify;
+*serialize = \&xmlify;
 
 =head2 perlify ()
 
@@ -1450,7 +1459,7 @@ Alias for method perlify()
 
 =cut
 
-*toperl=\&perlify;
+*toperl = \&perlify;
 
 1;
 

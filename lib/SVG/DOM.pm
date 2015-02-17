@@ -13,9 +13,9 @@ package SVG::Element;
 # sub getFirstChild
 
 sub getFirstChild {
-    my $self=shift;
+    my $self = shift;
 
-    if (my @children=$self->getChildren) {
+    if ( my @children = $self->getChildren ) {
         return $children[0];
     }
     return;
@@ -27,16 +27,16 @@ sub getFirstChild {
 # or the passed list (if there is one).
 
 sub getChildIndex {
-    my ($self,@children)=@_;
+    my ( $self, @children ) = @_;
 
     unless (@children) {
-        my $parent=$self->getParent();
-        @children=$parent->getChildren();
+        my $parent = $self->getParent();
+        @children = $parent->getChildren();
         return unless @children;
     }
 
-    for my $index (0..$#children) {
-        return $index if $children[$index]==$self;
+    for my $index ( 0 .. $#children ) {
+        return $index if $children[$index] == $self;
     }
 
     return;
@@ -48,11 +48,11 @@ sub getChildIndex {
 # (the index can be negative)
 
 sub getChildAtIndex {
-    my ($self,$index,@children)=@_;
+    my ( $self, $index, @children ) = @_;
 
     unless (@children) {
-        my $parent=$self->getParent();
-        @children=$parent->getChildren();
+        my $parent = $self->getParent();
+        @children = $parent->getChildren();
         return unless @children;
     }
 
@@ -63,31 +63,30 @@ sub getChildAtIndex {
 # sub getNextSibling
 
 sub getNextSibling {
-    my $self=shift;
+    my $self = shift;
 
-    if (my $parent=$self->getParent) {
-        my @children=$parent->getChildren();
-        my $index=$self->getChildIndex(@children);
-        if (defined $index and scalar(@children)>$index) {
-            return $children[$index+1];
+    if ( my $parent = $self->getParent ) {
+        my @children = $parent->getChildren();
+        my $index    = $self->getChildIndex(@children);
+        if ( defined $index and scalar(@children) > $index ) {
+            return $children[ $index + 1 ];
         }
     }
 
     return;
 }
 
-
 #-----------------
 # sub getPreviousSibling
 
 sub getPreviousSibling {
-    my $self=shift;
+    my $self = shift;
 
-    if (my $parent=$self->getParent) {
-        my @children=$parent->getChildren();
-        my $index=$self->getChildIndex(@children);
+    if ( my $parent = $self->getParent ) {
+        my @children = $parent->getChildren();
+        my $index    = $self->getChildIndex(@children);
         if ($index) {
-            return $children[$index-1];
+            return $children[ $index - 1 ];
         }
     }
 
@@ -98,9 +97,9 @@ sub getPreviousSibling {
 # sub getLastChild
 
 sub getLastChild {
-    my $self=shift;
+    my $self = shift;
 
-    if (my @children=$self->getChildren) {
+    if ( my @children = $self->getChildren ) {
         return $children[-1];
     }
 
@@ -111,82 +110,82 @@ sub getLastChild {
 # sub getChildren
 
 sub getChildren {
-    my $self=shift;
+    my $self = shift;
 
-    if ($self->{-childs}) {
+    if ( $self->{-childs} ) {
         if (wantarray) {
-            return @{$self->{-childs}};
+            return @{ $self->{-childs} };
         }
         return $self->{-childs};
     }
 
     return;
 }
-*getChildElements=\&getChildren;
-*getChildNodes=\&getChildren;
+*getChildElements = \&getChildren;
+*getChildNodes    = \&getChildren;
 
 #-----------------
 
 sub hasChildren {
-    my $self=shift;
+    my $self = shift;
 
-    if (exists $self->{-childs}) {
-        if (scalar @{$self->{-childs}}) {
+    if ( exists $self->{-childs} ) {
+        if ( scalar @{ $self->{-childs} } ) {
             return 1;
         }
     }
 
     return 0;
 }
-*hasChildElements=\&hasChildren;
-*hasChildNodes=\&hasChildren;
+*hasChildElements = \&hasChildren;
+*hasChildNodes    = \&hasChildren;
 
 #-----------------
 # sub getParent / getParentElement
 # return the ref of the parent of the current node
 
 sub getParent {
-    my $self=shift;
+    my $self = shift;
 
-    if ($self->{-parent}) {
+    if ( $self->{-parent} ) {
         return $self->{-parent};
     }
 
     return;
 }
-*getParentElement=\&getParent;
-*getParentNode=\&getParent;
+*getParentElement = \&getParent;
+*getParentNode    = \&getParent;
 
 #-----------------
 # sub getParents / getParentElements
 
 sub getParents {
-    my $self=shift;
+    my $self = shift;
 
-    my $parent=$self->{-parent};
+    my $parent = $self->{-parent};
     return unless $parent;
 
     my @parents;
     while ($parent) {
-        push @parents,$parent;
-        $parent=$parent->{-parent};
+        push @parents, $parent;
+        $parent = $parent->{-parent};
     }
 
     return @parents;
 }
-*getParentElements=\&getParents;
-*getParentNodes=\&getParents;
-*getAncestors=\&getParents;
+*getParentElements = \&getParents;
+*getParentNodes    = \&getParents;
+*getAncestors      = \&getParents;
 
 #-----------------
 # sub isAncestor
 
 sub isAncestor {
-    my ($self,$descendant)=@_;
+    my ( $self, $descendant ) = @_;
 
-    my @parents=$descendant->getParents();
+    my @parents = $descendant->getParents();
     foreach my $parent (@parents) {
-        return 1 if $parent==$self;
+        return 1 if $parent == $self;
     }
 
     return 0;
@@ -196,11 +195,11 @@ sub isAncestor {
 # sub isDescendant
 
 sub isDescendant {
-    my ($self,$ancestor)=@_;
+    my ( $self, $ancestor ) = @_;
 
-    my @parents=$self->getParents();
+    my @parents = $self->getParents();
     foreach my $parent (@parents) {
-        return 1 if $parent==$ancestor;
+        return 1 if $parent == $ancestor;
     }
 
     return 0;
@@ -210,9 +209,9 @@ sub isDescendant {
 # sub getSiblings
 
 sub getSiblings {
-    my $self=shift;
+    my $self = shift;
 
-    if (my $parent=$self->getParent) {
+    if ( my $parent = $self->getParent ) {
         return $parent->getChildren();
     }
 
@@ -223,11 +222,11 @@ sub getSiblings {
 # sub hasSiblings
 
 sub hasSiblings {
-    my $self=shift;
+    my $self = shift;
 
-    if (my $parent=$self->getParent) {
-        my $siblings=scalar($parent->getChildren);
-        return 1 if $siblings>=2;
+    if ( my $parent = $self->getParent ) {
+        my $siblings = scalar( $parent->getChildren );
+        return 1 if $siblings >= 2;
     }
 
     return;
@@ -237,20 +236,20 @@ sub hasSiblings {
 # sub getElementName / getType
 
 sub getElementName {
-    my $self=shift;
+    my $self = shift;
 
-    if (exists $self->{-name}) {
+    if ( exists $self->{-name} ) {
         return $self->{-name};
     }
 
     return;
 }
-*getType=\&getElementName;
-*getElementType=\&getElementName;
-*getTagName=\&getElementName;
-*getTagType=\&getElementName;
-*getNodeName=\&getElementName;
-*getNodeType=\&getElementName;
+*getType        = \&getElementName;
+*getElementType = \&getElementName;
+*getTagName     = \&getElementName;
+*getTagType     = \&getElementName;
+*getNodeName    = \&getElementName;
+*getNodeType    = \&getElementName;
 
 #-----------------
 # sub getElements
@@ -258,23 +257,24 @@ sub getElementName {
 # if none is specified, get all elements in document.
 
 sub getElements {
-    my ($self,$element)=@_;
+    my ( $self, $element ) = @_;
 
     return unless exists $self->{-docref};
     return unless exists $self->{-docref}->{-elist};
 
-    my $elist=$self->{-docref}->{-elist};
-    if (defined $element) {
-        if (exists $elist->{$element}) {
-            return wantarray?@{$elist->{$element}}:$elist->{$element};
+    my $elist = $self->{-docref}->{-elist};
+    if ( defined $element ) {
+        if ( exists $elist->{$element} ) {
+            return wantarray ? @{ $elist->{$element} } : $elist->{$element};
         }
         return;
-    } else {
-       my @elements;
-       foreach my $element_type (keys %$elist) {
-            push @elements,@{$elist->{$element_type}};
-       }
-       return wantarray?@elements:\@elements;
+    }
+    else {
+        my @elements;
+        foreach my $element_type ( keys %$elist ) {
+            push @elements, @{ $elist->{$element_type} };
+        }
+        return wantarray ? @elements : \@elements;
     }
 }
 
@@ -282,25 +282,25 @@ sub getElements {
 sub getElementsByName {
     return shift->getElements(shift);
 }
-*getElementsByType=\&getElementsByName;
+*getElementsByType = \&getElementsByName;
 
 #-----------------
 sub getElementNames {
-    my $self=shift;
+    my $self = shift;
 
-    my @types=keys %{$self->{-docref}->{-elist}};
+    my @types = keys %{ $self->{-docref}->{-elist} };
 
-    return wantarray?@types:\@types;
+    return wantarray ? @types : \@types;
 }
-*getElementTypes=\&getElementNames;
+*getElementTypes = \&getElementNames;
 
 #-----------------
 # sub getElementID
 
 sub getElementID {
-    my $self=shift;
+    my $self = shift;
 
-    if (exists $self->{id}) {
+    if ( exists $self->{id} ) {
         return $self->{id};
     }
 
@@ -311,26 +311,26 @@ sub getElementID {
 # sub getElementByID / getElementbyID
 
 sub getElementByID {
-    my ($self,$id)=@_;
+    my ( $self, $id ) = @_;
 
     return unless defined($id);
-    my $idlist=$self->{-docref}->{-idlist};
-    if (exists $idlist->{$id}) {
+    my $idlist = $self->{-docref}->{-idlist};
+    if ( exists $idlist->{$id} ) {
         return $idlist->{$id};
     }
 
     return;
 }
-*getElementbyID=\&getElementByID;
+*getElementbyID = \&getElementByID;
 
 #-----------------
 # sub getAttribute
 # see also SVG::attrib()
 
 sub getAttribute {
-    my ($self,$attr)=@_;
+    my ( $self, $attr ) = @_;
 
-    if (exists $self->{$attr}) {
+    if ( exists $self->{$attr} ) {
         return $self->{$attr};
     }
 
@@ -341,24 +341,23 @@ sub getAttribute {
 # sub getAttributes
 
 sub getAttributes {
-    my $self=shift;
+    my $self = shift;
 
     my $out = {};
-    foreach my $i (keys %$self) {
+    foreach my $i ( keys %$self ) {
         $out->{$i} = $self->{$i} unless $i =~ /^-/;
     }
 
-    return wantarray?%{$out}:$out;
+    return wantarray ? %{$out} : $out;
 }
-
 
 #-----------------
 # sub setAttribute
 
 sub setAttributes {
-    my ($self,$attr) = @_;
-    foreach my $i (keys %$attr) {
-        $self->attrib($i,$attr->{$i});
+    my ( $self, $attr ) = @_;
+    foreach my $i ( keys %$attr ) {
+        $self->attrib( $i, $attr->{$i} );
     }
 }
 
@@ -366,23 +365,24 @@ sub setAttributes {
 # sub setAttribute
 
 sub setAttribute {
-    my ($self,$att,$val) = @_;
-    $self->attrib($att,$val);
+    my ( $self, $att, $val ) = @_;
+    $self->attrib( $att, $val );
 }
+
 #-----------------
 # sub getCDATA / getCdata / getData
 
 sub getCDATA {
-    my $self=shift;
+    my $self = shift;
 
-    if (exists $self->{-cdata}) {
+    if ( exists $self->{-cdata} ) {
         return $self->{-cdata};
     }
 
     return;
 }
-*getCdata=\&getCDATA;
-*getData=\&getCDATA;
+*getCdata = \&getCDATA;
+*getData  = \&getCDATA;
 
 # ----------------
 # 2005-12-30 - Martin Owens, apply greater DOM specification (write)
@@ -390,166 +390,166 @@ sub getCDATA {
 
 # ----------------
 # sub document
-sub document
-{
-	my ($self) = @_;
-	return $self->{-docref};
+sub document {
+    my ($self) = @_;
+    return $self->{-docref};
 }
 
 # DOM specified method names
-*createElement=\&tag;
-*firstChild=\&getFirstChild;
-*lastChild=\&getLastChild;
-*previousSibling=\&getPreviousSibling;
-*nextSibling=\&getNextSibling;
+*createElement   = \&tag;
+*firstChild      = \&getFirstChild;
+*lastChild       = \&getLastChild;
+*previousSibling = \&getPreviousSibling;
+*nextSibling     = \&getNextSibling;
 
 # ----------------
 # sub insertBefore
-sub insertBefore
-{
-	my ($self, $newChild, $refChild) = @_;
-	return $self->appendElement($newChild) if not $refChild;
-	my $index = $self->findChildIndex($refChild);
-	return 0 if $index < 0; # NO_FOUND_ERR
-	return $self->insertAtIndex($newChild, $index);
+sub insertBefore {
+    my ( $self, $newChild, $refChild ) = @_;
+    return $self->appendElement($newChild) if not $refChild;
+    my $index = $self->findChildIndex($refChild);
+    return 0 if $index < 0;    # NO_FOUND_ERR
+    return $self->insertAtIndex( $newChild, $index );
 }
-*insertChildBefore=\&insertBefore;
-*insertNodeBefore=\&insertBefore;
-*insertElementBefore=\&insertBefore;
+*insertChildBefore   = \&insertBefore;
+*insertNodeBefore    = \&insertBefore;
+*insertElementBefore = \&insertBefore;
 
 # ----------------
 # sub insertAfter
-sub insertAfter
-{
-	my ($self, $newChild, $refChild) = @_;
-	return $self->appendElement($newChild) if not $refChild;
-	my $index = $self->findChildIndex($refChild);
-	return 0 if $index < 0; # NO_FOUND_ERR
-	return $self->insertAtIndex($newChild, $index+1);
+sub insertAfter {
+    my ( $self, $newChild, $refChild ) = @_;
+    return $self->appendElement($newChild) if not $refChild;
+    my $index = $self->findChildIndex($refChild);
+    return 0 if $index < 0;    # NO_FOUND_ERR
+    return $self->insertAtIndex( $newChild, $index + 1 );
 }
-*insertChildAfter=\&insertAfter;
-*insertNodeAfter=\&insertAfter;
-*insertElementAfter=\&insertAfter;
+*insertChildAfter   = \&insertAfter;
+*insertNodeAfter    = \&insertAfter;
+*insertElementAfter = \&insertAfter;
 
 # ----------------
 # sub insertSiblingAfter (Not in W3C DOM)
-sub insertSiblingAfter
-{
-	my ($self, $newChild) = @_;
-	return $self->parent->insertAfter($newChild, $self) if $self->parent;
-	return 0;
+sub insertSiblingAfter {
+    my ( $self, $newChild ) = @_;
+    return $self->parent->insertAfter( $newChild, $self ) if $self->parent;
+    return 0;
 }
 
 # ----------------
 # sub insertSiblingBefore (Not in W3C DOM)
-sub insertSiblingBefore
-{
-    my ($self, $newChild) = @_;
-    return $self->parent->insertBefore($newChild, $self) if $self->parent;
+sub insertSiblingBefore {
+    my ( $self, $newChild ) = @_;
+    return $self->parent->insertBefore( $newChild, $self ) if $self->parent;
     return 0;
-} 
+}
 
 # ----------------
 # sub replaceChild
-sub replaceChild
-{
-	my ($self, $newChild, $oldChild) = @_;
-	# Replace newChild if it is in this list of children already
-	$self->removeChild($newChild) if $newChild->{-parent} eq $self;
-	# We need the index of the node to replace
-	my $index = $self->findChildIndex($oldChild);
-	return 0 if($index < 0); # NOT_FOUND_ERR
-	# Replace and bind new node with its family
-	$self->removeChildAtIndex($index);
-	$self->insertChildAtIndex($index);
-	return $oldChild;
+sub replaceChild {
+    my ( $self, $newChild, $oldChild ) = @_;
+
+    # Replace newChild if it is in this list of children already
+    $self->removeChild($newChild) if $newChild->{-parent} eq $self;
+
+    # We need the index of the node to replace
+    my $index = $self->findChildIndex($oldChild);
+    return 0 if ( $index < 0 );    # NOT_FOUND_ERR
+                                   # Replace and bind new node with its family
+    $self->removeChildAtIndex($index);
+    $self->insertChildAtIndex($index);
+    return $oldChild;
 }
-*replaceElement=\&replaceChild;
-*replaceNode=\&replaceChild;
+*replaceElement = \&replaceChild;
+*replaceNode    = \&replaceChild;
 
 # ----------------
 # sub removeChild
-sub removeChild
-{
-	my ($self, $oldChild) = @_;
-	my $index = $self->findChildIndex($oldChild);
-	return 0 if($index < 0); # NOT_FOUND_ERR
-	return $self->removeChildAtIndex($index);
+sub removeChild {
+    my ( $self, $oldChild ) = @_;
+    my $index = $self->findChildIndex($oldChild);
+    return 0 if ( $index < 0 );    # NOT_FOUND_ERR
+    return $self->removeChildAtIndex($index);
 }
-*removeElement=\&removeChild;
-*removeNode=\&removeChild;
+*removeElement = \&removeChild;
+*removeNode    = \&removeChild;
 
 # ----------------
 # sub appendChild
-sub appendChild
-{
-    my ($self, $element) = @_;
-    my $index = (defined $self->{-childs} && scalar @{$self->{-childs}}) || 0;
-    $self->insertAtIndex($element, $index);
+sub appendChild {
+    my ( $self, $element ) = @_;
+    my $index
+        = ( defined $self->{-childs} && scalar @{ $self->{-childs} } ) || 0;
+    $self->insertAtIndex( $element, $index );
     return 1;
 }
-*appendElement=\&appendChild;
-*appendNode=\&appendChild;
+*appendElement = \&appendChild;
+*appendNode    = \&appendChild;
 
 # ----------------
 # sub cloneNode
-sub cloneNode
-{
-	my ($self, $deep) = @_;
-	my $clone = new SVG::Element;
-	foreach my $key (keys(%{$self})) {
-    next if $key eq '-childs' or $key eq '-parent';
-    if ($key eq '-docref') {
-      # need to forge a docref based on the docref of the template element
-      foreach my $dockey (keys(%{$self->{-docref}})) {
-        next if $dockey eq '-childs' or $dockey eq '-parent' or $dockey eq '-idlist' or $dockey eq '-elist' or $dockey eq '-document' or $dockey eq '-docref';
-        $clone->{-docref}->{$dockey} = $self->{-docref}->{$dockey};
-      }
-    } else {
-      $clone->{$key} = $self->{$key};
-		}
-	}
+sub cloneNode {
+    my ( $self, $deep ) = @_;
+    my $clone = new SVG::Element;
+    foreach my $key ( keys( %{$self} ) ) {
+        next if $key eq '-childs' or $key eq '-parent';
+        if ( $key eq '-docref' ) {
 
-	# We need to clone the children if deep is specified.
-	if ($deep) {
-		foreach my $child (@{$self->{-childs}}) {
-			my $childClone = $child->cloneNode($deep);
-			$clone->appendChild($childClone);
-		}
-	}
+          # need to forge a docref based on the docref of the template element
+            foreach my $dockey ( keys( %{ $self->{-docref} } ) ) {
+                next
+                    if $dockey eq '-childs'
+                    or $dockey eq '-parent'
+                    or $dockey eq '-idlist'
+                    or $dockey eq '-elist'
+                    or $dockey eq '-document'
+                    or $dockey eq '-docref';
+                $clone->{-docref}->{$dockey} = $self->{-docref}->{$dockey};
+            }
+        }
+        else {
+            $clone->{$key} = $self->{$key};
+        }
+    }
 
-	return $clone;
+    # We need to clone the children if deep is specified.
+    if ($deep) {
+        foreach my $child ( @{ $self->{-childs} } ) {
+            my $childClone = $child->cloneNode($deep);
+            $clone->appendChild($childClone);
+        }
+    }
+
+    return $clone;
 }
-*cloneElement=\&cloneNode;
+*cloneElement = \&cloneNode;
 
 # ---------------------------------------
 #    NONE DOM Supporting methodss
 
 # ----------------
 # sub findChildIndex
-sub findChildIndex
-{
-    my ($self, $refChild) = @_;
+sub findChildIndex {
+    my ( $self, $refChild ) = @_;
 
     my $index = 0;
-    foreach my $child (@{$self->{-childs}}) {
-        if ($child eq $refChild) {
-            return $index; # Child found
+    foreach my $child ( @{ $self->{-childs} } ) {
+        if ( $child eq $refChild ) {
+            return $index;    # Child found
         }
         $index++;
     }
 
-    return -1; # Child not found
+    return -1;                # Child not found
 }
 
 # ---------------
 # sub insertAtIndex
-sub insertAtIndex
-{
-    my ($self, $newChild, $index) = @_;
+sub insertAtIndex {
+    my ( $self, $newChild, $index ) = @_;
 
     # add child
-    splice @{$self->{-childs}}, $index, 0, $newChild;
+    splice @{ $self->{-childs} }, $index, 0, $newChild;
 
     # update parent and document reference
     $newChild->{-docref} = $self->{-docref};
@@ -558,48 +558,48 @@ sub insertAtIndex
     weaken( $newChild->{-parent} );
 
     # update ID and element list
-    if ( defined($newChild->{id}) ) {
+    if ( defined( $newChild->{id} ) ) {
         $self->{-docref}->{-idlist}->{ $newChild->{id} } = $newChild;
     }
     $self->{-docref}->{-elist} = {}
         unless ( defined $self->{-docref}->{-elist} );
     $self->{-docref}->{-elist}->{ $newChild->{-name} } = []
         unless ( defined $self->{-docref}->{-elist}->{ $newChild->{-name} } );
-    unshift @{ $self->{-docref}->{-elist}->{ $newChild->{-name} } }, $newChild;
+    unshift @{ $self->{-docref}->{-elist}->{ $newChild->{-name} } },
+        $newChild;
 
     return 1;
 }
-*insertChildAtIndex=\&insertAtIndex;
+*insertChildAtIndex = \&insertAtIndex;
 
 # ----------------
 # sub removeChildAtIndex
-sub removeChildAtIndex
-{
-	my ($self, $index) = @_;
+sub removeChildAtIndex {
+    my ( $self, $index ) = @_;
 
-  # remove child
-	my $oldChild = splice @{$self->{-childs}}, $index, 1;
-	if(not @{$self->{-childs}}) {
-		delete $self->{-childs};
-	}
+    # remove child
+    my $oldChild = splice @{ $self->{-childs} }, $index, 1;
+    if ( not @{ $self->{-childs} } ) {
+        delete $self->{-childs};
+    }
 
-  # update parent and document reference
-  $oldChild->{-docref} = undef;
-	$oldChild->{-parent} = undef;
+    # update parent and document reference
+    $oldChild->{-docref} = undef;
+    $oldChild->{-parent} = undef;
 
-  # update ID and element list
-  if ( defined($oldChild->{id}) && 
-       exists $self->{-docref}->{-idlist}->{ $oldChild->{id} } ) {
-    delete $self->{-docref}->{-idlist}->{ $oldChild->{id} };
-  }
-  if ( exists $self->{-docref}->{-elist}->{ $oldChild->{-name} } ) {
-    delete $self->{-docref}->{-elist}->{ $oldChild->{-name} };
-  }
+    # update ID and element list
+    if ( defined( $oldChild->{id} )
+        && exists $self->{-docref}->{-idlist}->{ $oldChild->{id} } )
+    {
+        delete $self->{-docref}->{-idlist}->{ $oldChild->{id} };
+    }
+    if ( exists $self->{-docref}->{-elist}->{ $oldChild->{-name} } ) {
+        delete $self->{-docref}->{-elist}->{ $oldChild->{-name} };
+    }
 
-	return $oldChild;
+    return $oldChild;
 }
-*removeAtIndex=\&removeChildAtIndex;
-
+*removeAtIndex = \&removeChildAtIndex;
 
 #-------------------------------------------------------------------------------
 

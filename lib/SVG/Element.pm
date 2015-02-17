@@ -20,7 +20,6 @@ L<http://www.w3c.org/Graphics/SVG/> SVG at the W3C
 
 package SVG::Element;
 
-
 use strict;
 use warnings;
 
@@ -34,15 +33,15 @@ our $AUTOLOAD;
 our $VERSION = '2.59';
 
 my @autosubs = qw(
-  animateMotion animateColor animateTransform circle ellipse rect polyline
-  path polygon line title desc defs
-  altGlyph altGlyphDef altGlyphItem clipPath color-profile
-  cursor definition-src font-face-format font-face-name
-  font-face-src font-face-url foreignObject glyph
-  glyphRef hkern marker mask metadata missing-glyph
-  mpath switch symbol textPath tref tspan view vkern marker textbox
-  flowText style script
-  image a g
+    animateMotion animateColor animateTransform circle ellipse rect polyline
+    path polygon line title desc defs
+    altGlyph altGlyphDef altGlyphItem clipPath color-profile
+    cursor definition-src font-face-format font-face-name
+    font-face-src font-face-url foreignObject glyph
+    glyphRef hkern marker mask metadata missing-glyph
+    mpath switch symbol textPath tref tspan view vkern marker textbox
+    flowText style script
+    image a g
 );
 
 our %autosubs = map { $_ => 1 } @autosubs;
@@ -63,8 +62,10 @@ sub new {
                 $self->{'xlink:role'}    = $attrs{-role} if $attrs{-role};
                 $self->{'xlink:title'}   = $attrs{-title} if $attrs{-title};
                 $self->{'xlink:show'}    = $attrs{-show} if $attrs{-show};
-                $self->{'xlink:arcrole'} = $attrs{-arcrole} if $attrs{-arcrole};
-                $self->{'xlink:actuate'} = $attrs{-actuate} if $attrs{-actuate};
+                $self->{'xlink:arcrole'} = $attrs{-arcrole}
+                    if $attrs{-arcrole};
+                $self->{'xlink:actuate'} = $attrs{-actuate}
+                    if $attrs{-actuate};
                 next;
             }
         }
@@ -101,9 +102,11 @@ sub xmlify {
         if ( $k =~ /^-/ ) { next; }
         if ( ref( $self->{$k} ) eq 'ARRAY' ) {
             $attrs{$k} = join( ', ', @{ $self->{$k} } );
-        } elsif ( ref( $self->{$k} ) eq 'HASH' ) {
+        }
+        elsif ( ref( $self->{$k} ) eq 'HASH' ) {
             $attrs{$k} = cssstyle( %{ $self->{$k} } );
-        } elsif ( ref( $self->{$k} ) eq '' ) {
+        }
+        elsif ( ref( $self->{$k} ) eq '' ) {
             $attrs{$k} = $self->{$k};
         }
     }
@@ -112,13 +115,14 @@ sub xmlify {
     if ( $self->{-comment} ) {
         $xml .= $self->xmlcomment( $self->{-comment} );
         return $xml;
-    } elsif ( $self->{-name} eq 'document' ) {
+    }
+    elsif ( $self->{-name} eq 'document' ) {
 
         #write the xml header
         $xml .= $self->xmldecl unless $self->{-inline};
 
         $xml .= $self->xmlpi( $self->{-document}->{-pi} )
-          if $self->{-document}->{-pi};
+            if $self->{-document}->{-pi};
 
         #and write the dtd if this is inline
         $xml .= $self->dtddecl unless $self->{-inline};
@@ -132,11 +136,13 @@ sub xmlify {
 
         return $xml;
     }
-    my $is_cdataish = defined $self->{-cdata}
-                   || defined $self->{-CDATA}
-                   || defined $self->{-cdata_noxmlesc};
+    my $is_cdataish
+        = defined $self->{-cdata}
+        || defined $self->{-CDATA}
+        || defined $self->{-cdata_noxmlesc};
     if ( defined $self->{-childs} || $is_cdataish ) {
-        $xml .= $self->{-docref}->{-elsep} unless ($self->{-inline} && $self->{-name});
+        $xml .= $self->{-docref}->{-elsep}
+            unless ( $self->{-inline} && $self->{-name} );
         $xml .= $self->{-docref}->{-indent} x $self->{-docref}->{-level};
         $xml .= xmltagopen_ln( $self->{-name}, $ns, %attrs );
         $self->{-docref}->{-level}++;
@@ -158,12 +164,13 @@ sub xmlify {
 
         #return without writing the tag out if it the document tag
         $self->{-docref}->{-level}--;
-        unless( $is_cdataish ) {
+        unless ($is_cdataish) {
             $xml .= $self->{-docref}->{-elsep};
             $xml .= $self->{-docref}->{-indent} x $self->{-docref}->{-level};
         }
         $xml .= xmltagclose_ln( $self->{-name}, $ns );
-    } else {
+    }
+    else {
         $xml .= $self->{-docref}->{-elsep};
         $xml .= $self->{-docref}->{-indent} x $self->{-docref}->{-level};
         $xml .= xmltag_ln( $self->{-name}, $ns, %attrs );
@@ -183,9 +190,11 @@ sub perlify {
         next if $k =~ /^-/;
         if ( ref( $self->{$k} ) eq 'ARRAY' ) {
             $attrs{$k} = join( ', ', @{ $self->{$k} } );
-        } elsif ( ref( $self->{$k} ) eq 'HASH' ) {
+        }
+        elsif ( ref( $self->{$k} ) eq 'HASH' ) {
             $attrs{$k} = cssstyle( %{ $self->{$k} } );
-        } elsif ( ref( $self->{$k} ) eq '' ) {
+        }
+        elsif ( ref( $self->{$k} ) eq '' ) {
             $attrs{$k} = $self->{$k};
         }
     }
@@ -193,10 +202,12 @@ sub perlify {
     if ( $self->{-comment} ) {
         $code .= "->comment($self->{-comment})";
         return $code;
-    } elsif ( $self->{-pi} ) {
+    }
+    elsif ( $self->{-pi} ) {
         $code .= "->pi($self->{-pi})";
         return $code;
-    } elsif ( $self->{-name} eq 'document' ) {
+    }
+    elsif ( $self->{-name} eq 'document' ) {
 
         #write the xml header
         #$xml .= $self->xmldecl;
@@ -213,15 +224,17 @@ sub perlify {
     if ( defined $self->{-childs} ) {
         $code .= $self->{-docref}->{-elsep};
         $code .= $self->{-docref}->{-indent} x $self->{-docref}->{-level};
-        $code .=
-            $self->{-name} . '('
-          . ( join ', ', ( map { "$_=>'$attrs{$_}'" } sort keys %attrs ) )
-          . ')';
+        $code
+            .= $self->{-name} . '('
+            . ( join ', ', ( map {"$_=>'$attrs{$_}'"} sort keys %attrs ) )
+            . ')';
         if ( $self->{-cdata} ) {
             $code .= "->cdata($self->{-cdata})";
-        } elsif ( $self->{-CDATA} ) {
+        }
+        elsif ( $self->{-CDATA} ) {
             $code .= "->CDATA($self->{-CDATA})";
-        } elsif ( $self->{-cdata_noxmlesc} ) {
+        }
+        elsif ( $self->{-cdata_noxmlesc} ) {
             $code .= "->cdata_noxmlesc($self->{-cdata_noxmlesc})";
         }
 
@@ -232,13 +245,14 @@ sub perlify {
             }
         }
         $self->{-docref}->{-level}--;
-    } else {
+    }
+    else {
         $code .= $self->{-docref}->{-elsep};
         $code .= $self->{-docref}->{-indent} x $self->{-docref}->{-level};
-        $code .=
-            $self->{-name} . '('
-          . ( join ', ', ( map { "$_=>'$attrs{$_}'" } sort keys %attrs ) )
-          . ')';
+        $code
+            .= $self->{-name} . '('
+            . ( join ', ', ( map {"$_=>'$attrs{$_}'"} sort keys %attrs ) )
+            . ')';
     }
 
     return $code;
@@ -271,6 +285,7 @@ sub tag {
     my ( $self, $name, %attrs ) = @_;
 
     unless ( $self->{-parent} ) {
+
         #traverse down the tree until you find a non-document entry
         while ( $self->{-document} ) { $self = $self->{-document} }
     }
@@ -285,7 +300,7 @@ sub tag {
 
     #create the empty idlist hash ref unless it already exists
     $tag->{-docref}->{-idlist} = {}
-      unless ( defined $tag->{-docref}->{-idlist} );
+        unless ( defined $tag->{-docref}->{-idlist} );
 
     #verify that the current id is unique. compain on exception
     #>>>TBD: add -strictids option to disable this check if desired
@@ -297,20 +312,20 @@ sub tag {
     }
 
     #add the current id reference to the document id hash
-    if ( defined($tag->{id}) ) {
+    if ( defined( $tag->{id} ) ) {
         $tag->{-docref}->{-idlist}->{ $tag->{id} } = $tag;
     }
 
     #create the empty idlist hash ref unless it already exists
     $tag->{-docref}->{-elist} = {}
-      unless ( defined $tag->{-docref}->{-elist} );
+        unless ( defined $tag->{-docref}->{-elist} );
 
     #create the empty idlist hash ref unless it already exists
     $tag->{-docref}->{-elist}->{ $tag->{-name} } = []
-      unless ( defined $tag->{-docref}->{-elist}->{ $tag->{-name} } );
+        unless ( defined $tag->{-docref}->{-elist}->{ $tag->{-name} } );
 
-    #add the current element ref to the corresponding element-hash array
-    # -elist is a hash of element names. key name is element, content is object ref.
+#add the current element ref to the corresponding element-hash array
+# -elist is a hash of element names. key name is element, content is object ref.
 
     # add the reference to $tag to the array of refs that belong to the
     # key $tag->{-name}.
@@ -318,7 +333,7 @@ sub tag {
 
     # attach element to the DOM of the document
     $tag->{-parent} = $self;
-    weaken($tag->{-parent});
+    weaken( $tag->{-parent} );
     $tag->{-parentname} = $self->{-name};
     $self->addchilds($tag);
 
@@ -698,7 +713,7 @@ B<Example:>
 sub comment {
     my ( $self, @text ) = @_;
     my $tag = $self->tag('comment');
-    $tag->{ -comment } = [@text];
+    $tag->{-comment} = [@text];
     return $tag;
 }
 
@@ -724,11 +739,11 @@ B<Example:>
 
 sub pi {
     my ( $self, @text ) = @_;
-    return $self->{-document}->{ -pi } unless scalar @text;
+    return $self->{-document}->{-pi} unless scalar @text;
     my @pi;
-    @pi = @{ $self->{-document}->{ -pi } } if $self->{-document}->{ -pi };
+    @pi = @{ $self->{-document}->{-pi} } if $self->{-document}->{-pi};
     unshift( @text, @pi ) if @pi;
-    $self->{-document}->{ -pi } = \@text;
+    $self->{-document}->{-pi} = \@text;
     my $tag = $self->tag('pi');
     return $tag;
 }
@@ -883,7 +898,7 @@ sub get_path {
     if ( lc($type) eq 'path' ) {
         my $char = 'M';
         $char = ' m '
-          if ( defined $attrs{-relative} && lc( $attrs{-relative} ) );
+            if ( defined $attrs{-relative} && lc( $attrs{-relative} ) );
         while (@x) {
 
             #scale each value
@@ -894,14 +909,15 @@ sub get_path {
             $points .= "$char $x $y ";
             $char = ' L ';
             $char = ' l '
-              if ( defined $attrs{-relative}
+                if ( defined $attrs{-relative}
                 && lc( $attrs{-relative} ) );
         }
         $points .= ' z '
-          if ( defined $attrs{-closed} && lc( $attrs{-closed} ) );
+            if ( defined $attrs{-closed} && lc( $attrs{-closed} ) );
         my %out = ( d => $points );
         return \%out;
-    } elsif ( lc($type) =~ /^poly/ ) {
+    }
+    elsif ( lc($type) =~ /^poly/ ) {
         while (@x) {
 
             #scale each value
@@ -1151,12 +1167,14 @@ sub attrib {
 
             # two arguments only - retrieve
             return $self->{$name};
-        } else {
+        }
+        else {
 
             # 3rd argument is undef - delete
             delete $self->{$name};
         }
-    } else {
+    }
+    else {
 
         # 3 defined arguments - set
         $self->{$name} = $val;
@@ -1202,7 +1220,7 @@ SEE ALSO:
 
 sub cdata {
     my ( $self, @txt ) = @_;
-    $self->{ -cdata } = join( ' ', @txt );
+    $self->{-cdata} = join( ' ', @txt );
     return ($self);
 }
 
@@ -1275,13 +1293,13 @@ SEE ALSO:
 
 sub CDATA {
     my ( $self, @txt ) = @_;
-    $self->{ -CDATA } = join( '\n', @txt );
+    $self->{-CDATA} = join( '\n', @txt );
     return ($self);
 }
 
 sub cdata_noxmlesc {
     my ( $self, @txt ) = @_;
-    $self->{ -cdata_noxmlesc } = join( '\n', @txt );
+    $self->{-cdata_noxmlesc} = join( '\n', @txt );
     return ($self);
 }
 
@@ -1606,7 +1624,8 @@ sub error {
 
     if ( $self->{-docref}->{-raiseerror} ) {
         die "$command: $error\n";
-    } elsif ( $self->{-docref}->{-printerror} ) {
+    }
+    elsif ( $self->{-docref}->{-printerror} ) {
         print STDERR "$command: $error\n";
     }
 
@@ -1620,22 +1639,24 @@ sub autoload {
 
     if ( $sub eq 'DESTROY' ) {
         return $self->release();
-    } else {
+    }
+    else {
 
         # the import routine may call us with a tag name involving '-'s
         my $tag = $sub;
         $sub =~ tr/-/_/;
 
-        # N.B.: The \ on \@_ makes sure that the incoming arguments are
-        # used and not the ones passed when the subroutine was created.
-       # eval "sub $package\:\:$sub (\$;\@) { return shift->tag('$tag',\@_) }";
-	#per rt.perl.org comment by slaven.
+      # N.B.: The \ on \@_ makes sure that the incoming arguments are
+      # used and not the ones passed when the subroutine was created.
+      # eval "sub $package\:\:$sub (\$;\@) { return shift->tag('$tag',\@_) }";
+      #per rt.perl.org comment by slaven.
 
-	if (!$package->can($sub)) {
-        ## no critic (TestingAndDebugging::ProhibitNoStrict)
-		no strict 'refs';
-		*{$package.'::'.$sub} = sub { return shift->tag($tag, @_) };
-	}
+        if ( !$package->can($sub) ) {
+            ## no critic (TestingAndDebugging::ProhibitNoStrict)
+            no strict 'refs';
+            *{ $package . '::' . $sub }
+                = sub { return shift->tag( $tag, @_ ) };
+        }
         return $self->$sub(@_) if $self;
     }
 }

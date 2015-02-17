@@ -24,13 +24,13 @@ document.write('<br>');//write a horizontal rule
 }|
 );
 
-ok($tag, "create script element");
+ok( $tag, "create script element" );
 my $out = $svg->xmlify;
 
-like($out, qr{"text/ecmascript"}, "specify script type");
-like($out, qr/function/, "generate script content");;
-like($out, qr/'<br>'/, "handle single quotes");
-like($out, qr/"<hr>/, "handle double quotes");
+like( $out, qr{"text/ecmascript"}, "specify script type" );
+like( $out, qr/function/,          "generate script content" );
+like( $out, qr/'<br>'/,            "handle single quotes" );
+like( $out, qr/"<hr>/,             "handle double quotes" );
 
 #test for adding scripting commands in an element
 
@@ -48,15 +48,17 @@ my $rect = $svg->rect(
 
 $out = $rect->xmlify;
 
-like($out, qr/'hello'/, 'mouse event');
-like($out, qr/'world'/, "mouse event script call" );
-
+like( $out, qr/'hello'/, 'mouse event' );
+like( $out, qr/'world'/, "mouse event script call" );
 
 $svg = new SVG;
 $svg->script()->CDATA("TESTTESTTEST");
 $out = $svg->xmlify;
 chomp $out;
 
-like( $out, qr/<script\s*><!\[CDATA\[TESTTESTTEST\]\]>\s*<\/script>/, "script without type");
-
+like(
+    $out,
+    qr/<script\s*><!\[CDATA\[TESTTESTTEST\]\]>\s*<\/script>/,
+    "script without type"
+);
 

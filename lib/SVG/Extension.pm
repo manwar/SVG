@@ -10,7 +10,6 @@ SVG::Extension - additional methods
 
 =cut
 
-
 # although DTD declarations are not elements, we use the same API so we can
 # manipulate the internal DTD subset using the same methods available for
 # elements. At this state, all extensions are the same object class, but
@@ -21,12 +20,12 @@ SVG::Extension - additional methods
 use parent qw/SVG::Element/;
 
 # DTD declarations handled in this module
-use constant ELEMENT => "ELEMENT";
-use constant ATTLIST => "ATTLIST";
+use constant ELEMENT  => "ELEMENT";
+use constant ATTLIST  => "ATTLIST";
 use constant NOTATION => "NOTATION";
-use constant ENTITY => "ENTITY";
+use constant ENTITY   => "ENTITY";
 
-our @TYPES = (ELEMENT,ATTLIST,NOTATION,ENTITY);
+our @TYPES = ( ELEMENT, ATTLIST, NOTATION, ENTITY );
 our %TYPES = map { $_ => 1 } @TYPES;
 
 #-----------------
@@ -36,16 +35,17 @@ sub new {
 }
 
 sub internal_subset {
-    my $self=shift;
+    my $self = shift;
 
-    my $document=$self->{-docref};
-    unless (exists $document->{-internal}) {
-        $document->{-internal}=new SVG::Extension("internal");
-        $document->{-internal}{-docref}=$document;
+    my $document = $self->{-docref};
+    unless ( exists $document->{-internal} ) {
+        $document->{-internal} = new SVG::Extension("internal");
+        $document->{-internal}{-docref} = $document;
     }
 
     return $document->{-internal};
 }
+
 =head2 extension
 
 return the element object
@@ -53,10 +53,10 @@ return the element object
 =cut
 
 sub extension {
-    my $self=shift;
-    my $class=ref($self) || $self;
+    my $self = shift;
+    my $class = ref($self) || $self;
 
-    return bless $self->SUPER::element(@_),$class;
+    return bless $self->SUPER::element(@_), $class;
 }
 
 #-----------------
@@ -68,10 +68,10 @@ generate an element declaration in the DTD
 =cut
 
 sub element_decl {
-    my ($self,%attrs)=@_;
-    my $subset=$self->internal_subset();
+    my ( $self, %attrs ) = @_;
+    my $subset = $self->internal_subset();
 
-    return $subset->extension('ELEMENT',%attrs);
+    return $subset->extension( 'ELEMENT', %attrs );
 }
 
 =head2 attribute_decl
@@ -81,14 +81,15 @@ return generate an attribute list for an element
 =cut
 
 sub attribute_decl {
-    my ($element_decl,%attrs)=@_;
+    my ( $element_decl, %attrs ) = @_;
 
-    unless ($element_decl->getElementType eq 'ELEMENT') {
-        $element_decl->error($element_decl => 'is not an ELEMENT declaration');
+    unless ( $element_decl->getElementType eq 'ELEMENT' ) {
+        $element_decl->error(
+            $element_decl => 'is not an ELEMENT declaration' );
         return;
     }
 
-    return $element_decl->extension('ATTLIST',%attrs);
+    return $element_decl->extension( 'ATTLIST', %attrs );
 }
 
 =head2 attlist_decl
@@ -96,12 +97,13 @@ sub attribute_decl {
 =cut
 
 sub attlist_decl {
-    my ($self,%attrs)=@_;
-    my $subset=$self->internal_subset();
+    my ( $self, %attrs ) = @_;
+    my $subset = $self->internal_subset();
 
-    my $element_decl=$subset->getElementDeclByName($attrs{name});
+    my $element_decl = $subset->getElementDeclByName( $attrs{name} );
     unless ($element_decl) {
-        $subset->error("ATTLIST declaration '$attrs{attr}'" => "ELEMENT declaration '$attrs{name}' does not exist");
+        $subset->error( "ATTLIST declaration '$attrs{attr}'" =>
+                "ELEMENT declaration '$attrs{name}' does not exist" );
         return;
     }
 
@@ -115,12 +117,11 @@ return an extension object of type NOTATION
 =cut
 
 sub notation_decl {
-    my ($self,%attrs)=@_;
-    my $subset=$self->internal_subset();
+    my ( $self, %attrs ) = @_;
+    my $subset = $self->internal_subset();
 
-    return $subset->extension('NOTATION',%attrs);
+    return $subset->extension( 'NOTATION', %attrs );
 }
-
 
 =head2 entity_decl(%attrs)
 
@@ -129,10 +130,10 @@ return an extension object of type 'ENTITY'
 =cut
 
 sub entity_decl {
-    my ($self,%attrs)=@_;
-    my $subset=$self->internal_subset();
+    my ( $self, %attrs ) = @_;
+    my $subset = $self->internal_subset();
 
-    return $subset->extension('ENTITY',%attrs);
+    return $subset->extension( 'ENTITY', %attrs );
 }
 
 #-----------------
@@ -147,75 +148,86 @@ sub entity_decl {
 =cut
 
 sub xmlify {
-    my $self=shift;
-    my $decl="";
+    my $self = shift;
+    my $decl = "";
 
-    if ($self->{-name} ne 'internal') {
-        $decl="<!";
-        SWITCH: foreach ($self->{-name}) {
+    if ( $self->{-name} ne 'internal' ) {
+        $decl = "<!";
+    SWITCH: foreach ( $self->{-name} ) {
             /^ELEMENT$/ and do {
-                $decl.="ELEMENT $self->{name}";
+                $decl .= "ELEMENT $self->{name}";
 
-                $decl.=" ".$self->{model} if exists $self->{model};
+                $decl .= " " . $self->{model} if exists $self->{model};
 
                 last SWITCH;
             };
             /^ATTLIST$/ and do {
-                $decl.="ATTLIST $self->{name} $self->{attr}";
+                $decl .= "ATTLIST $self->{name} $self->{attr}";
 
-                $decl.=" $self->{type} ".
-                  ($self->{fixed}?"#FIXED ":"").
-                  $self->{default};
+                $decl
+                    .= " $self->{type} "
+                    . ( $self->{fixed} ? "#FIXED " : "" )
+                    . $self->{default};
 
                 last SWITCH;
             };
             /^NOTATION$/ and do {
-                $decl.="NOTATION $self->{name}";
+                $decl .= "NOTATION $self->{name}";
 
-                $decl.=" ".$self->{base} if exists $self->{base};
-                if (exists $self->{pubid}) {
-                    $decl.="PUBLIC $self->{pubid} ";
-                    $decl.=" ".$self->{sysid} if exists $self->{sysid};
-                } elsif (exists $self->{sysid}) {
-                    $decl.=" SYSTEM ".$self->{sysid} if exists $self->{sysid};
+                $decl .= " " . $self->{base} if exists $self->{base};
+                if ( exists $self->{pubid} ) {
+                    $decl .= "PUBLIC $self->{pubid} ";
+                    $decl .= " " . $self->{sysid} if exists $self->{sysid};
+                }
+                elsif ( exists $self->{sysid} ) {
+                    $decl .= " SYSTEM " . $self->{sysid}
+                        if exists $self->{sysid};
                 }
 
                 last SWITCH;
             };
             /^ENTITY$/ and do {
-                $decl.="ENTITY ".($self->{isp}?"% ":"").$self->{name};
+                $decl
+                    .= "ENTITY "
+                    . ( $self->{isp} ? "% " : "" )
+                    . $self->{name};
 
-                if (exists $self->{value}) {
-                    $decl.=' "'.$self->{value}.'"';
-                } elsif (exists $self->{pubid}) {
-                    $decl.="PUBLIC $self->{pubid} ";
-                    $decl.=" ".$self->{sysid} if exists $self->{sysid};
-                    $decl.=" ".$self->{ndata} if $self->{ndata};
-                } else {
-                    $decl.=" SYSTEM ".$self->{sysid} if exists $self->{sysid};
-                    $decl.=" ".$self->{ndata} if $self->{ndata};
+                if ( exists $self->{value} ) {
+                    $decl .= ' "' . $self->{value} . '"';
+                }
+                elsif ( exists $self->{pubid} ) {
+                    $decl .= "PUBLIC $self->{pubid} ";
+                    $decl .= " " . $self->{sysid} if exists $self->{sysid};
+                    $decl .= " " . $self->{ndata} if $self->{ndata};
+                }
+                else {
+                    $decl .= " SYSTEM " . $self->{sysid}
+                        if exists $self->{sysid};
+                    $decl .= " " . $self->{ndata} if $self->{ndata};
                 }
 
                 last SWITCH;
-              DEFAULT:
-                # we don't know what this is, but the underlying parser allowed it
-                $decl.="$self->{-name} $self->{name}";
+            DEFAULT:
+
+            # we don't know what this is, but the underlying parser allowed it
+                $decl .= "$self->{-name} $self->{name}";
             };
         }
-        $decl.=">".$self->{-docref}{-elsep};
+        $decl .= ">" . $self->{-docref}{-elsep};
     }
 
-    my $result="";
-    if ($self->hasChildren) {
+    my $result = "";
+    if ( $self->hasChildren ) {
         $self->{-docref}->{-level}++;
-        foreach my $child ($self->getChildren) {
-            $result .= ($self->{-docref}{-indent} x $self->{-docref}->{-level}).
-                       $child->render();
+        foreach my $child ( $self->getChildren ) {
+            $result
+                .= ( $self->{-docref}{-indent} x $self->{-docref}->{-level} )
+                . $child->render();
         }
         $self->{-docref}->{-level}--;
     }
 
-    return $decl.$result;
+    return $decl . $result;
 }
 
 #some aliases for xmilfy
@@ -238,10 +250,10 @@ alias for xmlify
 
 =cut
 
-*render=\&xmlify;
-*to_xml=\&xmlify;
-*serialise=\&xmlify;
-*serialize=\&xmlify;
+*render    = \&xmlify;
+*to_xml    = \&xmlify;
+*serialise = \&xmlify;
+*serialize = \&xmlify;
 
 #-----------------
 
@@ -259,7 +271,7 @@ alias to getDeclName
 sub getDeclName {
     return shift->SUPER::getElementName();
 }
-*getExtensionName=\&getDeclName;
+*getExtensionName = \&getDeclName;
 
 =head2 getDeclNames
 
@@ -277,22 +289,20 @@ alias to getDeclNames
 # return list of existing decl types by extracting it from the overall list
 # of existing element types
 sub getDeclNames {
-    my $self=shift;
+    my $self = shift;
 
-    return grep {
-        exists $TYPES{$_}
-    } $self->SUPER::getElementNames();
+    return grep { exists $TYPES{$_} } $self->SUPER::getElementNames();
 }
-*getExtensionNames=\&getDeclNames;
+*getExtensionNames = \&getDeclNames;
 
 #-----------------
 
 # we can have only one element decl of a given name...
 sub getElementDeclByName {
-    my ($self,$name)=@_;
-    my $subset=$self->internal_subset();
+    my ( $self, $name ) = @_;
+    my $subset = $self->internal_subset();
 
-    my @element_decls=$subset->getElementsByName('ELEMENT');
+    my @element_decls = $subset->getElementsByName('ELEMENT');
     foreach my $element_decl (@element_decls) {
         return $element_decl if $element_decl->{name} eq $name;
     }
@@ -306,10 +316,10 @@ sub getElementDeclByName {
 # You can use the result of this method along with getParent to find the list of
 # all element decls that define a given attribute.
 sub getAttributeDeclsByName {
-    my ($self,$name)=@_;
-    my $subset=$self->internal_subset();
+    my ( $self, $name ) = @_;
+    my $subset = $self->internal_subset();
 
-    my @element_decls=$subset->getElementsByName('ELEMENT');
+    my @element_decls = $subset->getElementsByName('ELEMENT');
     foreach my $element_decl (@element_decls) {
         return $element_decl if $element_decl->{name} eq $name;
     }
@@ -326,12 +336,12 @@ sub getElementDecls {
 sub getNotations {
     return shift->SUPER::getElements('NOTATION');
 }
-*getNotationDecls=\&getNotations;
+*getNotationDecls = \&getNotations;
 
 sub getEntities {
     return shift->SUPER::getElements('ENTITY');
 }
-*getEntityDecls=\&getEntities;
+*getEntityDecls = \&getEntities;
 
 sub getAttributeDecls {
     return shift->SUPER::getElements('ATTLIST');
@@ -342,19 +352,19 @@ sub getAttributeDecls {
 # subclass, will use the object class.
 
 sub isElementDecl {
-    return (shift->getElementName eq ELEMENT)?1:0;
+    return ( shift->getElementName eq ELEMENT ) ? 1 : 0;
 }
 
 sub isNotation {
-    return (shift->getElementName eq NOTATION)?1:0;
+    return ( shift->getElementName eq NOTATION ) ? 1 : 0;
 }
 
 sub isEntity {
-    return (shift->getElementName eq ENTITY)?1:0;
+    return ( shift->getElementName eq ENTITY ) ? 1 : 0;
 }
 
 sub isAttributeDecl {
-    return (shift->getElementName eq ATTLIST)?1:0;
+    return ( shift->getElementName eq ATTLIST ) ? 1 : 0;
 }
 
 #-----------------
@@ -362,9 +372,9 @@ sub isAttributeDecl {
 # the Decl 'name' is an attribute, the name is e.g. 'ELEMENT'
 # use getElementName if you want the actual decl type
 sub getElementDeclName {
-    my $self=shift;
+    my $self = shift;
 
-    if (exists $self->{name}) {
+    if ( exists $self->{name} ) {
         return $self->{name};
     }
 
@@ -374,9 +384,9 @@ sub getElementDeclName {
 # identical to the above; will be smarter as and when we subclass
 # as above, the name is ATTLIST, the 'name' is a property of the decl
 sub getAttributeDeclName {
-    my $self=shift;
+    my $self = shift;
 
-    if (exists $self->{name}) {
+    if ( exists $self->{name} ) {
         return $self->{name};
     }
 
@@ -388,24 +398,26 @@ sub getAttributeDeclName {
 # likely, so searching the master ATTLIST is not very useful. If you really want
 # to do that, use getAttributeDeclsByName (with an 's') above.
 sub getAttributeDeclByName {
-    my ($self,$name)=@_;
+    my ( $self, $name ) = @_;
 
-    my @attribute_decls=$self->getElementAttributeDecls();
+    my @attribute_decls = $self->getElementAttributeDecls();
     foreach my $attribute_decl (@attribute_decls) {
         return $attribute_decl if $attribute_decl->{name} eq $name;
     }
 
     return;
 }
+
 # as this is element specific, we allow a 'ElementAttribute' name too,
 # for those that like consistency at the price of brevity. Not that
 # the shorter name is all that brief to start with...
-*getElementAttributeDeclByName=\&getAttributeDeclByName;
+*getElementAttributeDeclByName = \&getAttributeDeclByName;
+
 # ...and for those who live their brevity:
-*getAttributeDecl=\&getAttributeDeclByName;
+*getAttributeDecl = \&getAttributeDeclByName;
 
 sub hasAttributeDecl {
-    return (shift->getElementDeclByName(shift))?1:0;
+    return ( shift->getElementDeclByName(shift) ) ? 1 : 0;
 }
 
 #-----------------
@@ -413,9 +425,9 @@ sub hasAttributeDecl {
 # element decl. You can use 'getChildIndex', 'getChildAtIndex' etc. as well
 
 sub getElementAttributeAtIndex {
-    my ($self,$index,@children)=@_;
+    my ( $self, $index, @children ) = @_;
 
-    return $self->SUPER::getChildAtIndex($index,@children);
+    return $self->SUPER::getChildAtIndex( $index, @children );
 }
 
 sub getElementAttributeIndex {
