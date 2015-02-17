@@ -79,7 +79,7 @@ sub xmlescp {
 
 sub cssstyle {
     my %attrs=@_;
-    return(join('; ',map { qq($_: ).$attrs{$_} } keys(%attrs)));
+    return(join('; ',map { qq($_: ).$attrs{$_} } sort keys(%attrs)));
 }
 
 # Per suggestion from Adam Schneider

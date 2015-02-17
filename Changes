@@ -1,5 +1,10 @@
 Revision history for Perl extension SVG.
 
+2.60
+	- Convert source files to utf8
+	- Add more tests
+	- css styles are now sorted to make it easeier to test
+
 2.59 2013.03.31
 	- Experiment to show images on MetaCPAN
 
