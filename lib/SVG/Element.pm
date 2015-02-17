@@ -748,7 +748,7 @@ B<Example:>
 
     # populate the script tag with cdata
     # be careful to manage the javascript line ends.
-    # qq|text| or qq§text§ where text is the script 
+    # qq|text| or qqÂ§textÂ§ where text is the script 
     # works well for this.
 
     $tag->CDATA(qq|function d(){
@@ -775,7 +775,7 @@ B<Example:>
 
     # Populate the style tag with cdata.
     # Be careful to manage the line ends.
-    # qq|text| or qq§text§, where text is the script
+    # qq|text| or qqÂ§textÂ§, where text is the script
     # work well for this.
 
     $tag1->CDATA(qq|
@@ -993,23 +993,23 @@ sub animate {
 
     #list of legal entities for each of the 5 methods of animations
     my %legal = (
-        animate => qq§ begin dur  end  min  max  restart  repeatCount 
+        animate => qq{ begin dur  end  min  max  restart  repeatCount 
               repeatDur  fill  attributeType attributeName additive
               accumulate calcMode  values  keyTimes  keySplines
-              from  to  by §,
-        animateTransform => qq§ begin dur  end  min  max  restart  repeatCount
+              from  to  by },
+        animateTransform => qq{ begin dur  end  min  max  restart  repeatCount
               repeatDur  fill  additive  accumulate calcMode  values
               keyTimes  keySplines  from  to  by calcMode path keyPoints
-              rotate origin type attributeName attributeType §,
-        animateMotion => qq§ begin dur  end  min  max  restart  repeatCount
+              rotate origin type attributeName attributeType },
+        animateMotion => qq{ begin dur  end  min  max  restart  repeatCount
               repeatDur  fill  additive  accumulate calcMode  values
               to  by keyTimes keySplines  from  path  keyPoints
-              rotate  origin §,
-        animateColor => qq§ begin dur  end  min  max  restart  repeatCount
+              rotate  origin },
+        animateColor => qq{ begin dur  end  min  max  restart  repeatCount
               repeatDur  fill  additive  accumulate calcMode  values
-              keyTimes  keySplines  from  to  by §,
-        set => qq§ begin dur  end  min  max  restart  repeatCount  repeatDur
-              fill to §
+              keyTimes  keySplines  from  to  by Â§,
+        set => qqÂ§ begin dur  end  min  max  restart  repeatCount  repeatDur
+              fill to }
     );
 
     foreach my $k ( keys %rtr ) {
@@ -1221,7 +1221,7 @@ content.
 
 B<Example:>
 
-      my $text = qq§
+      my $text = qqÂ§
         var SVGDoc;
         var groups = new Array();
         var last_group;
@@ -1239,7 +1239,7 @@ B<Example:>
             append_group(1, 4, 6); // group 0
             append_group(5, 4, 3); // group 1
             append_group(2, 3);    // group 2
-        }§;
+        }Â§;
         $SVG->script()->CDATA($text);
 
 

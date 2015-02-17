@@ -175,7 +175,7 @@ sub xmldecl {
     my $encoding = $self->{-encoding} || 'UTF-8';
     my $standalone = $self->{-standalone} ||'yes';
 
-    return qq§<?xml version="$version" encoding="$encoding" standalone="$standalone"?>§;
+    return qq{<?xml version="$version" encoding="$encoding" standalone="$standalone"?>};
 }
 
 #-------------------------------------------------------------------------------
