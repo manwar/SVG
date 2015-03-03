@@ -1,3 +1,8 @@
+package SVG::XML;
+use strict;
+use warnings;
+
+our $VERSION = '2.61';
 
 =pod
 
@@ -18,13 +23,7 @@ L<http://www.w3c.org/Graphics/SVG/> SVG at the W3C
 
 =cut
 
-package SVG::XML;
-use strict;
-use warnings;
-
 use Exporter qw(import);
-
-our $VERSION = '2.60';
 
 our @EXPORT = qw(
     xmlesc

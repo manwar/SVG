@@ -1,3 +1,9 @@
+package SVG::Element;
+
+use strict;
+use warnings;
+
+our $VERSION = '2.61';
 
 =pod
 
@@ -18,19 +24,12 @@ L<http://www.w3c.org/Graphics/SVG/> SVG at the W3C
 
 =cut
 
-package SVG::Element;
-
-use strict;
-use warnings;
-
 use SVG::XML;
 use SVG::DOM;
 use SVG::Extension;
 use Scalar::Util qw/weaken/;
 
 our $AUTOLOAD;
-
-our $VERSION = '2.60';
 
 my @autosubs = qw(
     animateMotion animateColor animateTransform circle ellipse rect polyline
