@@ -3,5 +3,10 @@
 use strict;
 use warnings;
 
-use Test::Code::TidyAll;
+use Test::More;
+
+eval "use Test::Code::TidyAll";
+plan skip_all => "Test::Code::TidyAll required for testing tidyness"
+    if $@;
+
 tidyall_ok();

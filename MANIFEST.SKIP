@@ -45,8 +45,5 @@ MYMETA\.(?:yml|json)$
 
 \.tidyall.d
 
-\.perlcriticrc
-\.perltidyrc
-\.tidyallrc
 \.travis.yml
 
