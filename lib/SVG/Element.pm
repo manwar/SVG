@@ -264,22 +264,6 @@ sub addchilds {
     return $self;
 }
 
-=pod
-
-=head2 tag (alias: element)
-
-$tag = $SVG->tag($name, %attributes)
-
-Generic element generator. Creates the element named $name with the attributes
-specified in %attributes. This method is the basis of most of the explicit
-element generators.
-
-B<Example:>
-
-    my $tag = $SVG->tag('g', transform=>'rotate(-45)');
-
-=cut
-
 sub tag {
     my ( $self, $name, %attrs ) = @_;
 
@@ -341,57 +325,6 @@ sub tag {
 
 *element = \&tag;
 
-=pod
-
-=head2 anchor
-
-$tag = $SVG->anchor(%attributes)
-
-Generate an anchor element. Anchors are put around objects to make them
-'live' (i.e. clickable). It therefore requires a drawn object or group element
-as a child.
-
-
-=head3 optional anchor attributes
-
-the following attributes are expected for anchor tags (any any tags which use -href links):
-
-=head2 -href    required
-=head2 -type    optional
-=head2 -role    optional
-=head2 -title   optional
-=head2 -show    optional
-=head2 -arcrole optional
-=head2 -actuate optional
-=head2 target   optional
-
-For more information on the options, refer to the w3c XLink specification at 
-L<http://www.w3.org/TR/xlink/>
-
-B<Example:>
-
-    # generate an anchor
-    $tag = $SVG->anchor(
-         -href=>'http://here.com/some/simpler/SVG.SVG'
-         -title => 'new window 2 example title',
-         -actuate => 'onLoad',
-         -show=> 'embed',
-
-    );
-
-for more information about the options above, refer to Link  section in the SVG recommendation: L<http://www.w3.org/TR/SVG11/linking.html#Links>
-
-    # add a circle to the anchor. The circle can be clicked on.
-    $tag->circle(cx=>10,cy=>10,r=>1);
-
-    # more complex anchor with both URL and target
-    $tag = $SVG->anchor(
-          -href   => 'http://somewhere.org/some/other/page.html',
-          target => 'new_window'
-    );
-
-=cut
-
 sub anchor {
     my ( $self, %attrs ) = @_;
     my $an = $self->tag( 'a', %attrs );
@@ -414,30 +347,6 @@ sub rectangle {
     return $self->tag( 'rect', %attrs );
 }
 
-=pod
-
-=head2 image
-
- $tag = $SVG->image(%attributes)
-
-Draw an image at (x,y) with width 'width' and height 'height' linked to image
-resource '-href'. See also L<"use">.
-
-B<Example:>
-
-    $tag = $SVG->image(
-        x=>100, y=>100,
-        width=>300, height=>200,
-        '-href'=>"image.png", #may also embed SVG, e.g. "image.SVG"
-        id=>'image_1'
-    );
-
-B<Output:>
-
-    <image xlink:href="image.png" x="100" y="100" width="300" height="200"/>
-
-=cut
-
 #sub image {
 #    my ($self,%attrs)=@_;
 #    my $im=$self->tag('image',%attrs);
@@ -445,155 +354,12 @@ B<Output:>
 #    return $im;
 #}
 
-=pod
-
-=head2 use
-
-$tag = $SVG->use(%attributes)
-
-Retrieve the content from an entity within an SVG document and apply it at
-(x,y) with width 'width' and height 'height' linked to image resource '-href'.
-
-B<Example:>
-
-    $tag = $SVG->use(
-        x=>100, y=>100,
-        width=>300, height=>200,
-        '-href'=>"pic.SVG#image_1",
-        id=>'image_1'
-    );
-
-B<Output:>
-
-    <use xlink:href="pic.SVG#image_1" x="100" y="100" width="300" height="200"/>
-
-According to the SVG specification, the 'use' element in SVG can point to a
-single element within an external SVG file.
-
-=cut
-
 sub use {
     my ( $self, %attrs ) = @_;
     my $u = $self->tag( 'use', %attrs );
     $u->{'xlink:href'} = $attrs{-href} if ( defined $attrs{-href} );
     return $u;
 }
-
-=pod
-
-=head2 polygon
-
-$tag = $SVG->polygon(%attributes)
-
-Draw an n-sided polygon with vertices at points defined by a string of the form
-'x1,y1,x2,y2,x3,y3,... xy,yn'. The L<"get_path"> method is provided as a
-convenience to generate a suitable string from coordinate data.
-
-B<Example:>
-
-    # a five-sided polygon
-    my $xv = [0,2,4,5,1];
-    my $yv = [0,0,2,7,5];
-
-    $points = $a->get_path(
-        x=>$xv, y=>$yv,
-        -type=>'polygon'
-    );
-
-    $c = $a->polygon(
-        %$points,
-        id=>'pgon1',
-        style=>\%polygon_style
-    );
-
-SEE ALSO:
-
-L<"polyline">, L<"path">, L<"get_path">.
-
-=cut
-
-=pod
-
-=head2 polyline
-
-$tag = $SVG->polyline(%attributes)
-
-Draw an n-point polyline with points defined by a string of the form
-'x1,y1,x2,y2,x3,y3,... xy,yn'. The L<"get_path"> method is provided as a
-convenience to generate a suitable string from coordinate data.
-
-B<Example:>
-
-    # a 10-pointsaw-tooth pattern
-    my $xv = [0,1,2,3,4,5,6,7,8,9];
-    my $yv = [0,1,0,1,0,1,0,1,0,1];
-
-    $points = $a->get_path(
-        x=>$xv, y=>$yv,
-        -type=>'polyline',
-        -closed=>'true' #specify that the polyline is closed.
-    );
-
-    my $tag = $a->polyline (
-        %$points,
-        id=>'pline_1',
-        style=>{
-            'fill-opacity'=>0,
-            'stroke-color'=>'rgb(250,123,23)'
-        }
-    );
-
-=head2 line
-
-$tag = $SVG->line(%attributes)
-
-Draw a straight line between two points (x1,y1) and (x2,y2).
-
-B<Example:>
-
-    my $tag = $SVG->line(
-        id=>'l1',
-        x1=>0, y1=>10,
-        x2=>10, y2=>0
-    );
-
-To draw multiple connected lines, use L<"polyline">.
-
-=head2 text
-
-$text = $SVG->text(%attributes)->cdata();
-
-$text_path = $SVG->text(-type=>'path');
-$text_span = $text_path->text(-type=>'span')->cdata('A');
-$text_span = $text_path->text(-type=>'span')->cdata('B');
-$text_span = $text_path->text(-type=>'span')->cdata('C');
-
-
-define the container for a text string to be drawn in the image.
-
-B<Input:> 
-    -type     = path type (path | polyline | polygon)
-    -type     = text element type  (path | span | normal [default])
-
-B<Example:>
-
-    my $text1 = $SVG->text(
-        id=>'l1', x=>10, y=>10
-    )->cdata('hello, world');
-
-    my $text2 = $SVG->text(
-        id=>'l1', x=>10, y=>10, -cdata=>'hello, world');
-
-    my $text = $SVG->text(
-        id=>'tp', x=>10, y=>10 -type=>path)
-        ->text(id=>'ts' -type=>'span')
-        ->cdata('hello, world');
-
-SEE ALSO:
-
-    L<"desc">, L<"cdata">.
-
-=cut
 
 sub text {
     my ( $self, %attrs ) = @_;
@@ -611,44 +377,6 @@ sub text {
     $text->{'target'}     = $attrs{-target} if ( defined $attrs{-target} );
     return ($text);
 }
-
-=pod
-
-=head2 title
-
-$tag = $SVG->title(%attributes)
-
-Generate the title of the image.
-
-B<Example:>
-
-    my $tag = $SVG->title(id=>'document-title')->cdata('This is the title');
-
-=cut
-
-=pod
-
-=head2 desc
-
-$tag = $SVG->desc(%attributes)
-
-Generate the description of the image.
-
-B<Example:>
-
-    my $tag = $SVG->desc(id=>'document-desc')->cdata('This is a description');
-
-=head2 comment
-
-$tag = $SVG->comment(@comments)
-
-Generate the description of the image.
-
-B<Example:>
-
-    my $tag = $SVG->comment('comment 1','comment 2','comment 3');
-
-=cut
 
 sub comment {
     my ( $self, @text ) = @_;
@@ -672,7 +400,7 @@ sub pi {
 
 =head2 get_path
 
-Documented on L<SVG/get_path>.
+Documented as L<SVG/get_path>.
 
 =cut
 
@@ -732,51 +460,6 @@ sub set_path {
     return get_path(%attrs);
 }
 
-=pod
-
-=head2 animate
-
-$tag = $SVG->animate(%attributes)
-
-Generate an SMIL animation tag. This is allowed within any nonempty tag. Refer\
-to the W3C for detailed information on the subtleties of the animate SMIL
-commands.
-
-B<Inputs:> -method = Transform | Motion | Color
-
-  my $an_ellipse = $SVG->ellipse(
-      cx=>30,cy=>150,rx=>10,ry=>10,id=>'an_ellipse',
-      stroke=>'rgb(130,220,70)',fill=>'rgb(30,20,50)'); 
-
-  $an_ellipse-> animate(
-      attributeName=>"cx",values=>"20; 200; 20",dur=>"10s", repeatDur=>'indefinite');
-
-  $an_ellipse-> animate(
-      attributeName=>"rx",values=>"10;30;20;100;50",
-      dur=>"10s", repeatDur=>'indefinite');
-
-  $an_ellipse-> animate(
-      attributeName=>"ry",values=>"30;50;10;20;70;150",
-      dur=>"15s", repeatDur=>'indefinite');
-
-  $an_ellipse-> animate(
-      attributeName=>"rx",values=>"30;75;10;100;20;20;150",
-      dur=>"20s", repeatDur=>'indefinite');
-
-  $an_ellipse-> animate(
-      attributeName=>"fill",values=>"red;green;blue;cyan;yellow",
-      dur=>"5s", repeatDur=>'indefinite');
-
-  $an_ellipse-> animate(
-      attributeName=>"fill-opacity",values=>"0;1;0.5;0.75;1",
-      dur=>"20s",repeatDur=>'indefinite');
-
-  $an_ellipse-> animate(
-      attributeName=>"stroke-width",values=>"1;3;2;10;5",
-      dur=>"20s",repeatDur=>'indefinite');
-
-=cut
-
 sub animate {
     my ( $self, %attrs ) = @_;
     my %rtr    = %attrs;
@@ -829,55 +512,10 @@ sub animate {
     return $self->tag( $name, %rtr );
 }
 
-=pod
-
-=head2 group
-
-$tag = $SVG->group(%attributes)
-
-Define a group of objects with common properties. groups can have style,
-animation, filters, transformations, and mouse actions assigned to them.
-
-B<Example:>
-
-    $tag = $SVG->group(
-        id        => 'xvs000248',
-        style     => {
-            'font'      => [ qw( Arial Helvetica sans ) ],
-            'font-size' => 10,
-            'fill'      => 'red',
-        },
-        transform => 'rotate(-45)'
-    );
-
-=cut
-
 sub group {
     my ( $self, %attrs ) = @_;
     return $self->tag( 'g', %attrs );
 }
-
-=pod
-
-=head2 defs
-
-$tag = $SVG->defs(%attributes)
-
-define a definition segment. A Defs requires children when defined using SVG.pm
-B<Example:>
-
-    $tag = $SVG->defs(id  =>  'def_con_one',);
-
-=head2 style
-
-$SVG->style(%styledef)
-
-Sets/Adds style-definition for the following objects being created.
-
-Style definitions apply to an object and all its children for all properties for
-which the value of the property is not redefined by the child.
-
-=cut
 
 sub STYLE {
     my ( $self, %attrs ) = @_;
@@ -890,16 +528,6 @@ sub STYLE {
     return $self;
 }
 
-=pod
-
-=head2 mouseaction
-
-$SVG->mouseaction(%attributes)
-
-Sets/Adds mouse action definitions for tag
-
-=cut
-
 sub mouseaction {
     my ( $self, %attrs ) = @_;
 
@@ -910,36 +538,6 @@ sub mouseaction {
 
     return $self;
 }
-
-=pod
-
-$SVG->attrib($name, $value)
-
-Sets/Adds attributes of an element.
-
-Retrieve an attribute:
-
-    $svg->attrib($name);
-
-Set a scalar attribute:
-
-    $SVG->attrib $name, $value
-
-Set a list attribute:
-
-    $SVG->attrib $name, \@value
-
-Set a hash attribute (i.e. style definitions):
-
-    $SVG->attrib $name, \%value
-
-Remove an attribute:
-
-    $svg->attrib($name,undef);
-
-B<Aliases:> attr attribute
-
-=cut
 
 sub attrib {
     my ( $self, $name, $val ) = @_;
@@ -975,111 +573,11 @@ sub attrib {
 *attr      = \&attrib;
 *attribute = \&attrib;
 
-=pod
-
-=head2 cdata
-
-$SVG->cdata($text)
-
-Sets cdata to $text. SVG.pm allows you to set cdata for any tag. If the tag is
-meant to be an empty tag, SVG.pm will not complain, but the rendering agent will
-fail. In the SVG DTD, cdata is generally only meant for adding text or script
-content.
-
-B<Example:>
-
-    $SVG->text(
-        style => {
-            'font'      => 'Arial',
-            'font-size' => 20
-        })->cdata('SVG.pm is a perl module on CPAN!');
-
-    my $text = $SVG->text(style=>{'font'=>'Arial','font-size'=>20});
-    $text->cdata('SVG.pm is a perl module on CPAN!');
-
-
-B<Result:>
-
-    E<lt>text style="font: Arial; font-size: 20" E<gt>SVG.pm is a perl module on CPAN!E<lt>/text E<gt>
-
-SEE ALSO:
-
-  L<"CDATA"> L<"desc">, L<"title">, L<"text">, L<"script">.
-
-=cut
-
 sub cdata {
     my ( $self, @txt ) = @_;
     $self->{-cdata} = join( ' ', @txt );
     return ($self);
 }
-
-=pod
-
-=head2 CDATA
-
- $script = $SVG->script();
- $script->CDATA($text);
-
-
-Generates a <![CDATA[ ... ]]> tag with the contents of $text rendered exactly as supplied. SVG.pm allows you to set cdata for any tag. If the tag is
-meant to be an empty tag, SVG.pm will not complain, but the rendering agent will
-fail. In the SVG DTD, cdata is generally only meant for adding text or script
-content.
-
-B<Example:>
-
-      my $text = qq§
-        var SVGDoc;
-        var groups = new Array();
-        var last_group;
-        
-        /*****
-        *
-        *   init
-        *
-        *   Find this SVG's document element
-        *   Define members of each group by id
-        *
-        *****/
-        function init(e) {
-            SVGDoc = e.getTarget().getOwnerDocument();
-            append_group(1, 4, 6); // group 0
-            append_group(5, 4, 3); // group 1
-            append_group(2, 3);    // group 2
-        }§;
-        $SVG->script()->CDATA($text);
-
-
-B<Result:>
-
-    E<lt>script E<gt>
-      <gt>![CDATA[
-        var SVGDoc;
-        var groups = new Array();
-        var last_group;
-        
-        /*****
-        *
-        *   init
-        *
-        *   Find this SVG's document element
-        *   Define members of each group by id
-        *
-        *****/
-        function init(e) {
-            SVGDoc = e.getTarget().getOwnerDocument();
-            append_group(1, 4, 6); // group 0
-            append_group(5, 4, 3); // group 1
-            append_group(2, 3);    // group 2
-        }
-        ]]E<gt>
-
-SEE ALSO:
-
-  L<"cdata">, L<"script">.
-
-=cut
 
 sub CDATA {
     my ( $self, @txt ) = @_;
@@ -1093,116 +591,10 @@ sub cdata_noxmlesc {
     return ($self);
 }
 
-=pod
-
-=head2 filter
-
-$tag = $SVG->filter(%attributes)
-
-Generate a filter. Filter elements contain L<"fe"> filter sub-elements.
-
-B<Example:>
-
-    my $filter = $SVG->filter(
-        filterUnits=>"objectBoundingBox",
-        x=>"-10%",
-        y=>"-10%",
-        width=>"150%",
-        height=>"150%",
-        filterUnits=>'objectBoundingBox'
-    );
-
-    $filter->fe();
-
-SEE ALSO:
-
-L<"fe">.
-
-=cut
-
 sub filter {
     my ( $self, %attrs ) = @_;
     return $self->tag( 'filter', %attrs );
 }
-
-=pod
-
-=head2 fe
-
-$tag = $SVG->fe(-type=>'type', %attributes)
-
-Generate a filter sub-element. Must be a child of a L<"filter"> element.
-
-B<Example:>
-
-    my $fe = $SVG->fe(
-        -type     => 'diffuselighting'  # required - element name in lower case omiting 'fe'
-        id        => 'filter_1',
-        style     => {
-            'font'      => [ qw(Arial Helvetica sans) ],
-            'font-size' => 10,
-            'fill'      => 'red',
-        },
-        transform => 'rotate(-45)'
-    );
-
-Note that the following filter elements are currently supported:
-Also note that the elelemts are defined in lower case in the module, but as of version 2.441, any case combination is allowed.
-
-=head2 * feBlend 
-
-=head2 * feColorMatrix 
-
-=head2 * feComponentTransfer 
-
-=head2 * feComposite
-
-=head2 * feConvolveMatrix 
-
-=head2 * feDiffuseLighting 
-
-=head2 * feDisplacementMap 
-
-=head2 * feDistantLight 
-
-=head2 * feFlood 
-
-=head2 * feFuncA 
-
-=head2 * feFuncB 
-
-=head2 * feFuncG 
-
-=head2 * feFuncR 
-
-=head2 * feGaussianBlur 
-
-=head2 * feImage 
-
-=head2 * feMerge 
-
-=head2 * feMergeNode 
-
-=head2 * feMorphology 
-
-=head2 * feOffset 
-
-=head2 * fePointLight
-
-=head2 * feSpecularLighting 
-
-=head2 * feSpotLight 
-
-=head2 * feTile 
-
-=head2 * feTurbulence 
-
-
-SEE ALSO:
-
-L<"filter">.
-
-=cut
 
 sub fe {
     my ( $self, %attrs ) = @_;
@@ -1243,96 +635,20 @@ sub fe {
     return $self->tag( $fe_name, %attrs );
 }
 
-=pod
-
-=head2 pattern
-
-$tag = $SVG->pattern(%attributes)
-
-Define a pattern for later reference by url.
-
-B<Example:>
-
-    my $pattern = $SVG->pattern(
-        id     => "Argyle_1",
-        width  => "50",
-        height => "50",
-        patternUnits        => "userSpaceOnUse",
-        patternContentUnits => "userSpaceOnUse"
-    );
-
-=cut
-
 sub pattern {
     my ( $self, %attrs ) = @_;
     return $self->tag( 'pattern', %attrs );
 }
-
-=pod
-
-=head2 set
-
-$tag = $SVG->set(%attributes)
-
-Set a definition for an SVG object in one section, to be referenced in other
-sections as needed.
-
-B<Example:>
-
-    my $set = $SVG->set(
-        id     => "Argyle_1",
-        width  => "50",
-        height => "50",
-        patternUnits        => "userSpaceOnUse",
-        patternContentUnits => "userSpaceOnUse"
-    );
-
-=cut
 
 sub set {
     my ( $self, %attrs ) = @_;
     return $self->tag( 'set', %attrs );
 }
 
-=pod
-
-=head2 stop
-
-$tag = $SVG->stop(%attributes)
-
-Define a stop boundary for L<"gradient">
-
-B<Example:>
-
-   my $pattern = $SVG->stop(
-       id     => "Argyle_1",
-       width  => "50",
-       height => "50",
-       patternUnits        => "userSpaceOnUse",
-       patternContentUnits => "userSpaceOnUse"
-   );
-
-=cut
-
 sub stop {
     my ( $self, %attrs ) = @_;
     return $self->tag( 'stop', %attrs );
 }
-
-=pod
-
-$tag = $SVG->gradient(%attributes)
-
-Define a color gradient. Can be of type B<linear> or B<radial>
-
-B<Example:>
-
-    my $gradient = $SVG->gradient(
-        -type => "linear",
-        id    => "gradient_1"
-    );
-
-=cut
 
 sub gradient {
     my ( $self, %attrs ) = @_;
@@ -1345,66 +661,6 @@ sub gradient {
 
     return $self->tag( $type . 'Gradient', %attrs );
 }
-
-=pod
-
-=head1 GENERIC ELEMENT METHODS
-
-The following elements are generically supported by SVG:
-
-=head2 * altGlyph
-
-=head2 * altGlyphDef
-
-=head2 * altGlyphItem
-
-=head2 * clipPath
-
-=head2 * color-profile
-
-=head2 * cursor
-
-=head2 * definition-src
-
-=head2 * font-face-format
-
-=head2 * font-face-name
-
-=head2 * font-face-src
-
-=head2 * font-face-url
-
-=head2 * foreignObject
-
-=head2 * glyph
-
-=head2 * glyphRef
-
-=head2 * hkern
-
-=head2 * marker
-
-=head2 * mask
-
-=head2 * metadata
-
-=head2 * missing-glyph
-
-=head2 * mpath
-
-=head2 * switch
-
-=head2 * symbol
-
-=head2 * tref
-
-=head2 * view
-
-=head2 * vkern
-
-See e.g. L<"pattern"> for an example of the use of these methods.
-
-=cut
 
 #-------------------------------------------------------------------------------
 # Internal methods

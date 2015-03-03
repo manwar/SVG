@@ -334,6 +334,45 @@ Generate an anchor element. Anchors are put around objects to make them
 'live' (i.e. clickable). It therefore requires a drawn object or group element
 as a child.
 
+=head3 optional anchor attributes
+
+the following attributes are expected for anchor tags (any any tags which use -href links):
+
+=head2 -href    required
+=head2 -type    optional
+=head2 -role    optional
+=head2 -title   optional
+=head2 -show    optional
+=head2 -arcrole optional
+=head2 -actuate optional
+=head2 target   optional
+
+For more information on the options, refer to the w3c XLink specification at 
+L<http://www.w3.org/TR/xlink/>
+
+B<Example:>
+
+    # generate an anchor
+    $tag = $SVG->anchor(
+         -href=>'http://here.com/some/simpler/SVG.SVG'
+         -title => 'new window 2 example title',
+         -actuate => 'onLoad',
+         -show=> 'embed',
+
+    );
+
+for more information about the options above, refer to Link  section in the SVG recommendation: L<http://www.w3.org/TR/SVG11/linking.html#Links>
+
+    # add a circle to the anchor. The circle can be clicked on.
+    $tag->circle(cx=>10,cy=>10,r=>1);
+
+    # more complex anchor with both URL and target
+    $tag = $SVG->anchor(
+          -href   => 'http://somewhere.org/some/other/page.html',
+          target => 'new_window'
+    );
+
+
     # generate an anchor
     $tag = $svg->anchor(
         -href=>'http://here.com/some/simpler/svg.svg'
@@ -346,8 +385,6 @@ as a child.
           -href   => 'http://somewhere.org/some/other/page.html',
           target => 'new_window'
     );
-
-
 
 =head2 circle
 
@@ -785,15 +822,31 @@ Sets/Adds mouse action definitions for tag
 
 =head2 attrib
 
-$svg->attrib($name, $value)
+  $svg->attrib($name, $value)
 
-Sets/Adds mouse action definitions.
+Sets/Adds attributes of an element.
 
-$svg->attrib $name, $value
+Retrieve an attribute:
 
-$svg->attrib $name, \@value
+    $svg->attrib($name);
 
-$svg->attrib $name, \%value
+Set a scalar attribute:
+
+    $SVG->attrib $name, $value
+
+Set a list attribute:
+
+    $SVG->attrib $name, \@value
+
+Set a hash attribute (i.e. style definitions):
+
+    $SVG->attrib $name, \%value
+
+Remove an attribute:
+
+    $svg->attrib($name,undef);
+
+B<Aliases:> attr attribute
 
 Sets/Replaces attributes for a tag.
 
@@ -945,6 +998,7 @@ Generate a filter sub-element. Must be a child of a L<"filter"> element.
     );
 
 Note that the following filter elements are currently supported:
+Also note that the elelemts are defined in lower case in the module, but as of version 2.441, any case combination is allowed.
 
 
 =head2 * feBlend
@@ -1004,6 +1058,7 @@ $tag = $svg->pattern(%attributes)
 
 Define a pattern for later reference by url.
 
+
     my $pattern = $svg->pattern(
         id     => "Argyle_1",
         width  => "50",
@@ -1040,6 +1095,8 @@ Define a stop boundary for L<"gradient">
        patternUnits        => "userSpaceOnUse",
        patternContentUnits => "userSpaceOnUse"
    );
+
+=head2 gradient
 
 $tag = $svg->gradient(%attributes)
 

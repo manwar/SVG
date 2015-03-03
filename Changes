@@ -1,5 +1,8 @@
 Revision history for Perl extension SVG.
 
+    - Remove more duplicate pod.
+
+
 2.61 2015.03.03
     - Eliminate a bunch of duplicate documentation.
     - Skip tidy testing if module is not available (RT #102484)
