@@ -131,8 +131,7 @@ Generating SVG is a simple three step process:
 
 =item 1 Construct a new SVG object with L<new>.
 
-=item 2 Call element constructors to create SVG elements.
-Examples of element constructors are L<circle> and L<path>.
+=item 2 Call element constructors such as L<circle> and L<path> to create SVG elements.
 
 =item 3 Render the SVG object into XML using the L<xmlify> method.
 
@@ -212,8 +211,6 @@ predeclared; other elements are defined as and when they are seen by Perl. Note
 that enabling '-auto' effectively disables compile-time syntax checking for
 valid method names.
 
-B<Example:>
-
     use SVG (
         -auto       => 0,
         -indent     => "  ",
@@ -265,8 +262,6 @@ $svg = SVG->new(%attributes)
 Creates a new SVG object. Attributes of the document SVG element be passed as
 an optional list of key value pairs. Additionally, SVG options (prefixed with
 a hyphen) may be set on a per object basis:
-
-B<Example:>
 
     my $svg1 = SVG->new;
 
@@ -330,8 +325,6 @@ Generic element generator. Creates the element named $name with the attributes
 specified in %attributes. This method is the basis of most of the explicit
 element generators.
 
-B<Example:>
-
     my $tag = $svg->tag('g', transform=>'rotate(-45)');
 
 
@@ -342,8 +335,6 @@ $tag = $svg->anchor(%attributes)
 Generate an anchor element. Anchors are put around objects to make them
 'live' (i.e. clickable). It therefore requires a drawn object or group element
 as a child.
-
-B<Example:>
 
     # generate an anchor
     $tag = $svg->anchor(
@@ -366,17 +357,13 @@ $tag = $svg->circle(%attributes)
 
 Draw a circle at (cx,cy) with radius r.
 
-B<Example:>
-
-    my $tag = $svg->circle(cx=>4, cy=>2, r=>1);
+    my $tag = $svg->circle(cx => 4, cy => 2, r => 1);
 
 =head2 ellipse
 
 $tag = $svg->ellipse(%attributes)
 
 Draw an ellipse at (cx,cy) with radii rx,ry.
-
-B<Example:>
 
     my $tag = $svg->ellipse(
         cx=>10, cy=>10,
@@ -399,8 +386,6 @@ $tag = $svg->rectangle(%attributes)
 Draw a rectangle at (x,y) with width 'width' and height 'height' and side radii
 'rx' and 'ry'.
 
-B<Example:>
-
     $tag = $svg->rectangle(
         x=>10, y=>20,
         width=>4, height=>5,
@@ -415,13 +400,11 @@ B<Example:>
 Draw an image at (x,y) with width 'width' and height 'height' linked to image
 resource '-href'. See also L<"use">.
 
-B<Example:>
-
     $tag = $svg->image(
-        x=>100, y=>100,
-        width=>300, height=>200,
-        '-href'=>"image.png", #may also embed SVG, e.g. "image.svg"
-        id=>'image_1'
+        x => 100, y => 100,
+        width => 300, height => 200,
+        '-href' => "image.png", #may also embed SVG, e.g. "image.svg"
+        id => 'image_1'
     );
 
 B<Output:>
@@ -434,8 +417,6 @@ $tag = $svg->use(%attributes)
 
 Retrieve the content from an entity within an SVG document and apply it at
 (x,y) with width 'width' and height 'height' linked to image resource '-href'.
-
-B<Example:>
 
     $tag = $svg->use(
         x=>100, y=>100,
@@ -487,8 +468,6 @@ Draw an n-point polyline with points defined by a string of the form
 'x1,y1,x2,y2,x3,y3,... xy,yn'. The L<"get_path"> method is provided as a
 convenience to generate a suitable string from coordinate data.
 
-B<Example:>
-
     # a 10-pointsaw-tooth pattern
     my $xv = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
     my $yv = [0, 1, 0, 1, 0, 1, 0, 1, 0, 1];
@@ -515,8 +494,6 @@ $tag = $svg->line(%attributes)
 
 Draw a straight line between two points (x1,y1) and (x2,y2).
 
-B<Example:>
-
     my $tag = $svg->line(
         id => 'l1',
         x1 =>  0,
@@ -539,34 +516,41 @@ $text_span = $text_path->text(-type=>'span')->cdata('C');
 Define the container for a text string to be drawn in the image.
 
 B<Input:>
+
     -type     = path type (path | polyline | polygon)
     -type     = text element type  (path | span | normal [default])
 
-B<Example:>
-
     my $text1 = $svg->text(
-        id=>'l1', x=>10, y=>10
+        id => 'l1',
+        x  => 10,
+        y  => 10
     )->cdata('hello, world');
 
     my $text2 = $svg->text(
-        id=>'l1', x=>10, y=>10, -cdata=>'hello, world');
+        id     => 'l1',
+        x      => 10,
+        y      => 10,
+        -cdata => 'hello, world',
+    );
 
     my $text = $svg->text(
-        id=>'tp', x=>10, y=>10 -type=>path)
-        ->text(id=>'ts' -type=>'span')
-        ->cdata('hello, world');
+        id    => 'tp',
+        x     => 10,
+        y     => 10,
+        -type => path,
+    )
+      ->text(id=>'ts' -type=>'span')
+      ->cdata('hello, world');
 
 SEE ALSO:
 
-    L<"desc">, L<"cdata">.
+L<desc>, L<cdata>.
 
 =head2 title
 
 $tag = $svg->title(%attributes)
 
 Generate the title of the image.
-
-B<Example:>
 
     my $tag = $svg->title(id=>'document-title')->cdata('This is the title');
 
@@ -576,8 +560,6 @@ $tag = $svg->desc(%attributes)
 
 Generate the description of the image.
 
-B<Example:>
-
     my $tag = $svg->desc(id=>'document-desc')->cdata('This is a description');
 
 =head2 comment
@@ -586,8 +568,6 @@ $tag = $svg->comment(@comments)
 
 Generate the description of the image.
 
-B<Example:>
-
     my $tag = $svg->comment('comment 1','comment 2','comment 3');
 
 =head2 pi (Processing Instruction)
@@ -595,8 +575,6 @@ B<Example:>
 $tag = $svg->pi(@pi)
 
 Generate a set of processing instructions
-
-B<Example:>
 
     my $tag = $svg->pi('instruction one','instruction two','instruction three');
 
@@ -611,8 +589,6 @@ $tag = $svg->script(%attributes)
 
 Generate a script container for dynamic (client-side) scripting using
 ECMAscript, Javascript or other compatible scripting language.
-
-B<Example:>
 
     my $tag = $svg->script(-type=>"text/ecmascript");
     #or my $tag = $svg->script();
@@ -637,8 +613,6 @@ $tag = $svg->path(%attributes)
 
 Draw a path element. The path vertices may be imputed as a parameter or
 calculated usingthe L<"get_path"> method.
-
-B<Example:>
 
     # a 10-pointsaw-tooth pattern drawn with a path definition
     my $xv = [0,1,2,3,4,5,6,7,8,9];
@@ -683,8 +657,6 @@ B<Output:> a hash reference consisting of the following key-value pair:
     -type     = path|polygon|polyline
     -relative = 1 (define relative position rather than absolute position)
     -closed   = 1 (close the curve - path and polygon only)
-
-B<Example:>
 
     #generate an open path definition for a path.
     my ($points,$p);
@@ -756,8 +728,6 @@ $tag = $svg->group(%attributes)
 Define a group of objects with common properties. groups can have style,
 animation, filters, transformations, and mouse actions assigned to them.
 
-B<Example:>
-
     $tag = $svg->group(
         id        => 'xvs000248',
         style     => {
@@ -773,7 +743,6 @@ B<Example:>
 $tag = $svg->defs(%attributes)
 
 define a definition segment. A Defs requires children when defined using SVG.pm
-B<Example:>
 
     $tag = $svg->defs(id  =>  'def_con_one',);
 
@@ -815,8 +784,6 @@ meant to be an empty tag, SVG.pm will not complain, but the rendering agent will
 fail. In the SVG DTD, cdata is generally only meant for adding text or script
 content.
 
-B<Example:>
-
     $svg->text(
         style => {
             'font'      => 'Arial',
@@ -825,7 +792,6 @@ B<Example:>
 
     my $text = $svg->text(style=>{'font'=>'Arial','font-size'=>20});
     $text->cdata('SVG.pm is a perl module on CPAN!');
-
 
 B<Result:>
 
@@ -853,9 +819,7 @@ meant to be an empty tag, SVG.pm will not complain, but the rendering agent will
 fail. In the SVG DTD, cdata is generally only meant for adding text or script
 content.
 
-B<Example:>
-
-      my $text = qq§
+      my $text = qq{
         var SVGDoc;
         var groups = new Array();
         var last_group;
@@ -873,7 +837,7 @@ B<Example:>
             append_group(1, 4, 6); // group 0
             append_group(5, 4, 3); // group 1
             append_group(2, 3);    // group 2
-        }§;
+        }};
         $svg->script()->CDATA($text);
 
 
@@ -901,9 +865,7 @@ B<Result:>
         }
         ]]E<gt>
 
-SEE ALSO:
-
-  L<"cdata">, L<"script">.
+SEE ALSO: L<cdata>, L<script>.
 
 =head2 xmlescp and xmlescape
 
@@ -930,8 +892,6 @@ $tag = $svg->filter(%attributes)
 
 Generate a filter. Filter elements contain L<"fe"> filter sub-elements.
 
-B<Example:>
-
     my $filter = $svg->filter(
         filterUnits=>"objectBoundingBox",
         x=>"-10%",
@@ -943,17 +903,13 @@ B<Example:>
 
     $filter->fe();
 
-SEE ALSO:
-
-L<"fe">.
+SEE ALSO: L<fe>.
 
 =head2 fe
 
 $tag = $svg->fe(-type=>'type', %attributes)
 
 Generate a filter sub-element. Must be a child of a L<"filter"> element.
-
-B<Example:>
 
     my $fe = $svg->fe(
         -type     => 'DiffuseLighting'  # required - element name omiting 'fe'
@@ -1018,17 +974,13 @@ Note that the following filter elements are currently supported:
 =head2 * feTurbulence
 
 
-SEE ALSO:
-
-L<"filter">.
+SEE ALSO: L<filter>.
 
 =head2 pattern
 
 $tag = $svg->pattern(%attributes)
 
 Define a pattern for later reference by url.
-
-B<Example:>
 
     my $pattern = $svg->pattern(
         id     => "Argyle_1",
@@ -1045,8 +997,6 @@ $tag = $svg->set(%attributes)
 Set a definition for an SVG object in one section, to be referenced in other
 sections as needed.
 
-B<Example:>
-
     my $set = $svg->set(
         id     => "Argyle_1",
         width  => "50",
@@ -1061,8 +1011,6 @@ $tag = $svg->stop(%attributes)
 
 Define a stop boundary for L<"gradient">
 
-B<Example:>
-
    my $pattern = $svg->stop(
        id     => "Argyle_1",
        width  => "50",
@@ -1074,8 +1022,6 @@ B<Example:>
 $tag = $svg->gradient(%attributes)
 
 Define a color gradient. Can be of type B<linear> or B<radial>
-
-B<Example:>
 
     my $gradient = $svg->gradient(
         -type => "linear",
@@ -1283,8 +1229,6 @@ $svg = SVG->new(%attributes)
 Creates a new SVG object. Attributes of the document SVG element be passed as
 an optional list of key value pairs. Additionally, SVG options (prefixed with
 a hyphen) may be set on a per object basis:
-
-B<Example:>
 
     my $svg1 = SVG->new;
 
