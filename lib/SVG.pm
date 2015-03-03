@@ -231,13 +231,11 @@ Resulting XML snippet:
   <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
   <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
   <svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  	<!--
-	  Generated using the Perl SVG Module V2.50
-  	by Ronan Oger
-	  Info: http://www.roitsystems.com/
-   -->
-
-
+      <!--
+        Generated using the Perl SVG Module V2.50
+          by Ronan Oger
+        Info: http://www.roitsystems.com/
+      -->
 
 =head1 METHODS
 
@@ -345,8 +343,8 @@ as a child.
 
     # more complex anchor with both URL and target
     $tag = $svg->anchor(
-	      -href   => 'http://somewhere.org/some/other/page.html',
-	      target => 'new_window'
+          -href   => 'http://somewhere.org/some/other/page.html',
+          target => 'new_window'
     );
 
 
@@ -618,7 +616,7 @@ calculated usingthe L<"get_path"> method.
     my $xv = [0,1,2,3,4,5,6,7,8,9];
     my $yv = [0,1,0,1,0,1,0,1,0,1];
 
-    $points = $a->get_path(
+    $points = $svg->get_path(
         x => $xv,
         y => $yv,
         -type   => 'path',
@@ -754,6 +752,30 @@ Sets/Adds style-definition for the following objects being created.
 
 Style definitions apply to an object and all its children for all properties for
 which the value of the property is not redefined by the child.
+
+  $tag = $SVG->style(%attributes)
+
+Generate a style container for inline or xlink:href based styling instructions
+
+    my $tag = $SVG->style(type=>"text/css");
+
+    # Populate the style tag with cdata.
+    # Be careful to manage the line ends.
+    # qq|text| or qq§text§, where text is the script
+    # work well for this.
+
+    $tag1->CDATA(qq{
+        rect     fill:red;stroke:green;
+        circle   fill:red;stroke:orange;
+        ellipse  fill:none;stroke:yellow;
+        text     fill:black;stroke:none;
+    });
+    
+    # Create a external CSS stylesheet reference
+    my $tag2 = $SVG->style(type=>"text/css", -href="/resources/example.css");
+
+=pod
+
 
 =head2 mouseaction
 

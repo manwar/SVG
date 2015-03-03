@@ -410,65 +410,6 @@ sub svg {
     return ($svg);
 }
 
-=pod
-
-=head2 circle
-
-$tag = $SVG->circle(%attributes)
-
-Draw a circle at (cx,cy) with radius r.
-
-B<Example:>
-
-    my $tag = $SVG->circlecx=>4, cy=>2, r=>1);
-
-=cut
-
-=pod
-
-=head2 ellipse
-
-$tag = $SVG->ellipse(%attributes)
-
-Draw an ellipse at (cx,cy) with radii rx,ry.
-
-B<Example:>
-
-    my $tag = $SVG->ellipse(
-        cx=>10, cy=>10,
-        rx=>5, ry=>7,
-        id=>'ellipse',
-        style=>{
-            'stroke'=>'red',
-            'fill'=>'green',
-            'stroke-width'=>'4',
-            'stroke-opacity'=>'0.5',
-            'fill-opacity'=>'0.2'
-        }
-    );
-
-=cut
-
-=pod
-
-=head2 rectangle (alias: rect)
-
-$tag = $SVG->rectangle(%attributes)
-
-Draw a rectangle at (x,y) with width 'width' and height 'height' and side radii
-'rx' and 'ry'.
-
-B<Example:>
-
-    $tag = $SVG->rectangle(
-        x=>10, y=>20,
-        width=>4, height=>5,
-        rx=>5.2, ry=>2.4,
-        id=>'rect_1'
-    );
-
-=cut
-
 sub rectangle {
     my ( $self, %attrs ) = @_;
     return $self->tag( 'rect', %attrs );
@@ -717,26 +658,6 @@ sub comment {
     return $tag;
 }
 
-=pod 
-
-$tag = $SVG->pi(@pi)
-
-Generate (or adds) a set of processing instructions which go at 
-the beginning of the document after the xml start tag
-
-B<Example:>
-
-    my $tag = $SVG->pi('instruction one','instruction two','instruction three');
-
-    returns: 
-      <?instruction one?>
-      <?instruction two?>
-      <?instruction three?>
-
-=cut
-
-#add
-
 sub pi {
     my ( $self, @text ) = @_;
     return $self->{-document}->{-pi} unless scalar @text;
@@ -750,139 +671,9 @@ sub pi {
 
 =pod
 
-=head2 script
-
-$tag = $SVG->script(%attributes)
-
-Generate a script container for dynamic (client-side) scripting using
-ECMAscript, Javascript or other compatible scripting language.
-
-B<Example:>
-
-    my $tag = $SVG->script(type=>"text/ecmascript");
-
-    # populate the script tag with cdata
-    # be careful to manage the javascript line ends.
-    # qq|text| or qq§text§ where text is the script 
-    # works well for this.
-
-    $tag->CDATA(qq|function d(){
-        //simple display function
-        for(cnt = 0; cnt < d.length; cnt++)
-            document.write(d[cnt]);//end for loop
-        document.write("<BR>");//write a line break
-      }|
-    );
-    # create an svg external script reference to an outside file
-    my $tag2 = SVG->script(type=>"text/ecmascript", -href="/scripts/example.es");
-
-=pod
-
-=head2 style
-
-$tag = $SVG->style(%attributes)
-
-Generate a style container for inline or xlink:href based styling instructions
-
-B<Example:>
-    
-    my $tag = $SVG->style(type=>"text/css");
-
-    # Populate the style tag with cdata.
-    # Be careful to manage the line ends.
-    # qq|text| or qq§text§, where text is the script
-    # work well for this.
-
-    $tag1->CDATA(qq|
-	rect     fill:red;stroke:green;
-	circle   fill:red;stroke:orange;
-	ellipse  fill:none;stroke:yellow;
-	text     fill:black;stroke:none;
-   	|);
-    
-    # Create a external CSS stylesheet reference
-    my $tag2 = $SVG->style(type=>"text/css", -href="/resources/example.css");
-
-=pod
-
-
-=head2 path
-
-$tag = $SVG->path(%attributes)
-
-Draw a path element. The path vertices may be imputed as a parameter or
-calculated usingthe L<"get_path"> method.
-
-B<Example:>
-
-    # a 10-pointsaw-tooth pattern drawn with a path definition
-    my $xv = [0,1,2,3,4,5,6,7,8,9];
-    my $yv = [0,1,0,1,0,1,0,1,0,1];
-
-    $points = $a->get_path(
-        x => $xv,
-        y => $yv,
-        -type   => 'path',
-        -closed => 'true'  #specify that the polyline is closed
-    );
-
-    $tag = $SVG->path(
-        %$points,
-        id    => 'pline_1',
-        style => {
-            'fill-opacity' => 0,
-            'fill-color'   => 'green',
-            'stroke-color' => 'rgb(250,123,23)'
-        }
-    );
-
-
-SEE ALSO:
-
-L<"get_path">.
-
 =head2 get_path
 
-$path = $SVG->get_path(%attributes)
-
-Returns the text string of points correctly formatted to be incorporated into
-the multi-point SVG drawing object definitions (path, polyline, polygon)
-
-B<Input:> attributes including:
-
-    -type     = path type (path | polyline | polygon)
-    x         = reference to array of x coordinates
-    y         = reference to array of y coordinates
-
-B<Output:> a hash reference consisting of the following key-value pair:
-
-    points    = the appropriate points-definition string
-    -type     = path|polygon|polyline
-    -relative = 1 (define relative position rather than absolute position)
-    -closed   = 1 (close the curve - path and polygon only)
-
-B<Example:>
-
-    #generate an open path definition for a path.
-    my ($points,$p);
-    $points = $SVG->get_path(x=&gt\@x,y=&gt\@y,-relative=&gt1,-type=&gt'path');
- 
-    #add the path to the SVG document
-    my $p = $SVG->path(%$path, style=>\%style_definition);
-
-    #generate an closed path definition for a a polyline.
-    $points = $SVG->get_path(
-        x=>\@x,
-        y=>\@y,
-        -relative=>1,
-        -type=>'polyline',
-        -closed=>1
-    ); # generate a closed path definition for a polyline
-
-    # add the polyline to the SVG document
-    $p = $SVG->polyline(%$points, id=>'pline1');
-
-B<Aliases:> get_path set_path
+Documented on L<SVG/get_path>.
 
 =cut
 

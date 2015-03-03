@@ -1,7 +1,8 @@
 Revision history for Perl extension SVG.
 
+    - Eliminate a bunch of duplicate documentation.
     - Skip tidy testing if module is not available (RT #102484)
-    - POD formatting
+    - POD formatting.
 
 2.60 2015.03.03
 	- Convert source files to utf8
