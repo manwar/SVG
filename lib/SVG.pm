@@ -1498,6 +1498,10 @@ as Perl itself. It is provided free of warranty and may be re-used freely.
 
 L<SVG using Perl|http://szabgab.com/svg-using-perl.html>
 
+L<SVG - Scalable Vector Graphics with Perl|http://perlmaven.com/scalable-vector-graphics-with-perl>
+
+L<Combining SVG and PSGI|http://perlmaven.com/combining-svg-and-psgi>
+
 =head1 SEE ALSO
 
 L<SVG::DOM>,
