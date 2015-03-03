@@ -22,19 +22,22 @@ SVG - Perl extension for generating Scalable Vector Graphics (SVG) documents
     use SVG;
 
     # create an SVG object
-    my $svg= SVG->new(width=>200,height=>200);
+    my $svg= SVG->new( width => 200, height => 200);
 
     # use explicit element constructor to generate a group element
     my $y=$svg->group(
         id    => 'group_y',
-        style => { stroke=>'red', fill=>'green' }
+        style => {
+            stroke => 'red',
+            fill   => 'green'
+        },
     );
 
     # add a circle to the group
-    $y->circle(cx=>100, cy=>100, r=>50, id=>'circle_in_group_y');
+    $y->circle( cx => 100, cy => 100, r => 50, id => 'circle_in_group_y' );
 
     # or, use the generic 'tag' method to generate a group element by name
-    my $z=$svg->tag('g',
+    my $z = $svg->tag('g',
                     id    => 'group_z',
                     style => {
                         stroke => 'rgb(100,200,50)',
@@ -43,7 +46,7 @@ SVG - Perl extension for generating Scalable Vector Graphics (SVG) documents
                 );
 
     # create and add a circle using the generic 'tag' method
-    $z->tag('circle', cx=>50, cy=>50, r=>100, id=>'circle_in_group_z');
+    $z->tag('circle', cx => 50, cy => 50, r => 100, id => 'circle_in_group_z');
 
     # create an anchor on a rectangle within a group within the group z
     my $k = $z->anchor(
@@ -83,9 +86,11 @@ L<SVG::Element>,
 L<SVG::Parser>,
 L<SVG::Extension>
 
-=head1 VERSION
+=h2 Converting to PNG and other raster image format
 
-Version 2.59
+The B<convert> command of L<http://www.imagemagick.org/> (also via L<Image::Magic> )
+
+Or L<Image::LibRSVG> can convert SVG to other format.
 
 =head1 EXAMPLES
 
@@ -122,18 +127,20 @@ object, create and access javascript, and generate SMIL animation content.
 
 Generating SVG is a simple three step process:
 
-=head2 1 The first step is to construct a new SVG object with L<"new">.
+=over 4
 
-=head2 2 The second step is to call element constructors to create SVG elements.
-Examples of element constructors are L<"circle"> and L<"path">.
+=item 1 Construct a new SVG object with L<new>.
 
-=head2 3 The third and last step is to render the SVG object into XML using the
-L<xmlify> method.
+=item 2 Call element constructors to create SVG elements.
+Examples of element constructors are L<circle> and L<path>.
+
+=item 3 Render the SVG object into XML using the L<xmlify> method.
+
+=back
 
 The L<xmlify> method takes a number of optional arguments that control how SVG
 renders the object into XML, and in particular determine whether a standalone
 SVG document or an inline SVG document fragment is generated:
-
 
 =head2 -standalone
 
@@ -144,7 +151,6 @@ elements may be optionally specified.
 
 An inline SVG document fragment with no DTD that be embedded within other XML
 content. As with standalone documents, an alternate namespace may be specified.
-
 
 No XML content is generated until the third step is reached. Up until this
 point, all constructed element definitions reside in a DOM-like data structure
@@ -450,30 +456,28 @@ single element within an external SVG file.
 $tag = $svg->polygon(%attributes)
 
 Draw an n-sided polygon with vertices at points defined by a string of the form
-'x1,y1,x2,y2,x3,y3,... xy,yn'. The L<"get_path"> method is provided as a
+'x1,y1,x2,y2,x3,y3,... xy,yn'. The L<get_path> method is provided as a
 convenience to generate a suitable string from coordinate data.
 
-B<Example:>
-
     # a five-sided polygon
-    my $xv = [0,2,4,5,1];
-    my $yv = [0,0,2,7,5];
+    my $xv = [0, 2, 4, 5, 1];
+    my $yv = [0, 0, 2, 7, 5];
 
-    $points = $a->get_path(
-        x=>$xv, y=>$yv,
-        -type=>'polygon'
+    my $points = $svg->get_path(
+        x     =>  $xv,
+        y     =>  $yv,
+        -type =>'polygon'
     );
 
-    $c = $a->polygon(
+    my $poly = $svg->polygon(
         %$points,
-        id=>'pgon1',
-        style=>\%polygon_style
+        id    => 'pgon1',
+        style => \%polygon_style
     );
 
 SEE ALSO:
 
-L<"polyline">, L<"path">, L<"get_path">.
-
+L<polyline>, L<path>, L<get_path>.
 
 =head2 polyline
 
@@ -486,21 +490,22 @@ convenience to generate a suitable string from coordinate data.
 B<Example:>
 
     # a 10-pointsaw-tooth pattern
-    my $xv = [0,1,2,3,4,5,6,7,8,9];
-    my $yv = [0,1,0,1,0,1,0,1,0,1];
+    my $xv = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    my $yv = [0, 1, 0, 1, 0, 1, 0, 1, 0, 1];
 
-    $points = $a->get_path(
-        x=>$xv, y=>$yv,
-        -type=>'polyline',
-        -closed=>'true' #specify that the polyline is closed.
+    my $points = $svg->get_path(
+        x       => $xv,
+        y       => $yv,
+        -type   => 'polyline',
+        -closed => 'true' #specify that the polyline is closed.
     );
 
-    my $tag = $a->polyline (
+    my $tag = $svg->polyline (
         %$points,
-        id=>'pline_1',
-        style=>{
+        id    =>'pline_1',
+        style => {
             'fill-opacity' => 0,
-            'stroke' => 'rgb(250,123,23)'
+            'stroke'       => 'rgb(250,123,23)'
         }
     );
 
@@ -513,9 +518,11 @@ Draw a straight line between two points (x1,y1) and (x2,y2).
 B<Example:>
 
     my $tag = $svg->line(
-        id=>'l1',
-        x1=>0, y1=>10,
-        x2=>10, y2=>0
+        id => 'l1',
+        x1 =>  0,
+        y1 => 10,
+        x2 => 10,
+        y2 =>  0,
     );
 
 To draw multiple connected lines, use L<"polyline">.
@@ -529,8 +536,7 @@ $text_span = $text_path->text(-type=>'span')->cdata('A');
 $text_span = $text_path->text(-type=>'span')->cdata('B');
 $text_span = $text_path->text(-type=>'span')->cdata('C');
 
-
-define the container for a text string to be drawn in the image.
+Define the container for a text string to be drawn in the image.
 
 B<Input:>
     -type     = path type (path | polyline | polygon)
@@ -614,16 +620,16 @@ B<Example:>
 
     # populate the script tag with cdata
     # be careful to manage the javascript line ends.
-    # qq|text| or qq§text§ where text is the script
-    # works well for this.
-    #make sure to use the CAPITAL CDATA to poulate the script.
-    $tag->CDATA(qq|function d(){
+    # Use qq{text} or q{text} as appropriate.
+    # make sure to use the CAPITAL CDATA to poulate the script.
+    $tag->CDATA(qq{
+        function d() {
         //simple display function
-        for(cnt = 0; cnt < d.length; cnt++)
+          for(cnt = 0; cnt < d.length; cnt++)
             document.write(d[cnt]);//end for loop
         document.write("<BR>");//write a line break
-      }|
-    );
+        }
+    });
 
 =head2 path
 
@@ -656,9 +662,7 @@ B<Example:>
     );
 
 
-SEE ALSO:
-
-L<"get_path">.
+SEE ALSO: L<get_path>.
 
 =head2 get_path
 
@@ -825,11 +829,11 @@ B<Example:>
 
 B<Result:>
 
-    E<lt>text style="font: Arial; font-size: 20" E<gt>SVG.pm is a perl module on CPAN!E<lt>/text E<gt>
+    <text style="font: Arial; font-size: 20">SVG.pm is a perl module on CPAN!</text>
 
 SEE ALSO:
 
-  L<"CDATA"> L<"desc">, L<"title">, L<"text">, L<"script">.
+L<CDATA>, L<desc>, L<title>, L<text>, L<script>.
 
 =head2 cdata_noxmlesc
 
