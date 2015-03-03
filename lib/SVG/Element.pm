@@ -30,7 +30,7 @@ use Scalar::Util qw/weaken/;
 
 our $AUTOLOAD;
 
-our $VERSION = '2.59';
+our $VERSION = '2.60';
 
 my @autosubs = qw(
     animateMotion animateColor animateTransform circle ellipse rect polyline

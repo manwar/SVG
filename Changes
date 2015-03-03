@@ -1,6 +1,6 @@
 Revision history for Perl extension SVG.
 
-2.60
+2.60 2015.03.03
 	- Convert source files to utf8
 	- Add more tests
 	- css styles are now sorted to make it easeier to test
