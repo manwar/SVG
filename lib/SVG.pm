@@ -11,6 +11,8 @@ our $VERSION = '2.61';
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 SVG - Perl extension for generating Scalable Vector Graphics (SVG) documents

@@ -7,6 +7,8 @@ our $VERSION = '2.61';
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 SVG::Element - Generate the element bits for SVG.pm
@@ -17,7 +19,8 @@ Ronan Oger, cpan@roitsystems.com
 
 =head1 SEE ALSO
 
-L<SVG>,L<SVG::XML>,L<SVG::Element>,L<SVG::Parser>
+For descreption of the methods see L<SVG>
+
 L<http://www.roitsystems.com/> ROASP.com: Serverside SVG server
 L<http://www.roitsystems.com/> ROIT Systems: Commercial SVG perl solutions
 L<http://www.w3c.org/Graphics/SVG/> SVG at the W3C
