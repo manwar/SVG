@@ -648,8 +648,8 @@ ECMAscript, Javascript or other compatible scripting language.
 
 $tag = $svg->path(%attributes)
 
-Draw a path element. The path vertices may be imputed as a parameter or
-calculated usingthe L<"get_path"> method.
+Draw a path element. The path vertices may be provided as a parameter or
+calculated using the L<get_path> method.
 
     # a 10-pointsaw-tooth pattern drawn with a path definition
     my $xv = [0,1,2,3,4,5,6,7,8,9];
@@ -721,7 +721,7 @@ B<Aliases:> get_path set_path
 
 $tag = $svg->animate(%attributes)
 
-Generate an SMIL animation tag. This is allowed within any nonempty tag. Refer\
+Generate an SMIL animation tag. This is allowed within any nonempty tag. Refer
 to the W3C for detailed information on the subtleties of the animate SMIL
 commands.
 
@@ -762,7 +762,7 @@ B<Inputs:> -method = Transform | Motion | Color
 
 $tag = $svg->group(%attributes)
 
-Define a group of objects with common properties. groups can have style,
+Define a group of objects with common properties. Groups can have style,
 animation, filters, transformations, and mouse actions assigned to them.
 
     $tag = $svg->group(
