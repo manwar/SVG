@@ -6,13 +6,7 @@ use SVG qw(star planet moon);
 
 my $svg = SVG->new;
 
-ok(
-    eval {
-        $svg->star( id => "Sol" )->planet( id => "Jupiter" )
-            ->moon( id => "Ganymede" );
-    },
-    "defined custom tags"
-);
-
+$svg->star( id => "Sol" )->planet( id => "Jupiter" )->moon( id => "Ganymede" );
+like $svg->xmlify, qr{<star id="Sol">\s+<planet id="Jupiter">\s+<moon id="Ganymede" />\s+</planet>\s+</star>}, 'stars and planets';
 ok( !eval { $svg->asteriod( id => "Ceres" ); }, "undefined custom tag" );
 
