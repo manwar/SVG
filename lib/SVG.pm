@@ -7,7 +7,7 @@ use SVG::XML;
 use parent qw(SVG::Element SVG::Extension);
 use Scalar::Util qw/weaken/;
 
-our $VERSION = '2.62';
+our $VERSION = '2.63';
 
 =pod
 
@@ -116,18 +116,9 @@ That you can either embed directly into HTML or can include it using:
 
 =for HTML <p><img src="http://szabgab.com/img/SVG/circle.png" alt="SVG example circle" /></p>
 
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
-<svg height="200" width="200" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<title >I am a title</title>
-<g id="group_y" style="fill: green; stroke: red">
-<circle cx="100" cy="100" id="circle_in_group_y" r="50" />
-<!-- This is a comment -->
-</g>
-</svg>
-
-
 (The image was converted to png using L<Image::LibRSVG>. See the svg2png.pl script in the examples directory.)
+
+=for HTML <p><img src="http://perlmaven.com/img/svg/circle.svg" alt="SVG example circle" /></p>
 
 See also the B<examples> directory in this distribution which contain several fully documented examples.
 
@@ -437,19 +428,7 @@ Draw an ellipse at (cx,cy) with radii rx,ry.
 
 See The B<example/ellipse.pl> 
 
-=for HTML
-
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
-<svg height="200" width="200" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-	<ellipse cx="10" cy="10" id="ellipse" rx="5" ry="7" style="stroke-width: 4; fill: green; stroke: red; stroke-opacity: 0.5; fill-opacity: 0.2" />
-	<!-- 
-	Generated using the Perl SVG Module V2.59
-	by Ronan Oger
-	Info: http://www.roitsystems.com/
- -->
-</svg>
-
+=for HTML <p><img src="http://perlmaven.com/img/svg/ellipse.svg" alt="SVG example ellipse" /></p>
 
 =head2 rectangle (alias: rect)
 
