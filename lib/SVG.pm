@@ -19,15 +19,16 @@ SVG - Perl extension for generating Scalable Vector Graphics (SVG) documents
 
 =head1 SYNOPSIS
 
-    #!/usr/bin/perl -w
+    #!/usr/bin/perl
     use strict;
+    use warnings;
     use SVG;
 
     # create an SVG object
     my $svg= SVG->new( width => 200, height => 200);
 
     # use explicit element constructor to generate a group element
-    my $y=$svg->group(
+    my $y = $svg->group(
         id    => 'group_y',
         style => {
             stroke => 'red',
@@ -88,11 +89,12 @@ L<SVG::Element>,
 L<SVG::Parser>,
 L<SVG::Extension>
 
-=h2 Converting to PNG and other raster image format
+=head2 Converting SVG to PNG and other raster image formats
 
-The B<convert> command of L<http://www.imagemagick.org/> (also via L<Image::Magic> )
+The B<convert> command of L<http://www.imagemagick.org/> (also via L<Image::Magic> ) can convert SVG files to PNG
+and other formats.
 
-Or L<Image::LibRSVG> can convert SVG to other format.
+L<Image::LibRSVG> can convert SVG to other format.
 
 =head1 EXAMPLES
 
@@ -113,6 +115,17 @@ That you can either embed directly into HTML or can include it using:
    <object data="file.svg" type="image/svg+xml"></object>
 
 =for HTML <p><img src="http://szabgab.com/img/SVG/circle.png" alt="SVG example circle" /></p>
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg height="200" width="200" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title >I am a title</title>
+<g id="group_y" style="fill: green; stroke: red">
+<circle cx="100" cy="100" id="circle_in_group_y" r="50" />
+<!-- This is a comment -->
+</g>
+</svg>
+
 
 (The image was converted to png using L<Image::LibRSVG>. See the svg2png.pl script in the examples directory.)
 
@@ -366,7 +379,7 @@ B<Example:>
 for more information about the options above, refer to Link  section in the SVG recommendation: L<http://www.w3.org/TR/SVG11/linking.html#Links>
 
     # add a circle to the anchor. The circle can be clicked on.
-    $tag->circle(cx=>10,cy=>10,r=>1);
+    $tag->circle(cx => 10, cy => 10, r => 1);
 
     # more complex anchor with both URL and target
     $tag = $SVG->anchor(
@@ -380,7 +393,7 @@ for more information about the options above, refer to Link  section in the SVG 
         -href=>'http://here.com/some/simpler/svg.svg'
     );
     # add a circle to the anchor. The circle can be clicked on.
-    $tag->circle(cx=>10,cy=>10,r=>1);
+    $tag->circle(cx => 10, cy => 10, r => 1);
 
     # more complex anchor with both URL and target
     $tag = $svg->anchor(
@@ -402,18 +415,40 @@ $tag = $svg->ellipse(%attributes)
 
 Draw an ellipse at (cx,cy) with radii rx,ry.
 
+    use SVG;
+
+    # create an SVG object
+    my $svg= SVG->new( width => 200, height => 200);
+
     my $tag = $svg->ellipse(
-        cx=>10, cy=>10,
-        rx=>5, ry=>7,
-        id=>'ellipse',
-        style=>{
-            'stroke'=>'red',
-            'fill'=>'green',
-            'stroke-width'=>'4',
-            'stroke-opacity'=>'0.5',
-            'fill-opacity'=>'0.2'
+        cx => 10,
+        cy => 10,
+        rx => 5,
+        ry => 7,
+        id => 'ellipse',
+        style => {
+            'stroke'         => 'red',
+            'fill'           => 'green',
+            'stroke-width'   => '4',
+            'stroke-opacity' => '0.5',
+            'fill-opacity'   => '0.2',
         }
     );
+
+See The B<example/ellipse.pl> 
+
+=for HTML
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg height="200" width="200" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<ellipse cx="10" cy="10" id="ellipse" rx="5" ry="7" style="stroke-width: 4; fill: green; stroke: red; stroke-opacity: 0.5; fill-opacity: 0.2" />
+	<!-- 
+	Generated using the Perl SVG Module V2.59
+	by Ronan Oger
+	Info: http://www.roitsystems.com/
+ -->
+</svg>
 
 
 =head2 rectangle (alias: rect)
@@ -424,10 +459,13 @@ Draw a rectangle at (x,y) with width 'width' and height 'height' and side radii
 'rx' and 'ry'.
 
     $tag = $svg->rectangle(
-        x=>10, y=>20,
-        width=>4, height=>5,
-        rx=>5.2, ry=>2.4,
-        id=>'rect_1'
+        x      => 10,
+        y      => 20,
+        width  => 4,
+        height => 5,
+        rx     => 5.2,
+        ry     => 2.4,
+        id     => 'rect_1'
     );
 
 =head2 image
@@ -438,10 +476,12 @@ Draw an image at (x,y) with width 'width' and height 'height' linked to image
 resource '-href'. See also L<"use">.
 
     $tag = $svg->image(
-        x => 100, y => 100,
-        width => 300, height => 200,
+        x       => 100,
+        y       => 100,
+        width   => 300,
+        height  => 200,
         '-href' => "image.png", #may also embed SVG, e.g. "image.svg"
-        id => 'image_1'
+        id      => 'image_1'
     );
 
 B<Output:>
@@ -456,10 +496,12 @@ Retrieve the content from an entity within an SVG document and apply it at
 (x,y) with width 'width' and height 'height' linked to image resource '-href'.
 
     $tag = $svg->use(
-        x=>100, y=>100,
-        width=>300, height=>200,
-        '-href'=>"pic.svg#image_1",
-        id=>'image_1'
+        x       => 100,
+        y       => 100,
+        width   => 300,
+        height  => 200,
+        '-href' => "pic.svg#image_1",
+        id      => 'image_1'
     );
 
 B<Output:>
@@ -728,19 +770,35 @@ commands.
 B<Inputs:> -method = Transform | Motion | Color
 
   my $an_ellipse = $svg->ellipse(
-      cx=>30,cy=>150,rx=>10,ry=>10,id=>'an_ellipse',
-      stroke=>'rgb(130,220,70)',fill=>'rgb(30,20,50)');
+      cx     => 30,
+      cy     => 150,
+      rx     => 10,
+      ry     => 10,
+      id     => 'an_ellipse',
+      stroke => 'rgb(130,220,70)',
+      fill   =>'rgb(30,20,50)'
+  );
 
   $an_ellipse-> animate(
-      attributeName=>"cx",values=>"20; 200; 20",dur=>"10s", repeatDur=>'indefinite');
+      attributeName => "cx",
+      values        => "20; 200; 20",
+      dur           => "10s",
+      repeatDur     => 'indefinite'
+  );
 
   $an_ellipse-> animate(
-      attributeName=>"rx",values=>"10;30;20;100;50",
-      dur=>"10s", repeatDur=>'indefinite');
+      attributeName => "rx",
+      values        => "10;30;20;100;50",
+      dur           => "10s",
+      repeatDur     => 'indefinite',
+  );
 
   $an_ellipse-> animate(
-      attributeName=>"ry",values=>"30;50;10;20;70;150",
-      dur=>"15s", repeatDur=>'indefinite');
+      attributeName => "ry",
+      values        => "30;50;10;20;70;150",
+      dur           => "15s",
+      repeatDur     => 'indefinite',
+  );
 
   $an_ellipse-> animate(
       attributeName=>"rx",values=>"30;75;10;100;20;20;150",
@@ -800,8 +858,7 @@ Generate a style container for inline or xlink:href based styling instructions
 
     # Populate the style tag with cdata.
     # Be careful to manage the line ends.
-    # qq|text| or qq§text§, where text is the script
-    # work well for this.
+    # Use qq{text}, where text is the script
 
     $tag1->CDATA(qq{
         rect     fill:red;stroke:green;
@@ -867,7 +924,7 @@ content.
             'font-size' => 20
         })->cdata('SVG.pm is a perl module on CPAN!');
 
-    my $text = $svg->text(style=>{'font'=>'Arial','font-size'=>20});
+    my $text = $svg->text( style => { 'font' => 'Arial', 'font-size' => 20 } );
     $text->cdata('SVG.pm is a perl module on CPAN!');
 
 B<Result:>
