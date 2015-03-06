@@ -20,10 +20,10 @@ SVG::Extension - additional methods
 use parent qw/SVG::Element/;
 
 # DTD declarations handled in this module
-use constant ELEMENT  => "ELEMENT";
-use constant ATTLIST  => "ATTLIST";
-use constant NOTATION => "NOTATION";
-use constant ENTITY   => "ENTITY";
+use constant ELEMENT  => 'ELEMENT';
+use constant ATTLIST  => 'ATTLIST';
+use constant NOTATION => 'NOTATION';
+use constant ENTITY   => 'ENTITY';
 
 our @TYPES = ( ELEMENT, ATTLIST, NOTATION, ENTITY );
 our %TYPES = map { $_ => 1 } @TYPES;
@@ -39,7 +39,7 @@ sub internal_subset {
 
     my $document = $self->{-docref};
     unless ( exists $document->{-internal} ) {
-        $document->{-internal} = new SVG::Extension("internal");
+        $document->{-internal} = new SVG::Extension('internal');
         $document->{-internal}{-docref} = $document;
     }
 
@@ -149,15 +149,15 @@ sub entity_decl {
 
 sub xmlify {
     my $self = shift;
-    my $decl = "";
+    my $decl = q{};
 
     if ( $self->{-name} ne 'internal' ) {
-        $decl = "<!";
+        $decl = '<!';
     SWITCH: foreach ( $self->{-name} ) {
             /^ELEMENT$/ and do {
                 $decl .= "ELEMENT $self->{name}";
 
-                $decl .= " " . $self->{model} if exists $self->{model};
+                $decl .= q{ } . $self->{model} if exists $self->{model};
 
                 last SWITCH;
             };
@@ -166,7 +166,7 @@ sub xmlify {
 
                 $decl
                     .= " $self->{type} "
-                    . ( $self->{fixed} ? "#FIXED " : "" )
+                    . ( $self->{fixed} ? '#FIXED ' : q{} )
                     . $self->{default};
 
                 last SWITCH;
@@ -174,13 +174,13 @@ sub xmlify {
             /^NOTATION$/ and do {
                 $decl .= "NOTATION $self->{name}";
 
-                $decl .= " " . $self->{base} if exists $self->{base};
+                $decl .= q{ } . $self->{base} if exists $self->{base};
                 if ( exists $self->{pubid} ) {
                     $decl .= "PUBLIC $self->{pubid} ";
-                    $decl .= " " . $self->{sysid} if exists $self->{sysid};
+                    $decl .= q{ } . $self->{sysid} if exists $self->{sysid};
                 }
                 elsif ( exists $self->{sysid} ) {
-                    $decl .= " SYSTEM " . $self->{sysid}
+                    $decl .= ' SYSTEM ' . $self->{sysid}
                         if exists $self->{sysid};
                 }
 
@@ -188,8 +188,8 @@ sub xmlify {
             };
             /^ENTITY$/ and do {
                 $decl
-                    .= "ENTITY "
-                    . ( $self->{isp} ? "% " : "" )
+                    .= 'ENTITY '
+                    . ( $self->{isp} ? '% ' : q{} )
                     . $self->{name};
 
                 if ( exists $self->{value} ) {
@@ -197,13 +197,13 @@ sub xmlify {
                 }
                 elsif ( exists $self->{pubid} ) {
                     $decl .= "PUBLIC $self->{pubid} ";
-                    $decl .= " " . $self->{sysid} if exists $self->{sysid};
-                    $decl .= " " . $self->{ndata} if $self->{ndata};
+                    $decl .= q{ } . $self->{sysid} if exists $self->{sysid};
+                    $decl .= q{ } . $self->{ndata} if $self->{ndata};
                 }
                 else {
-                    $decl .= " SYSTEM " . $self->{sysid}
+                    $decl .= ' SYSTEM ' . $self->{sysid}
                         if exists $self->{sysid};
-                    $decl .= " " . $self->{ndata} if $self->{ndata};
+                    $decl .= q{ } . $self->{ndata} if $self->{ndata};
                 }
 
                 last SWITCH;
@@ -213,10 +213,10 @@ sub xmlify {
                 $decl .= "$self->{-name} $self->{name}";
             };
         }
-        $decl .= ">" . $self->{-docref}{-elsep};
+        $decl .= '>' . $self->{-docref}{-elsep};
     }
 
-    my $result = "";
+    my $result = q{};
     if ( $self->hasChildren ) {
         $self->{-docref}->{-level}++;
         foreach my $child ( $self->getChildren ) {

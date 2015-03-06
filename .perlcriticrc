@@ -1,25 +1,33 @@
-severity  = 4
+# please alpha sort config items as you add them
 
-# Severity 5:
-[-OTRS::RequireCamelCase]
-[-OTRS::ProhibitSomeCoreFunctions]
-[-OTRS::ProhibitLowPrecendeceOps]
-[-OTRS::RequireParensWithMethods]
+severity = 5
+verbose = 11
+theme = core
 
-# TODO?
-[-ValuesAndExpressions::ProhibitAccessOfPrivateData]
+#[TestingAndDebugging::RequireUseStrict]
+#equivalent_modules = Moo Dancer Dancer2
 
-# Severity 4:
-[-Bangs::ProhibitRefProtoOrProto]
-[-ErrorHandling::RequireUseOfExceptions]
-[-Modules::ProhibitMultiplePackages]
-[-Modules::ProhibitAutomaticExportation]
-[-Modules::RequireExplicitInclusion]
-[-Objects::ProhibitIndirectSyntax]
-[-Subroutines::RequireFinalReturn]
-[-Subroutines::RequireArgUnpacking]
-[-Subroutines::ProhibitCallsToUndeclaredSubs]
-[-Subroutines::ProhibitCallsToUnexportedSubs]
-[-Subroutines::ProhibitExportingUndeclaredSubs]
-[-Subroutines::ProhibitBuiltinHomonyms]
-[-ValuesAndExpressions::ProhibitConstantPragma]
+#[TestingAndDebugging::RequireUseWarnings]
+#severity = 5
+#equivalent_modules = Moo Dancer Dancer2
+
+#[-ControlStructures::ProhibitPostfixControls]
+#[-Documentation::RequirePodLinksIncludeText]
+#[-Documentation::RequirePodSections]
+#[-Modules::RequireVersionVar]
+#[-RegularExpressions::RequireDotMatchAnything]
+#[-RegularExpressions::RequireExtendedFormatting]
+#[-RegularExpressions::RequireLineBoundaryMatching]
+#[-Variables::ProhibitPunctuationVars]
+#
+[CodeLayout::RequireTrailingCommas]
+severity = 5
+
+#[ValuesAndExpressions::ProhibitEmptyQuotes]
+#severity = 5
+
+[ValuesAndExpressions::ProhibitInterpolationOfLiterals]
+severity = 5
+
+#[ValuesAndExpressions::ProhibitNoisyQuotes]
+#severity = 5

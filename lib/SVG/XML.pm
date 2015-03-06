@@ -63,12 +63,12 @@ sub xmlescp {
     # Invalid XML characters are removed, not just escaped: \x00-\x08\x0b\x1f
     # Tabs (\x09) and newlines (\x0a) are valid.
     while ( $s =~ s/([\x00-\x08\x0b\x1f])/''/e ) {
-        my $char = "'\\x" . sprintf( '%02X', ord($1) ) . "'";
-        $self->error( $char => "This forbidden XML character was removed" );
+        my $char = q{'\\x} . sprintf( '%02X', ord($1) ) . q{'};
+        $self->error( $char => 'This forbidden XML character was removed' );
     }
 
     # Per suggestion from Adam Schneider
-    $s =~ s/([\200-\377])/'&#'.ord($1).';'/ge;
+    $s =~ s/([\200-\377])/' &    #'.ord($1).';'/ge;
 
     return $s;
 }
@@ -163,14 +163,16 @@ sub dtddecl {
 
     #>>>TBD: add internal() method to return this
     my $extension
-        = ( exists $self->{-internal} ) ? $self->{-internal}->render() : "";
+        = ( exists $self->{-internal} )
+        ? $self->{-internal}->render()
+        : q{};
     if ( exists $self->{-extension} and $self->{-extension} ) {
         $extension
             .= $self->{-docref}{-elsep}
             . $self->{-extension}
             . $self->{-docref}{-elsep};
     }
-    $extension = " [" . $self->{-docref}{-elsep} . $extension . "]"
+    $extension = ' [' . $self->{-docref}{-elsep} . $extension . ']'
         if $extension;
 
     return qq[$self->{-docref}{-elsep}<!DOCTYPE $at$extension>];

@@ -1280,7 +1280,7 @@ my %default_attrs = (
     -xml_svg   => 'http://www.w3.org/2000/svg',
     -xml_xlink => 'http://www.w3.org/1999/xlink',
     -standalone => 'yes',
-    -pubid      => "-//W3C//DTD SVG 1.0//EN",    # formerly -identifier
+    -pubid      => '-//W3C//DTD SVG 1.0//EN',    # formerly -identifier
     -sysid => 'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd',
 );
 

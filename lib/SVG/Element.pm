@@ -292,7 +292,7 @@ sub tag {
     #>>>TBD: add -strictids option to disable this check if desired
     if ( $tag->{id} ) {
         if ( $self->getElementByID( $tag->{id} ) ) {
-            $self->error( $tag->{id} => "ID already exists in document" );
+            $self->error( $tag->{id} => 'ID already exists in document' );
             return;
         }
     }
@@ -478,37 +478,37 @@ sub animate {
         motion    => 'animateMotion',
         color     => 'animateColor',
         set       => 'set',
-        attribute => 'animate'
+        attribute => 'animate',
     );
 
     my $name = $animation_method{$method} || 'animate';
 
     #list of legal entities for each of the 5 methods of animations
     my %legal = (
-        animate => qq{ begin dur  end  min  max  restart  repeatCount 
+        animate => q{ begin dur  end  min  max  restart  repeatCount 
               repeatDur  fill  attributeType attributeName additive
               accumulate calcMode  values  keyTimes  keySplines
               from  to  by },
-        animateTransform => qq{ begin dur  end  min  max  restart  repeatCount
+        animateTransform => q{ begin dur  end  min  max  restart  repeatCount
               repeatDur  fill  additive  accumulate calcMode  values
               keyTimes  keySplines  from  to  by calcMode path keyPoints
               rotate origin type attributeName attributeType },
-        animateMotion => qq{ begin dur  end  min  max  restart  repeatCount
+        animateMotion => q{ begin dur  end  min  max  restart  repeatCount
               repeatDur  fill  additive  accumulate calcMode  values
               to  by keyTimes keySplines  from  path  keyPoints
               rotate  origin },
-        animateColor => qq{ begin dur  end  min  max  restart  repeatCount
+        animateColor => q{ begin dur  end  min  max  restart  repeatCount
               repeatDur  fill  additive  accumulate calcMode  values
-              keyTimes  keySplines  from  to  by §,
-        set => qq§ begin dur  end  min  max  restart  repeatCount  repeatDur
-              fill to }
+              keyTimes  keySplines  from  to  by },
+        set => q{ begin dur  end  min  max  restart  repeatCount  repeatDur
+              fill to },
     );
 
     foreach my $k ( keys %rtr ) {
         next if ( $k =~ /\-/ );
 
         if ( $legal{$name} !~ /\b$k\b/ ) {
-            $self->error( "$name.$k" => "Illegal animation command" );
+            $self->error( "$name.$k" => 'Illegal animation command' );
         }
     }
 
@@ -546,9 +546,9 @@ sub attrib {
     my ( $self, $name, $val ) = @_;
 
     #verify that the current id is unique. compain on exception
-    if ( $name eq "id" ) {
+    if ( $name eq 'id' ) {
         if ( $self->getElementByID($val) ) {
-            $self->error( $val => "ID already exists in document" );
+            $self->error( $val => 'ID already exists in document' );
             return;
         }
     }
@@ -628,7 +628,7 @@ sub fe {
         specularlighting => 'feSpecularLighting',
         spotlight        => 'feSpotLight',
         tile             => 'feTile',
-        turbulence       => 'feTurbulence'
+        turbulence       => 'feTurbulence',
     );
 
     my $key = lc( $attrs{'-type'} );
