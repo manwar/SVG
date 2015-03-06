@@ -1,8 +1,8 @@
 Revision history for Perl extension SVG.
 
+2.62 2015.03.06
     - Remove more duplicate pod.
     - Encoding of the pod RT #89414
-
 
 2.61 2015.03.03
     - Eliminate a bunch of duplicate documentation.
