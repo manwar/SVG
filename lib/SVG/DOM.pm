@@ -432,7 +432,8 @@ sub insertAfter {
 # sub insertSiblingAfter (Not in W3C DOM)
 sub insertSiblingAfter {
     my ( $self, $newChild ) = @_;
-    return $self->getParent->insertAfter( $newChild, $self ) if $self->getParent;
+    return $self->getParent->insertAfter( $newChild, $self )
+        if $self->getParent;
     return 0;
 }
 
@@ -440,7 +441,8 @@ sub insertSiblingAfter {
 # sub insertSiblingBefore (Not in W3C DOM)
 sub insertSiblingBefore {
     my ( $self, $newChild ) = @_;
-    return $self->getParent->insertBefore( $newChild, $self ) if $self->getParent;
+    return $self->getParent->insertBefore( $newChild, $self )
+        if $self->getParent;
     return 0;
 }
 
