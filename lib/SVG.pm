@@ -91,7 +91,7 @@ L<SVG::Extension>
 
 =head2 Converting SVG to PNG and other raster image formats
 
-The B<convert> command of L<http://www.imagemagick.org/> (also via L<Image::Magic> ) can convert SVG files to PNG
+The B<convert> command of L<http://www.imagemagick.org/> (also via L<Image::Magick> ) can convert SVG files to PNG
 and other formats.
 
 L<Image::LibRSVG> can convert SVG to other format.
