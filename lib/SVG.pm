@@ -1484,7 +1484,9 @@ sub xmlify {
     my $credits = '';
 
     # Give the module and myself credit unless explicitly turned off
-    unless ( $self->{-docref}->{-nocredits} or $self->{-docref}{-creditsinserted} ) {
+    unless ( $self->{-docref}->{-nocredits}
+        or $self->{-docref}{-creditsinserted} )
+    {
         $self->comment(
             "\n\tGenerated using the Perl SVG Module V$VERSION\n\tby Ronan Oger\n\tInfo: http://www.roitsystems.com/\n"
         );
