@@ -135,15 +135,15 @@ Generating SVG is a simple three step process:
 
 =over 4
 
-=item 1 Construct a new SVG object with L<new>.
+=item 1 Construct a new SVG object with L<"new">.
 
-=item 2 Call element constructors such as L<circle> and L<path> to create SVG elements.
+=item 2 Call element constructors such as L<"circle"> and L<"path"> to create SVG elements.
 
-=item 3 Render the SVG object into XML using the L<xmlify> method.
+=item 3 Render the SVG object into XML using the L<"xmlify"> method.
 
 =back
 
-The L<xmlify> method takes a number of optional arguments that control how SVG
+The L<"xmlify"> method takes a number of optional arguments that control how SVG
 renders the object into XML, and in particular determine whether a standalone
 SVG document or an inline SVG document fragment is generated:
 
@@ -345,15 +345,22 @@ as a child.
 the following attributes are expected for anchor tags (any any tags which use -href links):
 
 =head2 -href    required
+
 =head2 -type    optional
+
 =head2 -role    optional
+
 =head2 -title   optional
+
 =head2 -show    optional
+
 =head2 -arcrole optional
+
 =head2 -actuate optional
+
 =head2 target   optional
 
-For more information on the options, refer to the w3c XLink specification at 
+For more information on the options, refer to the w3c XLink specification at
 L<http://www.w3.org/TR/xlink/>
 
 B<Example:>
@@ -426,7 +433,7 @@ Draw an ellipse at (cx,cy) with radii rx,ry.
         }
     );
 
-See The B<example/ellipse.pl> 
+See The B<example/ellipse.pl>
 
 =for HTML <p><img src="http://perlmaven.com/img/svg/ellipse.svg" alt="SVG example ellipse" /></p>
 
@@ -495,7 +502,7 @@ single element within an external SVG file.
 $tag = $svg->polygon(%attributes)
 
 Draw an n-sided polygon with vertices at points defined by a string of the form
-'x1,y1,x2,y2,x3,y3,... xy,yn'. The L<get_path> method is provided as a
+'x1,y1,x2,y2,x3,y3,... xy,yn'. The L<"get_path"> method is provided as a
 convenience to generate a suitable string from coordinate data.
 
     # a five-sided polygon
@@ -516,7 +523,7 @@ convenience to generate a suitable string from coordinate data.
 
 SEE ALSO:
 
-L<polyline>, L<path>, L<get_path>.
+L<"polyline">, L<"path">, L<"get_path">.
 
 =head2 polyline
 
@@ -602,7 +609,7 @@ B<Input:>
 
 SEE ALSO:
 
-L<desc>, L<cdata>.
+L<"desc">, L<"cdata">.
 
 =head2 title
 
@@ -670,7 +677,7 @@ ECMAscript, Javascript or other compatible scripting language.
 $tag = $svg->path(%attributes)
 
 Draw a path element. The path vertices may be provided as a parameter or
-calculated using the L<get_path> method.
+calculated using the L<"get_path"> method.
 
     # a 10-pointsaw-tooth pattern drawn with a path definition
     my $xv = [0,1,2,3,4,5,6,7,8,9];
@@ -694,7 +701,7 @@ calculated using the L<get_path> method.
     );
 
 
-SEE ALSO: L<get_path>.
+SEE ALSO: L<"get_path">.
 
 =head2 get_path
 
@@ -845,7 +852,7 @@ Generate a style container for inline or xlink:href based styling instructions
         ellipse  fill:none;stroke:yellow;
         text     fill:black;stroke:none;
     });
-    
+
     # Create a external CSS stylesheet reference
     my $tag2 = $SVG->style(type=>"text/css", -href="/resources/example.css");
 
@@ -912,7 +919,7 @@ B<Result:>
 
 SEE ALSO:
 
-L<CDATA>, L<desc>, L<title>, L<text>, L<script>.
+L<"CDATA">, L<"desc">, L<"title">, L<"text">, L<"script">.
 
 =head2 cdata_noxmlesc
 
@@ -978,7 +985,7 @@ B<Result:>
         }
         ]]E<gt>
 
-SEE ALSO: L<cdata>, L<script>.
+SEE ALSO: L<"cdata">, L<"script">.
 
 =head2 xmlescp and xmlescape
 
@@ -1016,7 +1023,7 @@ Generate a filter. Filter elements contain L<"fe"> filter sub-elements.
 
     $filter->fe();
 
-SEE ALSO: L<fe>.
+SEE ALSO: L<"fe">.
 
 =head2 fe
 
@@ -1088,7 +1095,7 @@ Also note that the elelemts are defined in lower case in the module, but as of v
 =head2 * feTurbulence
 
 
-SEE ALSO: L<filter>.
+SEE ALSO: L<"filter">.
 
 =head2 pattern
 
