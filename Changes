@@ -1,5 +1,8 @@
 Revision history for Perl extension SVG.
 
+2.65 Unknown
+    - Correct some spelling errors that were detected by codespell.
+
 2.64 2015.06.02
     - RT #103938 SVG::DOM insertSiblingAfter calls nonexistent 'parent' method (Marius Gavrilescu)
 
@@ -148,7 +151,7 @@ Revision history for Perl extension SVG.
 	- date was: Monday 3 November, 2003 (RO, PW)
 	-Added SVG::GD to allow GD users to output SVG for simple GD drawings (RO)
 	-Added perlify support: Generate Perl code from an SVG document (PW)
-	-Added SVG::Extention for DTD validation support during serialisation (PW)
+	-Added SVG::Extension for DTD validation support during serialisation (PW)
 	-Took away automatic xml escaping code. This belongs in user codei (RO).
 	-Added attributeName and attributeType to legal animateTransform in
 	 SVG::Element SMIL animation per Mike Churchill bug report 2003.12.03
