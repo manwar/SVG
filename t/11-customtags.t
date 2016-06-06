@@ -11,5 +11,5 @@ $svg->star( id => "Sol" )->planet( id => "Jupiter" )
 like $svg->xmlify,
     qr{<star id="Sol">\s+<planet id="Jupiter">\s+<moon id="Ganymede" />\s+</planet>\s+</star>},
     'stars and planets';
-ok( !eval { $svg->asteriod( id => "Ceres" ); }, "undefined custom tag" );
+ok( !eval { $svg->asteroid( id => "Ceres" ); }, "undefined custom tag" );
 

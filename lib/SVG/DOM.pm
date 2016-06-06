@@ -749,7 +749,7 @@ Set attribute $name to $value. If $value is undef, deletes the attribute.
 
 =head2 $cdata = $obj->getCDATA()
 
-Return the cannonical data (i.e. textual content) of the current node.
+Return the canonical data (i.e. textual content) of the current node.
 
 Alias: getCdata(), getData()
 

@@ -9,7 +9,7 @@ use_ok( 'SVG', "Use SVG" );
 # but maybe there was a related bug?
 use_ok( 'SVG', "call SVG twice without warnings" );
 use_ok( 'SVG', "call SVG three times without warnings" );
-use_ok( 'SVG', "call SVG dont blow it away without warnings" );
+use_ok( 'SVG', "call SVG ; do not blow it away without warnings" );
 
 my $svg = SVG->new;
 isa_ok $svg, 'SVG';

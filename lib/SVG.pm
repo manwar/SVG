@@ -256,7 +256,7 @@ All element constructors take a hash of element attributes and options;
 element attributes such as 'id' or 'border' are passed by name, while options for the
 method (such as the type of an element that supports multiple alternate forms)
 are passed preceded by a hyphen, e.g '-type'. Both types may be freely
-intermixed; see the L<"fe"> method and code examples througout the documentation
+intermixed; see the L<"fe"> method and code examples throughout the documentation
 for more examples.
 
 =head2 new (constructor)
@@ -1032,7 +1032,7 @@ $tag = $svg->fe(-type=>'type', %attributes)
 Generate a filter sub-element. Must be a child of a L<"filter"> element.
 
     my $fe = $svg->fe(
-        -type     => 'DiffuseLighting'  # required - element name omiting 'fe'
+        -type     => 'DiffuseLighting'  # required - element name omitting 'fe'
         id        => 'filter_1',
         style     => {
             'font'      => [ qw(Arial Helvetica sans) ],
@@ -1343,7 +1343,7 @@ All element constructors take a hash of element attributes and options;
 element attributes such as 'id' or 'border' are passed by name, while options for the
 method (such as the type of an element that supports multiple alternate forms)
 are passed preceded by a hyphen, e.g '-type'. Both types may be freely
-intermixed; see the L<"fe"> method and code examples througout the documentation
+intermixed; see the L<"fe"> method and code examples throughout the documentation
 for more examples.
 
 =head2 new (constructor)
