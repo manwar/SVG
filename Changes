@@ -2,6 +2,7 @@ Revision history for Perl extension SVG.
 
 2.65 Unknown
     - Correct some spelling errors that were detected by codespell.
+    - Don't insert whitespace between tag name and closing bracked when a tag has no attributes
 
 2.64 2015.06.02
     - RT #103938 SVG::DOM insertSiblingAfter calls nonexistent 'parent' method (Marius Gavrilescu)

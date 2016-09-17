@@ -85,14 +85,14 @@ sub cssstyle {
 # Per suggestion from Adam Schneider
 sub xmlattrib {
     my %attrs = @_;
-    return (
-        join( ' ', map { qq($_=") . $attrs{$_} . q(") } sort keys(%attrs) ) );
+    return '' if !%attrs;
+    return (' ' . join( ' ', map { qq($_=") . $attrs{$_} . q(") } sort keys(%attrs) ) );
 }
 
 sub xmltag {
     my ( $name, $ns, %attrs ) = @_;
     $ns = $ns ? "$ns:" : '';
-    my $at = ' ' . xmlattrib(%attrs) || '';
+    my $at = xmlattrib(%attrs) || '';
     return qq(<$ns$name$at />);
 }
 
@@ -104,7 +104,7 @@ sub xmltag_ln {
 sub xmltagopen {
     my ( $name, $ns, %attrs ) = @_;
     $ns = $ns ? "$ns:" : '';
-    my $at = ' ' . xmlattrib(%attrs) || '';
+    my $at = xmlattrib(%attrs) || '';
     return qq(<$ns$name$at>);
 }
 
