@@ -271,7 +271,7 @@ a hyphen) may be set on a per object basis:
 
     my $svg2 = SVG->new(id => 'document_element');
 
-    my $svg3 = SVG->new(s
+    my $svg3 = SVG->new(
         -printerror => 1,
         -raiseerror => 0,
         -indent     => '  ',
