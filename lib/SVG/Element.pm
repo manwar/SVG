@@ -3,7 +3,7 @@ package SVG::Element;
 use strict;
 use warnings;
 
-our $VERSION = '2.64';
+our $VERSION = '2.65';
 
 =pod
 
@@ -485,7 +485,7 @@ sub animate {
 
     #list of legal entities for each of the 5 methods of animations
     my %legal = (
-        animate => q{ begin dur  end  min  max  restart  repeatCount 
+        animate => q{ begin dur  end  min  max  restart  repeatCount
               repeatDur  fill  attributeType attributeName additive
               accumulate calcMode  values  keyTimes  keySplines
               from  to  by },

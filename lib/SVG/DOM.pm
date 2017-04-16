@@ -4,7 +4,7 @@ use warnings;
 
 use Scalar::Util qw/weaken/;
 
-our $VERSION = '2.64';
+our $VERSION = '2.65';
 
 # this module extends SVG::Element
 package SVG::Element;
@@ -605,7 +605,7 @@ sub removeChildAtIndex {
 
 #-------------------------------------------------------------------------------
 
-=pod 
+=pod
 
 =head1 NAME
 
@@ -615,7 +615,7 @@ SVG::DOM - A library of DOM (Document Object Model) methods for SVG objects.
 
 SVG::DOM provides a selection of methods for accessing and manipulating SVG
 elements through DOM-like methods such as getElements, getChildren, getNextSibling
-and so on. 
+and so on.
 
 =head1 SYNOPSIS
 
@@ -667,18 +667,18 @@ Return a list of all children defined on the current node, or undef if there are
 In scalar context returns an array reference.
 
 Alias: getChildElements(), getChildNodes()
-  
+
 =head2 @children = $obj->hasChildren()
 
 Return 1 if the current node has children, or 0 if there are no children.
 
 Alias: hasChildElements, hasChildNodes()
-  
-=head2 $ref = $obj->getFirstChild() 
+
+=head2 $ref = $obj->getFirstChild()
 
 Return the first child element of the current node, or undef if there are no children.
 
-=head2 $ref = $obj->getLastChild() 
+=head2 $ref = $obj->getLastChild()
 
 Return the last child element of the current node, or undef if there are no children.
 
@@ -721,7 +721,7 @@ Return a string containing the name (i.e. the type, not the ID) of an element.
 
 Alias: getType(), getTagName(), getNodeName()
 
-=head2 $ref = $svg->getElementByID($id) 
+=head2 $ref = $svg->getElementByID($id)
 
 Alias: getElementbyID()
 
@@ -775,7 +775,7 @@ Returns 1 if $element was successfully inserted before $obj
 
 =head2 $boolean = $obj->insertSiblingAfter( $element );
 
-Returns 1 if $element was successfully inserted after $obj 
+Returns 1 if $element was successfully inserted after $obj
 
 =head2 $element = $obj->replaceChild( $element, $child );
 
@@ -785,7 +785,7 @@ Returns $child if $element successfully replaced $child in $obj
 
 Returns $child if it was removed successfully from $obj
 
-=head2 $element = $obj->cloneNode( $deep ); 
+=head2 $element = $obj->cloneNode( $deep );
 
 Returns a new $element clone of $obj, without parents or children. If deep is set to 1, all children are included recursively.
 
@@ -804,4 +804,3 @@ L<http://www.w3c.org/Graphics/SVG/> SVG at the W3C
 =cut
 
 1;
-

@@ -7,7 +7,7 @@ use SVG::XML;
 use parent qw(SVG::Element SVG::Extension);
 use Scalar::Util qw/weaken/;
 
-our $VERSION = '2.64';
+our $VERSION = '2.65';
 
 =pod
 
@@ -15,7 +15,7 @@ our $VERSION = '2.64';
 
 =head1 NAME
 
-SVG - Perl extension for generating Scalable Vector Graphics (SVG) documents
+SVG - Perl extension for generating Scalable Vector Graphics (SVG) documents.
 
 =head1 SYNOPSIS
 
@@ -29,7 +29,7 @@ SVG - Perl extension for generating Scalable Vector Graphics (SVG) documents
 
     # use explicit element constructor to generate a group element
     my $y = $svg->group(
-        id    => 'group_y',
+        id => 'group_y',
         style => {
             stroke => 'red',
             fill   => 'green'
@@ -1591,4 +1591,3 @@ L<ROIT Systems: Commercial SVG perl solutions|http://www.roitsystems.com/>,
 L<SVG at the W3C|http://www.w3c.org/Graphics/SVG/>
 
 =cut
-
