@@ -12,11 +12,14 @@ WriteMakefile(
         'parent'       => 0,
         'Scalar::Util' => 0,
     },
+    dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
+    clean => { FILES => 'SVG-*' },
     ($] >= 5.005 ?
      (ABSTRACT_FROM  => 'lib/SVG.pm',
       LICENSE        => 'perl',
       AUTHOR         => 'Ronan Oger <ronan@cpan.com>') : ()),
-    META_MERGE       => {
+    (eval { ExtUtils::MakeMaker->VERSION(6.46) } ? (META_MERGE => {
+        'meta-spec' => { version => 2 },
         resources => {
             type  => 'git',
             url   => 'https://github.com/manwar/SVG.git',
@@ -30,6 +33,8 @@ WriteMakefile(
             'Allen Day',
             'Gabor Szabo',
             'Mohammad S Anwar',
-        ],
-    },
+         ],
+     })
+     : ()
+    ),
 );

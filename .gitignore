@@ -1,11 +1,1 @@
-*.swp
 /.tidyall.d
-MANIFEST
-MANIFEST.bak
-MYMETA.json
-MYMETA.yml
-Makefile
-SVG-*
-blib/
-cover_db
-pm_to_blib

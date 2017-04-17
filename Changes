@@ -1,5 +1,11 @@
 Revision history for Perl extension SVG.
 
+2.66  2017.04.17 MANWAR
+      - Addressed issue RT #121197 (incorrect meta spec), thanks @KENTNL.
+      - Added 'clean' and 'dist' keys to the Makefile.PL script.
+      - Tidied up .gitignore file.
+      - Added MANIFEST file, no need to generate every time.
+
 2.65  2017.04.16 MANWAR
       - Merged PR #9, correcting typo in the pod. Thanks @vti.
       - Tidied up Changes file.
