@@ -20,10 +20,12 @@ WriteMakefile(
       AUTHOR         => 'Ronan Oger <ronan@cpan.com>') : ()),
     (eval { ExtUtils::MakeMaker->VERSION(6.46) } ? (META_MERGE => {
         'meta-spec' => { version => 2 },
-        resources => {
-            type  => 'git',
-            url   => 'https://github.com/manwar/SVG.git',
-            web   => 'https://github.com/manwar/SVG',
+        resources   => {
+            repository => {
+                type  => 'git',
+                url   => 'https://github.com/manwar/SVG.git',
+                web   => 'https://github.com/manwar/SVG',
+            },
         },
         x_contributors => [
             'Peter Wainwright',
@@ -33,7 +35,7 @@ WriteMakefile(
             'Allen Day',
             'Gabor Szabo',
             'Mohammad S Anwar',
-         ],
+        ],
      })
      : ()
     ),

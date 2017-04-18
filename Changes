@@ -1,5 +1,8 @@
 Revision history for Perl extension SVG.
 
+2.67  2017.04.18 MANWAR
+      - Fixed the issue with regard to github respository info in the Makefile.PL script, thanks @KENTNL.
+
 2.66  2017.04.17 MANWAR
       - Addressed issue RT #121197 (incorrect meta spec), thanks @KENTNL.
       - Added 'clean' and 'dist' keys to the Makefile.PL script.
