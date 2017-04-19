@@ -1,5 +1,8 @@
 Revision history for Perl extension SVG.
 
+2.68  2017.04.19 MANWAR
+      - Fixed issue RT #109521, adding min ver of Test::More v0.94.
+
 2.67  2017.04.18 MANWAR
       - Fixed the issue with regard to github respository info in the Makefile.PL script, thanks @KENTNL.
 

@@ -12,6 +12,9 @@ WriteMakefile(
         'parent'       => 0,
         'Scalar::Util' => 0,
     },
+    BUILD_REQUIRES   => {
+        'Test::More' => '0.94',
+    },
     dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean => { FILES => 'SVG-*' },
     ($] >= 5.005 ?
