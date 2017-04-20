@@ -1,5 +1,8 @@
 Revision history for Perl extension SVG.
 
+2.69  2017.04.20 MANWAR
+      - Fixed issue RT #118091, skip test if Perl::Tidy is missing.
+
 2.68  2017.04.19 MANWAR
       - Fixed issue RT #109521, adding min ver of Test::More v0.94.
 
