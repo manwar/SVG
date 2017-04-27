@@ -15,6 +15,7 @@ WriteMakefile(
     BUILD_REQUIRES   => {
         'Test::More' => '0.94',
     },
+    MIN_PERL_VERSION => 5.006,
     dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean => { FILES => 'SVG-*' },
     ($] >= 5.005 ?

@@ -1,5 +1,8 @@
 Revision history for Perl extension SVG.
 
+2.70  2017.04.27 MANWAR
+      - Added MIN_PERL_VERSION to the Makefile.PL script as suggested by CPANTS.
+
 2.69  2017.04.20 MANWAR
       - Fixed issue RT #118091, skip test if Perl::Tidy is missing.
 
