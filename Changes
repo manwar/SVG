@@ -1,5 +1,8 @@
 Revision history for Perl extension SVG.
 
+2.71  2017.05.01 MANWAR
+      - Fixed issue RT #57000 with regard to be explici about SVG instance.
+
 2.70  2017.04.27 MANWAR
       - Added MIN_PERL_VERSION to the Makefile.PL script as suggested by CPANTS.
 
