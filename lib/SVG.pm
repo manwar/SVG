@@ -7,7 +7,7 @@ use SVG::XML;
 use parent qw(SVG::Element SVG::Extension);
 use Scalar::Util qw/weaken/;
 
-our $VERSION = '2.71';
+our $VERSION = '2.72';
 
 =pod
 
@@ -285,7 +285,7 @@ a hyphen) may be set on a per object basis:
         height      => 200,
     );
 
-B<SVG instance represents the document and not the <svg> root element.>
+B<SVG instance represents the document and not the C<E<lt>svgE<gt>> root element.>
 
 Default SVG options may also be set in the import list. See L<"EXPORTS"> above
 for more on the available options.

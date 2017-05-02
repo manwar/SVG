@@ -1,5 +1,9 @@
 Revision history for Perl extension SVG.
 
+2.72  2017.05.02 MANWAR
+      - Added test script t/00-load.t
+      - Fixed typo in the pod document.
+
 2.71  2017.05.01 MANWAR
       - Fixed issue RT #57000 with regard to be explici about SVG instance.
 
