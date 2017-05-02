@@ -1,5 +1,10 @@
 Revision history for Perl extension SVG.
 
+2.73  2017.05.02 MANWAR
+      - Merge PR #8, thanks @CSSON.
+      - Correct some spelling errors that were detected by codespell.
+      - Don't insert whitespace between tag name and closing bracked when a tag has no attributes
+
 2.72  2017.05.02 MANWAR
       - Added test script t/00-load.t
       - Fixed typo in the pod document.
@@ -92,8 +97,8 @@ Revision history for Perl extension SVG.
       - Fixed cloning method (bug # 36194)
       - DOM::insertAtIndex() and removeAtIndex() now update the ID and element list
 
-2.49 2009.01.23
-	-Fixed bugtracker URL in YAML
+2.49  2009.01.23
+      - Fixed bugtracker URL in YAML
 
 2.48  2009.01.08
       - Improved YAML and MANIFEST for cpan testers game
