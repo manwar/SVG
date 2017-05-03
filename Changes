@@ -1,7 +1,7 @@
 Revision history for Perl extension SVG.
 
-2.73  2017.05.02 MANWAR
-      - Merge PR #8, thanks @CSSON.
+2.73  2017.05.03 MANWAR
+      - Merged PR #8, thanks @CSSON. Modified slightly to keep tidyall happy.
       - Correct some spelling errors that were detected by codespell.
       - Don't insert whitespace between tag name and closing bracked when a tag has no attributes
 
