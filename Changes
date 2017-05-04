@@ -1,5 +1,8 @@
 Revision history for Perl extension SVG.
 
+2.74  2017.05.04 MANWAR
+      - Added key 'provides' to the Makefile.PL script as recommended by CPANTS.
+
 2.73  2017.05.03 MANWAR
       - Merged PR #8, thanks @CSSON. Modified slightly to keep tidyall happy.
       - Correct some spelling errors that were detected by codespell.
