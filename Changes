@@ -1,5 +1,9 @@
 Revision history for Perl extension SVG.
 
+2.75  2017.05.07 MANWAR
+      - Tidied up unit test scripts and removed '+x' attributes.
+      - Tidied up SEE ALSO section in SVG::XML package pod.
+
 2.74  2017.05.04 MANWAR
       - Added key 'provides' to the Makefile.PL script as recommended by CPANTS.
 
