@@ -1,5 +1,8 @@
 Revision history for Perl extension SVG.
 
+2.76  2017.05.08 MANWAR
+      - Added AUTHOR ONLY test scripts (meta-json.t and meta-yml.t).
+
 2.75  2017.05.07 MANWAR
       - Tidied up unit test scripts and removed '+x' attributes.
       - Tidied up SEE ALSO section in SVG::XML package pod.

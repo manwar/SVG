@@ -57,5 +57,7 @@ t/96-perl-critic.t
 t/98-tidyall.t
 t/99_test_pod_coverage.t
 t/duplicate_credits.t
+t/meta-json.t
+t/meta-yml.t
 xt/98_all_pod.t
 xt/99_perl_critic.t
