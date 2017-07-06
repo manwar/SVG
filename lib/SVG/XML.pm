@@ -76,7 +76,7 @@ sub xmlescp {
     }
 
     # Per suggestion from Adam Schneider
-    $s =~ s/([\200-\377])/' &    #'.ord($1).';'/ge;
+    $s =~ s/([\200-\377])/'&#'.ord($1).';'/ge;
 
     return $s;
 }
