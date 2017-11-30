@@ -10,6 +10,9 @@ plan skip_all => 'Perl::Tidy required' if $@;
 eval 'use Test::Perl::Critic 1.02';
 plan skip_all => 'Test::Perl::Critic 1.02 required' if $@;
 
+plan skip_all => 'Set $ENV{TEST_AUTHOR} to enable this test.'
+    unless $ENV{TEST_AUTHOR};
+
 # NOTE: New files will be tested automatically.
 
 # FIXME: Things should be removed (not added) to this list.
