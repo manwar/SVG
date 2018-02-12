@@ -7,11 +7,8 @@ plan skip_all => 'Set $ENV{TEST_AUTHOR} to enable this test.'
 
 ## no critic
 #use Perl::Critic;
-eval 'use Perl::Tidy';
-plan skip_all => 'Perl::Tidy required' if $@;
-
-eval 'use Test::Perl::Critic 1.02';
-plan skip_all => 'Test::Perl::Critic 1.02 required' if $@;
+use Perl::Tidy;
+use Test::Perl::Critic 1.02;
 
 # NOTE: New files will be tested automatically.
 

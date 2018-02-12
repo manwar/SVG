@@ -1,1 +1,9 @@
 /.tidyall.d
+/MANIFEST.SKIP.bak
+/MANIFEST.bak
+MYMETA*
+Makefile
+Makefile.old
+blib
+blib/
+pm_to_blib
