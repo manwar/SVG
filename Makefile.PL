@@ -40,11 +40,11 @@ WriteMakefile(
     (eval { ExtUtils::MakeMaker->VERSION(6.46) } ? (META_MERGE => {
         'meta-spec' => { version => 2 },
         provides    => {
-            'SVG'            => { file => 'lib/SVG.pm'          , version => '2.83' },
-            'SVG::DOM'       => { file => 'lib/SVG/DOM.pm'      , version => '2.83' },
-            'SVG::Element'   => { file => 'lib/SVG/Element.pm'  , version => '2.83' },
-            'SVG::Extension' => { file => 'lib/SVG/Extension.pm', version => '2.83' },
-            'SVG::XML'       => { file => 'lib/SVG/XML.pm'      , version => '2.83' },
+            'SVG'            => { file => 'lib/SVG.pm'          , version => '2.84' },
+            'SVG::DOM'       => { file => 'lib/SVG/DOM.pm'      , version => '2.84' },
+            'SVG::Element'   => { file => 'lib/SVG/Element.pm'  , version => '2.84' },
+            'SVG::Extension' => { file => 'lib/SVG/Extension.pm', version => '2.84' },
+            'SVG::XML'       => { file => 'lib/SVG/XML.pm'      , version => '2.84' },
         },
         resources   => {
             repository => {
