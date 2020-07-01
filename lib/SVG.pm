@@ -86,8 +86,9 @@ See the other modules in this distribution:
 L<SVG::DOM>,
 L<SVG::XML>,
 L<SVG::Element>,
-L<SVG::Parser>,
-L<SVG::Extension>
+and L<SVG::Extension>.
+
+See L<SVG::Parser> for reading SVG files as C<SVG> objects.
 
 =head2 Converting SVG to PNG and other raster image formats
 
@@ -1588,8 +1589,6 @@ L<SVG::Parser>,
 L<SVG::Extension>
 
 For Commercial Perl/SVG development, refer to the following sites:
-L<ROASP.com: Serverside SVG server|http://www.roitsystems.com/>,
-L<ROIT Systems: Commercial SVG perl solutions|http://www.roitsystems.com/>,
-L<SVG at the W3C|http://www.w3c.org/Graphics/SVG/>
+L<SVG at the W3C|http://www.w3c.org/Graphics/SVG/>.
 
 =cut
