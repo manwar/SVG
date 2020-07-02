@@ -4,7 +4,7 @@ use warnings;
 
 use Scalar::Util qw/weaken/;
 
-our $VERSION = '2.84';
+our $VERSION = '2.85';
 
 # this module extends SVG::Element
 package SVG::Element;
