@@ -13,7 +13,6 @@ WriteMakefile(
         'warnings'     => 0,
         'constant'     => 0,
         'parent'       => 0,
-        'vars'         => 0,
         'Exporter'     => 0,
         'Scalar::Util' => 0,
     },
