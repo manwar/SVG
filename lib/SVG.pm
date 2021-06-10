@@ -574,12 +574,12 @@ To draw multiple connected lines, use L<"polyline">.
 
 =head2 text
 
-$text = $svg->text(%attributes)->cdata();
+    $text = $svg->text(%attributes)->cdata();
 
-$text_path = $svg->text(-type=>'path');
-$text_span = $text_path->text(-type=>'span')->cdata('A');
-$text_span = $text_path->text(-type=>'span')->cdata('B');
-$text_span = $text_path->text(-type=>'span')->cdata('C');
+    $text_path = $svg->text(-type=>'path');
+    $text_span = $text_path->text(-type=>'span')->cdata('A');
+    $text_span = $text_path->text(-type=>'span')->cdata('B');
+    $text_span = $text_path->text(-type=>'span')->cdata('C');
 
 Define the container for a text string to be drawn in the image.
 
