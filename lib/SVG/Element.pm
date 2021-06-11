@@ -19,11 +19,7 @@ Ronan Oger, cpan@roitsystems.com
 
 =head1 SEE ALSO
 
-For descreption of the methods see L<SVG>
-
-L<http://www.roitsystems.com/> ROASP.com: Serverside SVG server
-L<http://www.roitsystems.com/> ROIT Systems: Commercial SVG perl solutions
-L<http://www.w3c.org/Graphics/SVG/> SVG at the W3C
+For description of the methods see L<SVG>.
 
 =cut
 
