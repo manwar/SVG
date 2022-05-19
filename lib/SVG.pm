@@ -241,7 +241,6 @@ Resulting XML snippet:
       <!--
         Generated using the Perl SVG Module V2.50
           by Ronan Oger
-        Info: http://www.roitsystems.com/
       -->
 
 =head1 METHODS
@@ -1493,7 +1492,7 @@ sub xmlify {
         or $self->{-docref}{-creditsinserted} )
     {
         $self->comment(
-            "\n\tGenerated using the Perl SVG Module V$VERSION\n\tby Ronan Oger\n\tInfo: http://www.roitsystems.com/\n\t"
+            "\n\tGenerated using the Perl SVG Module V$VERSION\n\tby Ronan Oger\n\n\t"
         );
         $self->{-docref}{-creditsinserted} = 1;
     }
