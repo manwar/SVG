@@ -3,7 +3,7 @@ package SVG::Element;
 use strict;
 use warnings;
 
-our $VERSION = '2.86';
+our $VERSION = '2.87';
 
 =pod
 
@@ -56,10 +56,10 @@ sub new {
         if ( $key =~ /^-/ ) {
             if ( $key eq '-href' ) {
                 $self->{'xlink:href'}    = $attrs{$key};
-                $self->{'xlink:type'}    = $attrs{-type} if $attrs{-type};
-                $self->{'xlink:role'}    = $attrs{-role} if $attrs{-role};
+                $self->{'xlink:type'}    = $attrs{-type}  if $attrs{-type};
+                $self->{'xlink:role'}    = $attrs{-role}  if $attrs{-role};
                 $self->{'xlink:title'}   = $attrs{-title} if $attrs{-title};
-                $self->{'xlink:show'}    = $attrs{-show} if $attrs{-show};
+                $self->{'xlink:show'}    = $attrs{-show}  if $attrs{-show};
                 $self->{'xlink:arcrole'} = $attrs{-arcrole}
                     if $attrs{-arcrole};
                 $self->{'xlink:actuate'} = $attrs{-actuate}
@@ -389,7 +389,7 @@ sub pi {
     return $self->{-document}->{-pi} unless scalar @text;
     my @pi;
     @pi = @{ $self->{-document}->{-pi} } if $self->{-document}->{-pi};
-    unshift( @text, @pi ) if @pi;
+    unshift( @text, @pi )                if @pi;
     $self->{-document}->{-pi} = \@text;
     my $tag = $self->tag('pi');
     return $tag;

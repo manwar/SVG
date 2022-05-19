@@ -7,7 +7,7 @@ use SVG::XML;
 use parent qw(SVG::Element SVG::Extension);
 use Scalar::Util qw/weaken/;
 
-our $VERSION = '2.86';
+our $VERSION = '2.87';
 
 =pod
 
@@ -1285,7 +1285,7 @@ my %default_attrs = (
     -xml_xlink => 'http://www.w3.org/1999/xlink',
     -standalone => 'yes',
     -pubid      => '-//W3C//DTD SVG 1.0//EN',    # formerly -identifier
-    -sysid => 'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd',
+    -sysid      => 'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd',
 );
 
 sub import {
@@ -1552,10 +1552,10 @@ patches, testing, suggestions, and other nice tidbits:
 
 Peter Wainwright, Excellent ideas, beta-testing, writing SVG::Parser and much of SVG::DOM.
 Fredo, http://www.penguin.at0.net/~fredo/ - provided example code and initial feedback for early SVG.pm versions and the idea of a simplified svg generator.
-Adam Schneider,
-Brial Pilpré,
+Adam Schneider
+Brial Pilpré
 Ian Hickson
-Steve Lihn,
+Steve Lihn
 Allen Day
 Martin Owens - SVG::DOM improvements in version 3.34
 
