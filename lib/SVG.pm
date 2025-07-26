@@ -1543,7 +1543,7 @@ Ronan Oger, RO IT Systemms GmbH, cpan@roitsystems.com
 
 =head1 MAINTAINER
 
-L<Gabor Szabo|http://szabgab.com/>
+L<Mohammad S Anwar|http://manwar.org/>
 
 =head1 CREDITS
 
