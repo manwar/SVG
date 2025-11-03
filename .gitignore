@@ -7,3 +7,4 @@ Makefile.old
 blib
 blib/
 pm_to_blib
+cover_db/
