@@ -104,7 +104,7 @@ sub xmlify {
         elsif ( ref( $self->{$k} ) eq 'HASH' ) {
             $attrs{$k} = cssstyle( %{ $self->{$k} } );
         }
-        elsif ( ref( $self->{$k} ) eq '' ) {
+        else {
             $attrs{$k} = $self->{$k};
         }
     }
