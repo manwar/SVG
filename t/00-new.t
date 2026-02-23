@@ -6,10 +6,10 @@ use Test::More;
 use SVG;
 
 my $svg = SVG->new();
-isa_ok($svg, 'SVG');
+isa_ok( $svg, 'SVG' );
 
 my $other = $svg->new;
-isa_ok($other, 'SVG');
+isa_ok( $other, 'SVG' );
 
 isnt $svg, $other;
 

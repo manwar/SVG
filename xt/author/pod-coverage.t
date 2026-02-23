@@ -1,3 +1,4 @@
+use lib 'lib';
 use Test::More;
 use Test::Pod::Coverage;
 

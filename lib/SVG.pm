@@ -4,10 +4,10 @@ use strict;
 use warnings;
 
 use SVG::XML;
-use parent qw(SVG::Element SVG::Extension);
+use parent       qw(SVG::Element SVG::Extension);
 use Scalar::Util qw/weaken/;
 
-our $VERSION = '2.87';
+our $VERSION = '2.88';
 
 =pod
 

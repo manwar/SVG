@@ -18,5 +18,4 @@ is $@, "";
 eval 'use SVG (-qqrq => "  ")';
 like $@, qr{^Unknown attribute '-qqrq' in import list};
 
-
 diag("Testing SVG $SVG::VERSION, Perl $], $^X");

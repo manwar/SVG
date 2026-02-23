@@ -27,7 +27,7 @@ is( $children[2],      $child3, "getChildren 3" );
 is( $parent->removeChild($child1),    $child1, 'removeChild1' );
 is( $parent->removeChild($child3),    $child3, 'removeChild3' );
 is( $parent->removeChild($child2),    $child2, 'removeChild2' );
-is( $parent->removeChild($child1),    0,       'no such child' );
+is( $parent->removeChild($child1),     0,      'no such child' );
 is( $parent->findChildIndex($child1), -1,      'child1 is gone' );
 
 is( $parent->insertAtIndex( $child1, 0 ), 1 );

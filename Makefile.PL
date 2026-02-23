@@ -39,11 +39,11 @@ WriteMakefile(
     (eval { ExtUtils::MakeMaker->VERSION(6.46) } ? (META_MERGE => {
         'meta-spec' => { version => 2 },
         provides    => {
-            'SVG'            => { file => 'lib/SVG.pm'          , version => '2.87' },
-            'SVG::DOM'       => { file => 'lib/SVG/DOM.pm'      , version => '2.87' },
-            'SVG::Element'   => { file => 'lib/SVG/Element.pm'  , version => '2.87' },
-            'SVG::Extension' => { file => 'lib/SVG/Extension.pm', version => '2.87' },
-            'SVG::XML'       => { file => 'lib/SVG/XML.pm'      , version => '2.87' },
+            'SVG'            => { file => 'lib/SVG.pm'          , version => '2.88' },
+            'SVG::DOM'       => { file => 'lib/SVG/DOM.pm'      , version => '2.88' },
+            'SVG::Element'   => { file => 'lib/SVG/Element.pm'  , version => '2.88' },
+            'SVG::Extension' => { file => 'lib/SVG/Extension.pm', version => '2.88' },
+            'SVG::XML'       => { file => 'lib/SVG/XML.pm'      , version => '2.88' },
         },
         resources   => {
             repository => {
@@ -59,7 +59,7 @@ WriteMakefile(
             'Steve Lihn',
             'Allen Day',
             'Gabor Szabo',
-            'Mohammad S Anwar',
+            'Mohammad Sajid Anwar',
         ],
      })
      : ()

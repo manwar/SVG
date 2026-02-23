@@ -1,3 +1,5 @@
+.github/dependabot.yml
+.github/workflows/ci.yml
 .perlcriticrc
 .perltidyrc
 .tidyallrc
@@ -27,10 +29,11 @@ lib/SVG/Extension.pm
 lib/SVG/XML.pm
 LICENSE
 Makefile.PL
-MANIFEST			This list of files
+MANIFEST            This list of files
 README
-t/00-report-prereqs.t
 t/00-load.t
+t/00-new.t
+t/00-report-prereqs.t
 t/01-loadsvg.t
 t/03-render.t
 t/04-inline.t
@@ -54,9 +57,13 @@ t/21-polygon.t
 t/22-xlink.t
 t/23-xmlescape.t
 t/30-shapes.t
+t/31-credit.t
+t/32-nocredit-in-use.t
+t/33-use-empty-import.t
 t/duplicate_credits.t
-xt/author/perl-critic.t
+xt/author/manifest.t
 xt/author/perl-critic-tidy.t
+xt/author/perl-critic.t
 xt/author/pod-coverage.t
 xt/author/pod-syntax.t
 xt/author/tidyall.t

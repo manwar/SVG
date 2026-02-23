@@ -58,7 +58,6 @@ subtest circle_without_id => sub {
     #diag $xml;
 };
 
-
 subtest ellipse => sub {
     plan tests => 1;
 

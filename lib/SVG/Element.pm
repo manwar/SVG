@@ -3,7 +3,7 @@ package SVG::Element;
 use strict;
 use warnings;
 
-our $VERSION = '2.87';
+our $VERSION = '2.88';
 
 =pod
 
@@ -715,5 +715,13 @@ sub colorAllocate {
 }
 
 #-------------------------------------------------------------------------------
+
+# Predeclare all known built-in element methods at load time
+# so they work regardless of how SVG.pm is imported
+# (e.g. 'use SVG ()' suppresses import() but still loads this module).
+foreach my $sub ( keys %SVG::Element::autosubs ) {
+    $SVG::Element::AUTOLOAD = "SVG::Element::$sub";
+    SVG::Element::autoload();
+}
 
 1;

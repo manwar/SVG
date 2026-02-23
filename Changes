@@ -1,5 +1,20 @@
 Revision history for Perl extension SVG.
 
+2.88  2026.02.23 MANWAR
+      [Bug Fix]
+      - Fixed: element methods (circle, title, rect, path, etc.) were
+        unavailable when module was loaded with empty import list
+        'use SVG ()'.
+        Perl suppresses the call to import() with empty parens, so element
+        methods were never predeclared. Fixed by predeclaring all built-in
+        element methods in SVG::Element at load time, regardless of how
+        SVG.pm is imported. (RT issue: #132058)
+      [Test]
+      - Added t/33-use-empty-import.t to test element methods with 'use SVG ()'
+      [Fixes]
+      - Fixed xt/author/pod-coverage.t to include 'use lib lib' so module is
+        found correctly when running tests from the distribution root
+
 2.87  2022.05.19 MANWAR
       - Indent doc for text PR #15, thanks @benkasminbullock.
       - Remove dead links to domain-squatted site PR #16, thanks @benkasminbullock.
