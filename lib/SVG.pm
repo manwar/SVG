@@ -517,6 +517,11 @@ convenience to generate a suitable string from coordinate data.
         -type =>'polygon'
     );
 
+    my %polygon_style  = (
+        'fill-opacity' => 0,
+        'stroke'       => 'rgb(250,123,23)'
+    );
+
     my $poly = $svg->polygon(
         %$points,
         id    => 'pgon1',
